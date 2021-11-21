@@ -1,4 +1,4 @@
-package Projet-Java;
+java.util.*;
 
 public class Joueur {
     string pseudo;
