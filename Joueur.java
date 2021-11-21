@@ -1,6 +1,6 @@
-java.util.*;
+import java.util.*;
 
 public class Joueur {
-    string pseudo;
-    int couleur id;
+    String pseudo;
+    int couleur_id;
 }
