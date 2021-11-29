@@ -33,8 +33,13 @@ public class Menu extends JPanel{
         g.drawImage(img, 0, 0,longueur, hauteur, null);
     }
 
+    public void creationBouton(Graphics g)
+    {
+    }
+
     public void paint(Graphics g)
     {
         affiche_fond(g);
+        creationBouton(g);
     }
 }
