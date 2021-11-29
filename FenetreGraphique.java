@@ -13,24 +13,33 @@ public class FenetreGraphique extends JFrame implements ActionListener{
     FenetreGraphique(String nom)
     {
         super(nom);
-        jeux = true;
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        jeux = false;
+        //Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         //double width = screenSize.getWidth();
         //double height = screenSize.getHeight();
         //setSize((int)width, (int)height);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setResizable(true);
+        setResizable(false);
         setLocationRelativeTo(null);
         setAlwaysOnTop(false);
+
+        //Dimension screenSize = getSize();
+        double width = getWidth();
+        //double height = screenSize.getHeight();
+
+        System.out.println(width);
             
         if (!jeux) {
             menu = new Menu();
+            
+            Bouton Jouer = new Bouton(900,200,100,80,"Jouer");
+            Bouton Option = new Bouton(900,400,100,80,"Option");
+
             menu.setLayout(null);
-            Bouton Jouer = new Bouton(400,200,100,80,"Jouer");
-            JButton Option = new JButton("Option");
 
             setContentPane(menu);
             getContentPane().add(Jouer);
+            getContentPane().add(Option);
         }
 
         else {
