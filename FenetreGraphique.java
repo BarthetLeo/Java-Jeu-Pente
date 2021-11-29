@@ -13,7 +13,7 @@ public class FenetreGraphique extends JFrame implements ActionListener{
     FenetreGraphique(String nom)
     {
         super(nom);
-        jeux = false;
+        jeux = true;
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         //double width = screenSize.getWidth();
         //double height = screenSize.getHeight();

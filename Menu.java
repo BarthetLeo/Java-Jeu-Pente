@@ -1,8 +1,7 @@
-import java.util.*;
 import javax.swing.*;
-import java.util.*;
+/*import java.util.*;
 import java.awt.Toolkit;
-import java.awt.Dimension;
+import java.awt.Dimension;*/
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
