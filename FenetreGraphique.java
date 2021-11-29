@@ -16,7 +16,8 @@ public class FenetreGraphique extends JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth();
         double height = screenSize.getHeight();
-        setSize((int)width, (int)height);
+        //setSize((int)width, (int)height);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setResizable(true);
         setLocationRelativeTo(null);
         setAlwaysOnTop(false);

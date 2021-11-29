@@ -23,6 +23,18 @@ public class Menu extends JPanel{
         {
             e.printStackTrace();
         }
+    }
 
+    public void affiche_fond(Graphics g)
+    {
+        int hauteur = getHeight();
+        int longueur = getWidth();
+        g.setColor(Color.BLACK);
+        g.drawImage(img, 0, 0,longueur, hauteur, null);
+    }
+
+    public void paint(Graphics g)
+    {
+        affiche_fond(g);
     }
 }
