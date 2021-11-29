@@ -3,10 +3,7 @@ import javax.swing.*;
 import java.awt.Toolkit;
 import java.awt.Dimension;*/
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import javax.imageio.*;
-import java.io.File;
+
 
 
 public class Pente extends JPanel{
@@ -20,18 +17,43 @@ public class Pente extends JPanel{
     }
     public void affiche_grille(Graphics g)
     {
-        int WM_plat = (getWidth()/4)*3;
+        //Largeur max du plateau
+        int M_W_plat = (getWidth()/4)*3;
+        //Espace minimum entre chaque ligne
+        int m_H_plat = getHeight()/20;
+
         //Convertissseur de Graphics en Graphics2D pour plus d'option.
         Graphics2D g2 = (Graphics2D)g;
+        //Permet de changer l'épaisseur des traits
+        g2.setStroke(new BasicStroke(5.0f));
         g2.setColor(Color.red);
-        g2.drawRect(0, 0, WM_plat, getHeight());
+        g2.drawRect(5, 5, M_W_plat, getHeight());
+        g2.setStroke(new BasicStroke(3.0f));
         g2.setColor(Color.black);
-        //Boucle pour dessiner les lignes verticales et des noms des lignes
+
+        //Boucle pour dessiner les colonne et des noms des colonnes
+        String [] lettre = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S"};
         for(int i =1;i<20;i++)
-            g2.drawLine((WM_plat/20)*i, (getHeight()/20), (WM_plat/20)*i, (getHeight()/20)*19);
-        //Boucle pour dessiner les lignes horizontales
+        {
+            g2.drawLine((M_W_plat/20)*i, (m_H_plat), (M_W_plat/20)*i, (m_H_plat)*19);
+            g2.drawString(lettre[i-1], ((M_W_plat/20)*i)-3,((m_H_plat)*19)+30);
+            
+        }
+        
+        //Boucle pour dessiner les lignes et les nombres des lignes
         for(int i =1;i<20;i++)
-            g2.drawLine((WM_plat/20), (getHeight()/20)*i, (WM_plat/20)*19, (getHeight()/20)*i);
+        {
+            g2.drawLine((M_W_plat/20), (m_H_plat)*i, (M_W_plat/20)*19, (m_H_plat)*i);
+            String nb = String.valueOf(i);
+            if(i<10)
+            {
+                g2.drawString(nb, ((M_W_plat/20)-20),((m_H_plat)*i)+3);
+            }
+            else
+                g2.drawString(nb, ((M_W_plat/20)-30),((m_H_plat)*i)+6);
+        }
+    
+        
     }
 
     public void paint(Graphics g)
