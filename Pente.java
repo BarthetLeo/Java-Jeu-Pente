@@ -27,7 +27,7 @@ public class Pente extends JPanel{
         //Permet de changer l'épaisseur des traits
         g2.setStroke(new BasicStroke(5.0f));
         g2.setColor(Color.red);
-        g2.drawRect(5, 5, M_W_plat, getHeight());
+        g2.drawRect(5, 5, M_W_plat, getHeight()-10);
         g2.setStroke(new BasicStroke(3.0f));
         g2.setColor(Color.black);
 

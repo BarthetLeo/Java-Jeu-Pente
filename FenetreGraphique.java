@@ -39,8 +39,8 @@ public class FenetreGraphique extends JFrame implements ActionListener{
             menu.setLayout(null);
 
             setContentPane(menu);
-            getContentPane().add(Jouer);
             getContentPane().add(Option);
+            getContentPane().add(Jouer);
         }
 
         else {
