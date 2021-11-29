@@ -12,36 +12,28 @@ import java.io.File;
 public class Pente extends JPanel{
     Jeton[][] plateau;
 
-    BufferedImage img;
-
     public Pente()
     {
         //Tableau permettant de stocker les Jeton mit sur le plateau
         plateau = new Jeton[19][19];
-        {
-            try
-            {
-                //Lecture du l'image de fond
-                img = ImageIO.read(new File("unamed.jfif"));
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
 
     }
-    public void affiche_fond(Graphics g)
+    public void affiche_grille(Graphics g)
     {
-        int hauteur = getHeight()-50;
-        int longueur = getWidth()-50;
-        g.setColor(Color.BLACK);
-        g.drawImage(img, 0, 0,longueur, hauteur, null);
+        //Convertissseur de Graphics en Graphics2D pour plus d'option.
+        Graphics2D g2 = (Graphics2D)g;
+        g2.setColor(Color.black);
+        //Boucle pour dessiner les lignes verticales
+        for(int i =1;i<20;i++)
+            g2.drawLine((getWidth()/20)*i, 0, (getWidth()/20)*i, getHeight());
+        //Boucle pour dessiner les lignes horizontales
+        for(int i =1;i<20;i++)
+            g2.drawLine(0, (getHeight()/20)*i, getWidth(), (getHeight()/20)*i);
     }
 
     public void paint(Graphics g)
     {
-        affiche_fond(g);
+        affiche_grille(g);
     }
 
 }
