@@ -72,7 +72,10 @@ public class Pente extends JPanel{
         {
             for(int j =M_W_plat/20;j<M_W_plat-M_W_plat/20;j +=M_W_plat/20)
             {
-                Bouton bt = new Bouton(j-taille/2, i-taille/2, taille, taille, "bt");
+                Bouton bt = new Bouton(j-taille/2, i-taille/2, taille, taille, "");
+                bt.setOpaque(false);
+                bt.setContentAreaFilled(false);
+                bt.setBorderPainted(false);
                 this.add(bt);
             }
         }
