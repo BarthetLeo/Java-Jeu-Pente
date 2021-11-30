@@ -10,7 +10,7 @@ import java.io.File;
 
 
 public class Pente extends JPanel{
-    Jeton[][] plateau;
+    Bouton[][] plateau;
     Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
     int Height = (int)dimension.getHeight();
     int Width  = (int)dimension.getWidth();
@@ -27,7 +27,7 @@ public class Pente extends JPanel{
             e.printStackTrace();
         }
         //Tableau permettant de stocker les Jeton mit sur le plateau
-        plateau = new Jeton[19][19];
+        plateau = new Bouton[19][19];
         tableau_bouton();
         
     }
@@ -79,15 +79,22 @@ public class Pente extends JPanel{
         int m_H_plat = Height/20-1;
 
         int taille = 25;
+        int k = 0,h =0;
 
         for(int i =m_H_plat;i<m_H_plat*20;i +=m_H_plat)
         {
+            k += 1;
             for(int j =M_W_plat/20;j<M_W_plat-M_W_plat/20;j +=M_W_plat/20)
             {
+                h +=1;
                 Bouton bt = new Bouton(j-taille/2, i-taille/2, taille, taille, "");
                 bt.setBorderPainted(false);
                 bt.setContentAreaFilled(false);
                 bt.setFocusPainted(false);
+                System.out.println(h);
+                System.out.println(k);
+                
+                //plateau[k][h] = bt;
                 this.add(bt);
             }
         }
@@ -104,7 +111,7 @@ public class Pente extends JPanel{
     public void paintComponent(Graphics g)
     {
         affiche_fond(g);
-       affiche_grille(g);
+        affiche_grille(g);
     }
 
 }
