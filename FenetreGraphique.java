@@ -9,40 +9,49 @@ public class FenetreGraphique extends JFrame implements ActionListener{
     ZoneDessin zoneDessin;
     Menu menu;
     Pente pente;
-<<<<<<< HEAD
-    static boolean jeux;
-=======
     Options options;
-    static boolean jeux;
-    static boolean option;
->>>>>>> parent of f441434 (oui)
+    static int fenetre;
 
     FenetreGraphique(String nom)
     {
         super(nom);
-<<<<<<< HEAD
-=======
-        option = false;
->>>>>>> parent of f441434 (oui)
-        jeux = false;
+        fenetre = 1; // 1 = menu // 2 = le jeux // 3 = option
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        double _width = screenSize.getWidth();
-        double _height = screenSize.getHeight();
-        setSize((int)_width, (int)_height);
+        int _width = (int)screenSize.getWidth();
+        int _height = (int)screenSize.getHeight();
+        setSize(_width,_height);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setAlwaysOnTop(false);
         while (true) {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(1000);
             } catch (Exception e) {
                 //TODO: handle exception
             }
-<<<<<<< HEAD
             setResizable(false);
-            setLocationRelativeTo(null);
             setAlwaysOnTop(false);
-=======
+            if(fenetre == 1) {
+                
+                menu = new Menu();
+                
+                menu.setLayout(null);
+                
+                setContentPane(menu);
 
-            if (option) {
+                repaint();
+            }
+            
+            else if (fenetre == 2) {
+        
+                pente = new Pente();
+                pente.setLayout(null);
+                setContentPane(pente);
+                repaint();
+            }
+
+            if (fenetre == 3) {
                 
                 options = new Options();
 
@@ -52,39 +61,6 @@ public class FenetreGraphique extends JFrame implements ActionListener{
 
                 repaint();
             }
-
->>>>>>> parent of f441434 (oui)
-            if(!jeux) {
-                //Dimension screenSize = getSize();
-                int width = getWidth();
-                //double height = screenSize.getHeight();
-        
-                System.out.println(width);
-                    
-                menu = new Menu();
-                
-                menu.setLayout(null);
-        
-                setContentPane(menu);
-            }
-    
-            else if (jeux) {
-
-                //Dimension screenSize = getSize();
-                int width = getWidth();
-                //double height = screenSize.getHeight();
-        
-                System.out.println(width);
-                pente = new Pente();
-                pente.setLayout(null);
-                setContentPane(pente);
-<<<<<<< HEAD
-            }
-=======
-                repaint();
-            }
-
->>>>>>> parent of f441434 (oui)
 
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setVisible(true);
