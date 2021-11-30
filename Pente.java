@@ -3,7 +3,10 @@ import javax.swing.*;
 import java.awt.Toolkit;
 import java.awt.Dimension;*/
 import java.awt.*;
-
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.*;
+import java.io.File;
 
 
 public class Pente extends JPanel{
@@ -11,9 +14,18 @@ public class Pente extends JPanel{
     Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
     int Height = (int)dimension.getHeight();
     int Width  = (int)dimension.getWidth();
+    BufferedImage img;
     
     public Pente()
     {
+        try
+        {
+            img = ImageIO.read(new File("fond_jeu.jpg"));
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
         //Tableau permettant de stocker les Jeton mit sur le plateau
         plateau = new Jeton[19][19];
         tableau_bouton();
@@ -73,16 +85,25 @@ public class Pente extends JPanel{
             for(int j =M_W_plat/20;j<M_W_plat-M_W_plat/20;j +=M_W_plat/20)
             {
                 Bouton bt = new Bouton(j-taille/2, i-taille/2, taille, taille, "");
-                bt.setOpaque(false);
-                bt.setContentAreaFilled(false);
                 bt.setBorderPainted(false);
+                bt.setContentAreaFilled(false);
+                bt.setFocusPainted(false);
                 this.add(bt);
             }
         }
     }
+    public void affiche_fond(Graphics g)
+    {
+        int hauteur = getHeight();
+        int longueur = getWidth();
+        g.setColor(Color.BLACK);
+        g.drawImage(img, 0, 0,longueur, hauteur, null);
+    }
+
 
     public void paintComponent(Graphics g)
     {
+        affiche_fond(g);
        affiche_grille(g);
     }
 
