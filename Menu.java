@@ -12,7 +12,6 @@ import java.awt.event.*;
 public class Menu extends JPanel implements ActionListener{
     
     BufferedImage img;
-    Pente pente;
 
     Menu()
     {
@@ -41,7 +40,7 @@ public class Menu extends JPanel implements ActionListener{
         Bouton Jouer = new Bouton(900,200,100,80,"Jouer");
         Bouton Option = new Bouton(900,400,100,80,"Option");
         Jouer.setActionCommand("Jouer");
-        Option.setActionCommand("Options");
+        Option.setActionCommand("Option");
         Jouer.addActionListener(this);
         Option.addActionListener(this);
         this.add(Jouer);
@@ -53,6 +52,10 @@ public class Menu extends JPanel implements ActionListener{
         if (event.getActionCommand().equals("Jouer")) {
             FenetreGraphique.jeux = true;
         }
+
+        else if (event.getActionCommand().equals("Option")) {
+            FenetreGraphique.option = true;
+        }
     }
 
     public void paintComponent(Graphics g)
@@ -60,5 +63,3 @@ public class Menu extends JPanel implements ActionListener{
         affiche_fond(g);
     }
 }
-
-//Bonjour
