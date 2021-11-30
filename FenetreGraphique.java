@@ -30,21 +30,14 @@ public class FenetreGraphique extends JFrame implements ActionListener{
             } catch (Exception e) {
                 //TODO: handle exception
             }
-            setResizable(false);
-            setLocationRelativeTo(null);
-            setAlwaysOnTop(false);
-<<<<<<< HEAD
+
             if(fenetre == 1) {
-                
-=======
-            if(!jeux) {
                 //Dimension screenSize = getSize();
                 int width = getWidth();
                 //double height = screenSize.getHeight();
         
                 System.out.println(width);
                     
->>>>>>> parent of 1a90d2b (ENFIN PT1)
                 menu = new Menu();
                 
                 menu.setLayout(null);
@@ -53,17 +46,12 @@ public class FenetreGraphique extends JFrame implements ActionListener{
 
                 repaint();
             }
-<<<<<<< HEAD
-            
-            else if (fenetre == 2) {
-=======
     
-            else if (jeux) {
+            else if (fenetre == 2) {
 
                 //Dimension screenSize = getSize();
                 int width = getWidth();
                 //double height = screenSize.getHeight();
->>>>>>> parent of 1a90d2b (ENFIN PT1)
         
                 System.out.println(width);
                 pente = new Pente();
