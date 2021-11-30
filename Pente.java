@@ -8,26 +8,30 @@ import java.awt.*;
 
 public class Pente extends JPanel{
     Jeton[][] plateau;
-
+    Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+    int Height = (int)dimension.getHeight();
+    int Width  = (int)dimension.getWidth();
+    
     public Pente()
     {
         //Tableau permettant de stocker les Jeton mit sur le plateau
         plateau = new Jeton[19][19];
-
+        tableau_bouton();
+        
     }
     public void affiche_grille(Graphics g)
     {
         //Largeur max du plateau
-        int M_W_plat = (getWidth()/4)*3;
+        int M_W_plat = (Width/4)*3-16;
         //Espace minimum entre chaque ligne
-        int m_H_plat = getHeight()/20;
-
+        int m_H_plat = Height/20-1;
+        
         //Convertissseur de Graphics en Graphics2D pour plus d'option.
         Graphics2D g2 = (Graphics2D)g;
         //Permet de changer l'épaisseur des traits
         g2.setStroke(new BasicStroke(5.0f));
         g2.setColor(Color.red);
-        g2.drawRect(5, 5, M_W_plat, getHeight()-10);
+        g2.drawRect(0, 0, M_W_plat, Height);
         g2.setStroke(new BasicStroke(3.0f));
         g2.setColor(Color.black);
 
@@ -55,10 +59,28 @@ public class Pente extends JPanel{
     
         
     }
-
-    public void paint(Graphics g)
+    public void tableau_bouton()
     {
-        affiche_grille(g);
+        //Largeur max du plateau
+        int M_W_plat = (Width/4)*3-16;
+        //Espace minimum entre chaque ligne
+        int m_H_plat = Height/20-1;
+
+        int taille = 25;
+
+        for(int i =m_H_plat;i<m_H_plat*20;i +=m_H_plat)
+        {
+            for(int j =M_W_plat/20;j<M_W_plat-M_W_plat/20;j +=M_W_plat/20)
+            {
+                Bouton bt = new Bouton(j-taille/2, i-taille/2, taille, taille, "bt");
+                this.add(bt);
+            }
+        }
+    }
+
+    public void paintComponent(Graphics g)
+    {
+       affiche_grille(g);
     }
 
 }
