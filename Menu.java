@@ -41,7 +41,11 @@ public class Menu extends JPanel implements ActionListener{
         Bouton Jouer = new Bouton(900,200,100,80,"Jouer");
         Bouton Option = new Bouton(900,400,100,80,"Option");
         Jouer.setActionCommand("Jouer");
+<<<<<<< HEAD
         Option.setActionCommand("Options");
+=======
+        Option.setActionCommand("Option");
+>>>>>>> parent of f441434 (oui)
         Jouer.addActionListener(this);
         Option.addActionListener(this);
         this.add(Jouer);
@@ -52,6 +56,13 @@ public class Menu extends JPanel implements ActionListener{
     {
         if (event.getActionCommand().equals("Jouer")) {
             FenetreGraphique.jeux = true;
+<<<<<<< HEAD
+=======
+        }
+
+        else if (event.getActionCommand().equals("Option")) {
+            FenetreGraphique.option = true;
+>>>>>>> parent of f441434 (oui)
         }
     }
 

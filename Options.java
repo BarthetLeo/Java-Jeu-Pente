@@ -21,4 +21,26 @@ public class Options extends JPanel {
         }
     }
 
+<<<<<<< HEAD
+=======
+    public void creationBouton()
+    {
+        Bouton Jouer = new Bouton(900,800,100,80,"Quitter");
+        Jouer.setActionCommand("Jouer");
+        Jouer.addActionListener(this);
+        this.add(Jouer);
+    }
+
+    public void actionPerformed(ActionEvent event)
+    {
+        if (event.getActionCommand().equals("Quitter")) {
+            FenetreGraphique.option = false;
+        }
+    }
+
+    public void paintComponent(Graphics g)
+    {
+        affiche_fond(g);
+    }
+>>>>>>> parent of f441434 (oui)
 }
