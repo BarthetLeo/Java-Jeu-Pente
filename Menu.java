@@ -60,3 +60,5 @@ public class Menu extends JPanel implements ActionListener{
         affiche_fond(g);
     }
 }
+
+//Bonjour
