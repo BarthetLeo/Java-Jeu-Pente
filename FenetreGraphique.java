@@ -26,7 +26,7 @@ public class FenetreGraphique extends JFrame implements ActionListener{
         setAlwaysOnTop(false);
         while (true) {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(5000);
             } catch (Exception e) {
                 //TODO: handle exception
             }
