@@ -38,7 +38,7 @@ public class Options extends JPanel implements ActionListener{
     public void creationBouton()
     {
         Bouton Jouer = new Bouton(900,800,100,80,"Quitter");
-        Jouer.setActionCommand("Jouer");
+        Jouer.setActionCommand("Quitter");
         Jouer.addActionListener(this);
         this.add(Jouer);
     }
@@ -46,7 +46,7 @@ public class Options extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent event)
     {
         if (event.getActionCommand().equals("Quitter")) {
-            FenetreGraphique.option = false;
+            FenetreGraphique.fenetre = 1;
         }
     }
 
