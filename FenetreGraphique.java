@@ -16,9 +16,9 @@ public class FenetreGraphique extends JFrame implements ActionListener{
         super(nom);
         jeux = false;
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        double _width = screenSize.getWidth();
-        double _height = screenSize.getHeight();
-        setSize((int)_width, (int)_height);
+        int _width = (int)screenSize.getWidth();
+        int _height = (int)screenSize.getHeight();
+        setSize(_width,_height);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         while (true) {
             try {
@@ -27,29 +27,18 @@ public class FenetreGraphique extends JFrame implements ActionListener{
                 //TODO: handle exception
             }
             setResizable(false);
-            setLocationRelativeTo(null);
             setAlwaysOnTop(false);
             if(!jeux) {
-                //Dimension screenSize = getSize();
-                int width = getWidth();
-                //double height = screenSize.getHeight();
-        
-                System.out.println(width);
-                    
+                
                 menu = new Menu();
                 
                 menu.setLayout(null);
-        
+                
                 setContentPane(menu);
             }
-    
+            
             else if (jeux) {
-
-                //Dimension screenSize = getSize();
-                int width = getWidth();
-                //double height = screenSize.getHeight();
         
-                System.out.println(width);
                 pente = new Pente();
                 pente.setLayout(null);
                 setContentPane(pente);
