@@ -8,7 +8,15 @@ public class Bouton extends JButton {
 
     Bouton(int x, int y, int width, int height, String name) {
         super(name);
+        this.x = x;
+        this.y = y;
         setSize(width, height);
         setLocation(x,y);
+    }
+
+    void position()
+    {
+        System.out.println(x);
+        System.out.println(y);
     }
 }
