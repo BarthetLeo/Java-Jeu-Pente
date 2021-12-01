@@ -91,8 +91,8 @@ public class Pente extends JPanel{
                 bt.setBorderPainted(false);
                 bt.setContentAreaFilled(false);
                 bt.setFocusPainted(false);
-                System.out.println(h);
-                System.out.println(k);
+                //System.out.println(h);
+                //System.out.println(k);
                 
                 //plateau[k][h] = bt;
                 this.add(bt);
