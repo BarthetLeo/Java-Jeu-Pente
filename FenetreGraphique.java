@@ -11,7 +11,7 @@ public class FenetreGraphique extends JFrame implements ActionListener{
     Pente pente;
     Options options;
     static int window; /* 1 = menu // 2 = game // 3 = settings*///, background /* 1 = settings // 2 = game */;
-    static boolean changement;
+    static boolean changement, fullscreen = false;
 
     FenetreGraphique(String nom)
     {
@@ -52,43 +52,57 @@ public class FenetreGraphique extends JFrame implements ActionListener{
 
             if(changement) {
                 changement = false;
+                setVisible(false);
 
-                if(window == 1) {
-                    //background = 1;
-                    //Dimension screenSize = getSize();
-                    int width = getWidth();
-                    //double height = screenSize.getHeight();
-            
-                    System.out.println("width : " + width);
-                    
-                    menu.setLayout(null);
-            
-                    setContentPane(menu);
-    
-                    repaint();
-                }
+                switch (window) {
+                    case 1: {
+                        //background = 1;
+                        //Dimension screenSize = getSize();
+                        int width = getWidth();
+                        //double height = screenSize.getHeight();
+                
+                        System.out.println("width : " + width);
+                        
+                        menu.setLayout(null);
+                
+                        setContentPane(menu);
+                        
+                        break;
+                    }
+
+                    case 2: {
+                                 
+                        //background = 2;
         
-                else if (window == 2) {
-    
-                    //background = 2;
-    
-                    //Dimension screenSize = getSize();
-                    //int width = getWidth();
-                    //double height = screenSize.getHeight();
-                    System.out.println("Window 2");
-                    pente.setLayout(null);
-                    setContentPane(pente);
-                    repaint();
+                        //Dimension screenSize = getSize();
+                        //int width = getWidth();
+                        //double height = screenSize.getHeight();
+                        System.out.println("Window 2");
+                        pente.setLayout(null);
+                        setContentPane(pente);
+
+                        break;
+                    }
+
+                    case 3: {
+                                
+                        options.setLayout(null);
+        
+                        setContentPane(options);                  
+                        break;
+                    }
+                
+                    default:
+                        break;
                 }
-    
-                if (window == 3) {
-    
-                    options.setLayout(null);
-    
-                    setContentPane(options);
-    
-                    repaint();
+
+                /*if (fullscreen) {
+                    setUndecorated(true);
                 }
+
+                else if (!fullscreen){
+                    setUndecorated(false);
+                }*/
             }
 
             int width = getWidth();

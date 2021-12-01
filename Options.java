@@ -37,9 +37,13 @@ public class Options extends JPanel implements ActionListener{
 
     public void creationBouton()
     {
+        Bouton Fullscreen = new Bouton(900,450,100,80,"Full");
         Bouton Revenir = new Bouton(900,650,100,80,"Revenir");
+        Fullscreen.setActionCommand("Fullscreen");
         Revenir.setActionCommand("Revenir");
+        Fullscreen.addActionListener(this);
         Revenir.addActionListener(this);
+        this.add(Fullscreen);
         this.add(Revenir);
     }
 
@@ -47,6 +51,11 @@ public class Options extends JPanel implements ActionListener{
     {
         if (event.getActionCommand().equals("Revenir")) {
             FenetreGraphique.window = 1;
+            FenetreGraphique.changement = true;
+        }
+
+        else if (event.getActionCommand().equals("Fullscreen")) {
+            FenetreGraphique.fullscreen = !FenetreGraphique.fullscreen;
             FenetreGraphique.changement = true;
         }
     }
