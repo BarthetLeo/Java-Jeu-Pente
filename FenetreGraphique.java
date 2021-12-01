@@ -16,7 +16,6 @@ public class FenetreGraphique extends JFrame implements ActionListener{
     static boolean affiche_fps = false;
     static String nom1;
     static String nom2;
-    Test test;
 
     FenetreGraphique(String nom)
     {
@@ -24,7 +23,6 @@ public class FenetreGraphique extends JFrame implements ActionListener{
         changement = true;
         menu = new Menu();
         options = new Options();
-        test = new Test();
         window = 1;
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double _width = screenSize.getWidth();
@@ -79,18 +77,18 @@ public class FenetreGraphique extends JFrame implements ActionListener{
                         //int width = getWidth();
                         //double height = screenSize.getHeight();
                         pente = new Pente();
-                        System.out.println("Window 2");
+                        System.out.println("Jeux");
                         pente.setLayout(null);
                         setContentPane(pente);
-                        nom1 = JOptionPane.showInputDialog(null, "Entrer le nom du J1");
-                        nom2 = JOptionPane.showInputDialog(null, "Entrer le nom du J2");
+                        nom1 = JOptionPane.showInputDialog(null, "Entrer le nom du J1","Joueur 1");
+                        nom2 = JOptionPane.showInputDialog(null, "Entrer le nom du J2", "Joueur 2");
                         
                         
                         break;
                     }
 
                     case 3: {
-                                
+                        System.out.println("Options");
                         options.setLayout(null);
         
                         setContentPane(options);                  

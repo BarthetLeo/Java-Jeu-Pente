@@ -1,5 +1,4 @@
 
-import javax.swing.*;
 import java.awt.*;
 
 public class Joueur {
@@ -14,7 +13,7 @@ public class Joueur {
     {
         this.pseudo = pseudo;
         this.couleur_id = couleur_id;
-        pile_jeton = 10;
+        pile_jeton = 60;
         tour = false;
     }
 
