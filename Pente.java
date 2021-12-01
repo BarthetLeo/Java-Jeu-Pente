@@ -89,8 +89,8 @@ public class Pente extends JPanel{
             {
                 l++;
                 Bouton bt = new Bouton(j-taille/2, i-taille/2, taille, taille, "");
-                Jeton jeton = new Jeton(1, j-taille/2, i-taille/2, taille, taille);
-                //bt.setBorderPainted(false);
+                Jeton jeton = new Jeton(j-taille/2, i-taille/2, taille, taille);
+                bt.setBorderPainted(false);
                 bt.setContentAreaFilled(false);
                 bt.setFocusPainted(false);
                 //On définie le nom de l'action
