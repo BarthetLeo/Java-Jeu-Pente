@@ -5,19 +5,19 @@ public class ListenerBouton implements ActionListener {
     private Bouton bouton;
     private Jeton jeton;
     
-    public ListenerBouton(Pente pente,Bouton bouton)
+    public ListenerBouton(Pente pente,Bouton bouton,Jeton jeton)
     {
         this.bouton = bouton;
         this.pente = pente;
-        jeton = new Jeton(1, bouton);
+        this.jeton = jeton;
     }
 
     public void actionPerformed(ActionEvent event)
     {
         if (event.getActionCommand().equals("Cliquez")) {
-            {bouton.position();
-             pente.ajout_jeton(bouton);
-             pente.supprimer(bouton);
+            {
+                jeton.set_sur_terrain(true);
+                pente.supprimer(bouton);
             }
         }
     }

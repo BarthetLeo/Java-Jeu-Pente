@@ -3,8 +3,7 @@
 import javax.swing.JButton;
 public class Bouton extends JButton {
     
-    int x,y,width,height;
-    String name;
+    private int x,y;
 
     Bouton(int x, int y, int width, int height, String name) {
         super(name);
@@ -14,9 +13,13 @@ public class Bouton extends JButton {
         setLocation(x,y);
     }
 
-    void position()
+    public int get_x()
     {
-        System.out.println(x);
-        System.out.println(y);
+        return x;
     }
+    public int get_y()
+    {
+        return y;
+    }
+    
 }

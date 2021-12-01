@@ -14,9 +14,12 @@ public class Pente extends JPanel{
     int Height = (int)dimension.getHeight();
     int Width  = (int)dimension.getWidth();
     BufferedImage img;
+    boolean cliqued = false;
+    Jeton[][] j_tab;
     
     public Pente()
     {
+        j_tab = new Jeton[19][19];
         try
         {
             img = ImageIO.read(new File("fond_jeu.jpg"));
@@ -77,28 +80,32 @@ public class Pente extends JPanel{
         int m_H_plat = Height/20-1;
 
         int taille = 25;
-
+        int k=0,l=0;
         for(int i =m_H_plat;i<m_H_plat*20;i +=m_H_plat)
         {
-
+            k++;
+            l = 0;
             for(int j =M_W_plat/20;j<M_W_plat-M_W_plat/20;j +=M_W_plat/20)
             {
+                l++;
                 Bouton bt = new Bouton(j-taille/2, i-taille/2, taille, taille, "");
+                Jeton jeton = new Jeton(1, j-taille/2, i-taille/2, taille, taille);
                 //bt.setBorderPainted(false);
                 bt.setContentAreaFilled(false);
                 bt.setFocusPainted(false);
                 //On définie le nom de l'action
                 bt.setActionCommand("Cliquez");
                 //On créer un nouveau ListenerBouton pour le bouton
-                bt.addActionListener(new ListenerBouton(this, bt)); 
+                bt.addActionListener(new ListenerBouton(this, bt,jeton)); 
                 this.add(bt);
+                j_tab[k-1][l-1] = jeton;
             }
         }
     }
     public void affiche_fond(Graphics g)
     {
-        int hauteur = getHeight();
-        int longueur = getWidth();
+        int hauteur = Height;
+        int longueur = Width;
         g.setColor(Color.BLACK);
         g.drawImage(img, 0, 0,longueur, hauteur, null);
     }
@@ -109,23 +116,31 @@ public class Pente extends JPanel{
         this.remove(bt);
     }
     
-    public void ajout_jeton(Bouton bt)
-    {
-        Jeton j = new Jeton(1, bt);
-        this.add(j);
-    }
-    
-    public void paintComponent(Graphics g)
+    public void dessine_grille(Graphics g)
     {
         affiche_fond(g);
         affiche_grille(g);
         if(FenetreGraphique.affiche_fps)
         {
-            int fps = (int)FenetreGraphique.fps;
-            Font font = new Font("Verdana", Font.BOLD,20);
-            g.setFont(font);
-            g.drawString("FPS :", 25, 100);
-            g.drawString("" + fps, 100, 100);
+            Menu.creation_fps(g);
         }
+        for(int i=0;i<19;i++)
+            {
+                for(int j=0;j<19;j++)
+                {
+                    if(j_tab[i][j].getbool())
+                    dessine_jeton(g,j_tab[i][j]);
+                }
+            }
+    }
+
+    public void dessine_jeton(Graphics g, Jeton j)
+    {
+        j.paintComponent(g);
+    }
+
+    public void paintComponent(Graphics g)
+    {
+        dessine_grille(g);
     }
 }

@@ -14,6 +14,7 @@ public class FenetreGraphique extends JFrame implements ActionListener{
     static boolean changement, fullscreen = false, changeScreen = false;
     static double fps;
     static boolean affiche_fps = false;
+    Test test;
 
     FenetreGraphique(String nom)
     {
@@ -22,6 +23,7 @@ public class FenetreGraphique extends JFrame implements ActionListener{
         menu = new Menu();
         pente = new Pente();
         options = new Options();
+        test = new Test();
         window = 1;
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double _width = screenSize.getWidth();
@@ -56,10 +58,10 @@ public class FenetreGraphique extends JFrame implements ActionListener{
                     case 1: {
                         //background = 1;
                         //Dimension screenSize = getSize();
-                        int width = getWidth();
+                        //int width = getWidth();
                         //double height = screenSize.getHeight();
                 
-                        System.out.println("width : " + width);
+                        //System.out.println("width : " + width);
                         
                         menu.setLayout(null);
                 
@@ -78,7 +80,7 @@ public class FenetreGraphique extends JFrame implements ActionListener{
                         System.out.println("Window 2");
                         pente.setLayout(null);
                         setContentPane(pente);
-
+                        
                         break;
                     }
 
@@ -110,10 +112,10 @@ public class FenetreGraphique extends JFrame implements ActionListener{
 
             }
 
-            int width = getWidth();
+            //int width = getWidth();
             //double height = screenSize.getHeight();
     
-            System.out.println("width : " + width);
+            //System.out.println("width : " + width);
 
             repaint();
 
