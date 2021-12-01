@@ -29,7 +29,21 @@ public class FenetreGraphique extends JFrame implements ActionListener{
         setResizable(false);
         setLocationRelativeTo(null);
         setAlwaysOnTop(false);
+
+        long jul = System.nanoTime();
+        long papacito = System.nanoTime();
         while (true) {
+
+            jul = System.nanoTime();
+
+            double despacito = (jul - papacito) / 1000000000.0;
+
+            double fps = 1/ despacito;
+
+            System.out.println("FPS : " + fps);
+
+            papacito = jul;
+
             /*try {
                 Thread.sleep(1000);
             } catch (Exception e) {
