@@ -12,6 +12,7 @@ public class FenetreGraphique extends JFrame implements ActionListener{
     Options options;
     static int window; /* 1 = menu // 2 = game // 3 = settings*///, background /* 1 = settings // 2 = game */;
     static boolean changement, fullscreen = false, changeScreen = false;
+    static double fps;
 
     FenetreGraphique(String nom)
     {
@@ -38,10 +39,9 @@ public class FenetreGraphique extends JFrame implements ActionListener{
 
             double despacito = (jul - papacito) / 1000000000.0;
 
-            double fps = 1/ despacito;
+            fps = 1/ despacito;
 
-            System.out.println("FPS : " + fps);
-
+            menu.affiche_fps(true);
             papacito = jul;
 
             /*try {

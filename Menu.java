@@ -12,6 +12,7 @@ import java.awt.event.*;
 public class Menu extends JPanel implements ActionListener{
     
     BufferedImage img;
+    boolean show_fps = false;
 
     Menu()
     {
@@ -69,8 +70,18 @@ public class Menu extends JPanel implements ActionListener{
         }
     }
 
+    public void affiche_fps(boolean b)
+    {
+        show_fps = b;
+    }
+
     public void paintComponent(Graphics g)
     {
         affiche_fond(g);
+        if(show_fps)
+        {
+            double fps = FenetreGraphique.fps;
+            g.drawString("" + fps, 100, 100);
+        }
     }
 }
