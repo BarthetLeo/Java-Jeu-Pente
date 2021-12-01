@@ -46,7 +46,7 @@ public class Options extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent event)
     {
         if (event.getActionCommand().equals("Revenir")) {
-            FenetreGraphique.fenetre = 1;
+            FenetreGraphique.window = 1;
         }
     }
 

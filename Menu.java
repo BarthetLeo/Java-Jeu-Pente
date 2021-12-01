@@ -54,11 +54,11 @@ public class Menu extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent event)
     {
         if (event.getActionCommand().equals("Jouer")) {
-            FenetreGraphique.fenetre = 2;
+            FenetreGraphique.window = 2;
         }
 
         else if (event.getActionCommand().equals("Option")) {
-            FenetreGraphique.fenetre = 3;
+            FenetreGraphique.window = 3;
         }
 
         else if (event.getActionCommand().equals("Quitter"))

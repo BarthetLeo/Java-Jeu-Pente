@@ -10,12 +10,12 @@ public class FenetreGraphique extends JFrame implements ActionListener{
     Menu menu;
     Pente pente;
     Options options;
-    static int fenetre;
+    static int window /* 1 = menu // 2 = game // 3 = settings*/, background /* 1 = settings // 2 = game */;
 
     FenetreGraphique(String nom)
     {
         super(nom);
-        fenetre = 1; // 1 = menu // 2 = le jeux // 3 = option
+        window = 1;
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double _width = screenSize.getWidth();
         double _height = screenSize.getHeight();
@@ -31,7 +31,8 @@ public class FenetreGraphique extends JFrame implements ActionListener{
                 //TODO: handle exception
             }
 
-            if(fenetre == 1) {
+            if(window == 1) {
+                background = 1;
                 //Dimension screenSize = getSize();
                 int width = getWidth();
                 //double height = screenSize.getHeight();
@@ -47,7 +48,9 @@ public class FenetreGraphique extends JFrame implements ActionListener{
                 repaint();
             }
     
-            else if (fenetre == 2) {
+            else if (window == 2) {
+
+                background = 2;
 
                 //Dimension screenSize = getSize();
                 int width = getWidth();
@@ -60,7 +63,7 @@ public class FenetreGraphique extends JFrame implements ActionListener{
                 repaint();
             }
 
-            if (fenetre == 3) {
+            if (window == 3) {
                 
                 options = new Options();
 
