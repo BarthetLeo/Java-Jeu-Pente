@@ -103,21 +103,29 @@ public class Pente extends JPanel{
         g.drawImage(img, 0, 0,longueur, hauteur, null);
     }
 
-    public void paintComponent(Graphics g)
-    {
-        affiche_fond(g);
-        affiche_grille(g);
-    }
-
+    
     public void supprimer(Bouton bt)
     {
         this.remove(bt);
     }
-
+    
     public void ajout_jeton(Bouton bt)
     {
         Jeton j = new Jeton(1, bt);
         this.add(j);
     }
-
+    
+    public void paintComponent(Graphics g)
+    {
+        affiche_fond(g);
+        affiche_grille(g);
+        if(FenetreGraphique.affiche_fps)
+        {
+            int fps = (int)FenetreGraphique.fps;
+            Font font = new Font("Verdana", Font.BOLD,20);
+            g.setFont(font);
+            g.drawString("FPS :", 25, 100);
+            g.drawString("" + fps, 100, 100);
+        }
+    }
 }

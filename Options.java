@@ -38,12 +38,16 @@ public class Options extends JPanel implements ActionListener{
     public void creationBouton()
     {
         Bouton Fullscreen = new Bouton(900,450,100,80,"Full");
+        Bouton AfficherFPS = new Bouton(900, 250, 120, 80, "Afficher Fps");
         Bouton Revenir = new Bouton(900,650,100,80,"Revenir");
         Fullscreen.setActionCommand("Fullscreen");
+        AfficherFPS.setActionCommand("AfficherFPS");
         Revenir.setActionCommand("Revenir");
         Fullscreen.addActionListener(this);
+        AfficherFPS.addActionListener(this);
         Revenir.addActionListener(this);
         this.add(Fullscreen);
+        this.add(AfficherFPS);
         this.add(Revenir);
     }
 
@@ -59,10 +63,22 @@ public class Options extends JPanel implements ActionListener{
             FenetreGraphique.changeScreen = true;
             FenetreGraphique.changement = true;
         }
+        else if(event.getActionCommand().equals("AfficherFPS"))
+        {
+            FenetreGraphique.affiche_fps = !FenetreGraphique.affiche_fps;
+        }
     }
 
     public void paintComponent(Graphics g)
     {
         affiche_fond(g);
+        if(FenetreGraphique.affiche_fps)
+        {
+            int fps = (int)FenetreGraphique.fps;
+            Font font = new Font("Verdana", Font.BOLD,20);
+            g.setFont(font);
+            g.drawString("FPS :", 25, 100);
+            g.drawString("" + fps, 100, 100);
+        }
     }
 }

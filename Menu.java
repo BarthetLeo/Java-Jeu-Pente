@@ -70,15 +70,10 @@ public class Menu extends JPanel implements ActionListener{
         }
     }
 
-    public void affiche_fps(boolean b)
-    {
-        show_fps = b;
-    }
-
     public void paintComponent(Graphics g)
     {
         affiche_fond(g);
-        if(show_fps)
+        if(FenetreGraphique.affiche_fps)
         {
             int fps = (int)FenetreGraphique.fps;
             Font font = new Font("Verdana", Font.BOLD,20);
