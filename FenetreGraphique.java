@@ -10,12 +10,17 @@ public class FenetreGraphique extends JFrame implements ActionListener{
     Menu menu;
     Pente pente;
     Options options;
-    static int fenetre;
+    static int window; /* 1 = menu // 2 = game // 3 = settings*///, background /* 1 = settings // 2 = game */;
+    static boolean changement, fullscreen = false, changeScreen = false;
 
     FenetreGraphique(String nom)
     {
         super(nom);
-        fenetre = 1; // 1 = menu // 2 = le jeux // 3 = option
+        changement = true;
+        menu = new Menu();
+        pente = new Pente();
+        options = new Options();
+        window = 1;
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double _width = screenSize.getWidth();
         double _height = screenSize.getHeight();
@@ -24,52 +29,94 @@ public class FenetreGraphique extends JFrame implements ActionListener{
         setResizable(false);
         setLocationRelativeTo(null);
         setAlwaysOnTop(false);
+
+        long jul = System.nanoTime();
+        long papacito = System.nanoTime();
         while (true) {
-            try {
-                Thread.sleep(5000);
+
+            jul = System.nanoTime();
+
+            double despacito = (jul - papacito) / 1000000000.0;
+
+            double fps = 1/ despacito;
+
+            System.out.println("FPS : " + fps);
+
+            papacito = jul;
+
+            /*try {
+                Thread.sleep(1000);
             } catch (Exception e) {
                 //TODO: handle exception
-            }
+            }*/
 
-            if(fenetre == 1) {
-                //Dimension screenSize = getSize();
-                int width = getWidth();
-                //double height = screenSize.getHeight();
-        
-                System.out.println(width);
-                    
-                menu = new Menu();
+            if(changement) {
+                changement = false;
+
+                switch (window) {
+                    case 1: {
+                        //background = 1;
+                        //Dimension screenSize = getSize();
+                        int width = getWidth();
+                        //double height = screenSize.getHeight();
                 
-                menu.setLayout(null);
-        
-                setContentPane(menu);
+                        System.out.println("width : " + width);
+                        
+                        menu.setLayout(null);
+                
+                        setContentPane(menu);
+                        
+                        break;
+                    }
 
-                repaint();
-            }
+                    case 2: {
+                                 
+                        //background = 2;
+        
+                        //Dimension screenSize = getSize();
+                        //int width = getWidth();
+                        //double height = screenSize.getHeight();
+                        System.out.println("Window 2");
+                        pente.setLayout(null);
+                        setContentPane(pente);
+
+                        break;
+                    }
+
+                    case 3: {
+                                
+                        options.setLayout(null);
+        
+                        setContentPane(options);                  
+                        break;
+                    }
+                
+                    default:
+                        break;
+                }
+
+                if (changeScreen) {
+
+                    changeScreen = false;
+                    dispose();
+
+                    if (fullscreen) {
+                        setUndecorated(true);
+                    }
     
-            else if (fenetre == 2) {
+                    else if (!fullscreen){
+                        setUndecorated(false);
+                    }
+                }
 
-                //Dimension screenSize = getSize();
-                int width = getWidth();
-                //double height = screenSize.getHeight();
-        
-                System.out.println(width);
-                pente = new Pente();
-                pente.setLayout(null);
-                setContentPane(pente);
-                repaint();
             }
 
-            if (fenetre == 3) {
-                
-                options = new Options();
+            int width = getWidth();
+            //double height = screenSize.getHeight();
+    
+            System.out.println("width : " + width);
 
-                options.setLayout(null);
-
-                setContentPane(options);
-
-                repaint();
-            }
+            repaint();
 
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setVisible(true);

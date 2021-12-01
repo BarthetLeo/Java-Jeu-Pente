@@ -37,9 +37,9 @@ public class Menu extends JPanel implements ActionListener{
 
     public void creationBouton()
     {
-        Bouton Jouer = new Bouton(900,200,100,80,"Jouer");
-        Bouton Option = new Bouton(900,400,100,80,"Option");
-        Bouton Quitter = new Bouton(900,800,100,80,"Quitter");
+        Bouton Jouer = new Bouton(900,250,100,80,"Jouer");
+        Bouton Option = new Bouton(900,450,100,80,"Option");
+        Bouton Quitter = new Bouton(900,650,100,80,"Quitter");
         Jouer.setActionCommand("Jouer");
         Option.setActionCommand("Option");
         Quitter.setActionCommand("Quitter");
@@ -54,16 +54,18 @@ public class Menu extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent event)
     {
         if (event.getActionCommand().equals("Jouer")) {
-            FenetreGraphique.fenetre = 2;
+            FenetreGraphique.window = 2;
+            FenetreGraphique.changement = true;
         }
 
         else if (event.getActionCommand().equals("Option")) {
-            FenetreGraphique.fenetre = 3;
+            FenetreGraphique.window = 3;
+            FenetreGraphique.changement = true;
         }
 
         else if (event.getActionCommand().equals("Quitter"))
         {
-            JeuxPente.close = false;
+            System.exit(0);
         }
     }
 
