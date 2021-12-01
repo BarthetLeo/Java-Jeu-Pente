@@ -35,7 +35,9 @@ public class Pente extends JPanel{
         J1 = new Joueur(FenetreGraphique.nom1, Color.red);
         J2 = new Joueur(FenetreGraphique.nom2,Color.yellow);
         
+        J1.set_tour(true);
     }
+    
     public void affiche_grille(Graphics g)
     {
         //Largeur max du plateau
@@ -147,6 +149,7 @@ public class Pente extends JPanel{
     {
         Font font = new Font("Verdana",Font.BOLD,20);
         g.setFont(font);
+        g.setColor(Color.black);
         g.drawString("Joueur 1 :" + FenetreGraphique.nom1, Width-((Width/4)/4)*4, Height/20);
         g.drawString("Joueur 2 :" + FenetreGraphique.nom2, Width-((Width/4)/4)*4, (Height/20)*19);
     }

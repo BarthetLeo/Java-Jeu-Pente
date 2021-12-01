@@ -23,7 +23,6 @@ public class FenetreGraphique extends JFrame implements ActionListener{
         super(nom);
         changement = true;
         menu = new Menu();
-        pente = new Pente();
         options = new Options();
         test = new Test();
         window = 1;
@@ -66,7 +65,7 @@ public class FenetreGraphique extends JFrame implements ActionListener{
                         //System.out.println("width : " + width);
                         
                         menu.setLayout(null);
-                
+                        System.out.println("Menu");;
                         setContentPane(menu);
                         
                         break;
@@ -79,6 +78,7 @@ public class FenetreGraphique extends JFrame implements ActionListener{
                         //Dimension screenSize = getSize();
                         //int width = getWidth();
                         //double height = screenSize.getHeight();
+                        pente = new Pente();
                         System.out.println("Window 2");
                         pente.setLayout(null);
                         setContentPane(pente);
@@ -123,7 +123,8 @@ public class FenetreGraphique extends JFrame implements ActionListener{
             //System.out.println("width : " + width);
 
             repaint();
-
+            if(!(pente == null) & window==2)
+                test_jeton(pente.J2);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setVisible(true);
         }
@@ -132,6 +133,16 @@ public class FenetreGraphique extends JFrame implements ActionListener{
     
     public void actionPerformed(ActionEvent event)
     {
+
+    }
+
+    public void test_jeton(Joueur j)
+    {
+        if(j.get_pile() == 0)
+        {
+            window = 1;
+            changement = true;
+        }
 
     }
 
