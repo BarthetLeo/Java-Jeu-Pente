@@ -14,6 +14,8 @@ public class FenetreGraphique extends JFrame implements ActionListener{
     static boolean changement, fullscreen = false, changeScreen = false;
     static double fps;
     static boolean affiche_fps = false;
+    static String nom1;
+    static String nom2;
     Test test;
 
     FenetreGraphique(String nom)
@@ -80,6 +82,9 @@ public class FenetreGraphique extends JFrame implements ActionListener{
                         System.out.println("Window 2");
                         pente.setLayout(null);
                         setContentPane(pente);
+                        nom1 = JOptionPane.showInputDialog(null, "Entrer le nom du J1");
+                        nom2 = JOptionPane.showInputDialog(null, "Entrer le nom du J2");
+                        
                         
                         break;
                     }

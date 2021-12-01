@@ -14,6 +14,7 @@ public class Menu extends JPanel implements ActionListener{
     BufferedImage img;
     boolean show_fps = false;
 
+
     Menu()
     {
         try
@@ -57,6 +58,7 @@ public class Menu extends JPanel implements ActionListener{
         if (event.getActionCommand().equals("Jouer")) {
             FenetreGraphique.window = 2;
             FenetreGraphique.changement = true;
+
         }
 
         else if (event.getActionCommand().equals("Option")) {

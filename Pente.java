@@ -16,6 +16,8 @@ public class Pente extends JPanel{
     BufferedImage img;
     boolean cliqued = false;
     Jeton[][] j_tab;
+    Joueur J1;
+    Joueur J2;
     
     public Pente()
     {
@@ -30,6 +32,8 @@ public class Pente extends JPanel{
         }
         //Tableau permettant de stocker les Jeton mit sur le plateau
         tableau_bouton();
+        J1 = new Joueur(FenetreGraphique.nom1, Color.red);
+        J2 = new Joueur(FenetreGraphique.nom2,Color.yellow);
         
     }
     public void affiche_grille(Graphics g)
@@ -139,8 +143,17 @@ public class Pente extends JPanel{
         j.paintComponent(g);
     }
 
+    public void affiche_joueur(Graphics g)
+    {
+        Font font = new Font("Verdana",Font.BOLD,20);
+        g.setFont(font);
+        g.drawString("Joueur 1 :" + FenetreGraphique.nom1, Width-((Width/4)/4)*4, Height/20);
+        g.drawString("Joueur 2 :" + FenetreGraphique.nom2, Width-((Width/4)/4)*4, (Height/20)*19);
+    }
+
     public void paintComponent(Graphics g)
     {
         dessine_grille(g);
+        affiche_joueur(g);
     }
 }
