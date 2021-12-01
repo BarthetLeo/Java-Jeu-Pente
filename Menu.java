@@ -80,7 +80,10 @@ public class Menu extends JPanel implements ActionListener{
         affiche_fond(g);
         if(show_fps)
         {
-            double fps = FenetreGraphique.fps;
+            int fps = (int)FenetreGraphique.fps;
+            Font font = new Font("Verdana", Font.BOLD,20);
+            g.setFont(font);
+            g.drawString("FPS :", 25, 100);
             g.drawString("" + fps, 100, 100);
         }
     }
