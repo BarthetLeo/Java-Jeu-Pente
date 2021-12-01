@@ -21,12 +21,12 @@ public class ListenerBouton implements ActionListener {
                 if(pente.J1.get_tour())
                 {
                     jeton.set_couleur(pente.J1.get_couleur());
-                    enlever_jeton(pente.J1);
+                    gestion_jeton(pente.J1);
                 }
                 else if(pente.J2.get_tour())
                 {
                     jeton.set_couleur(pente.J2.get_couleur());
-                    enlever_jeton(pente.J2);
+                    gestion_jeton(pente.J2);
                 }
                 enverser_tour(pente.J1,pente.J2);
                 jeton.set_sur_terrain(true);
@@ -41,8 +41,12 @@ public class ListenerBouton implements ActionListener {
         j2.set_tour(!j2.get_tour());
     }
 
-    public void enlever_jeton(Joueur j)
+    public void gestion_jeton(Joueur j)
     {
         j.tour();
+        j.get_tab()[j.get_nb_elem()] = jeton;
+        j.add_jeton();
+        //j.affiche();
     }
+
 }
