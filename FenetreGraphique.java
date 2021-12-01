@@ -11,7 +11,7 @@ public class FenetreGraphique extends JFrame implements ActionListener{
     Pente pente;
     Options options;
     static int window; /* 1 = menu // 2 = game // 3 = settings*///, background /* 1 = settings // 2 = game */;
-    static boolean changement, fullscreen = false;
+    static boolean changement, fullscreen = false, changeScreen = false;
 
     FenetreGraphique(String nom)
     {
@@ -52,7 +52,6 @@ public class FenetreGraphique extends JFrame implements ActionListener{
 
             if(changement) {
                 changement = false;
-                setVisible(false);
 
                 switch (window) {
                     case 1: {
@@ -96,13 +95,20 @@ public class FenetreGraphique extends JFrame implements ActionListener{
                         break;
                 }
 
-                /*if (fullscreen) {
-                    setUndecorated(true);
+                if (changeScreen) {
+
+                    changeScreen = false;
+                    dispose();
+
+                    if (fullscreen) {
+                        setUndecorated(true);
+                    }
+    
+                    else if (!fullscreen){
+                        setUndecorated(false);
+                    }
                 }
 
-                else if (!fullscreen){
-                    setUndecorated(false);
-                }*/
             }
 
             int width = getWidth();

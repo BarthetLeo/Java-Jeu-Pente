@@ -56,6 +56,7 @@ public class Options extends JPanel implements ActionListener{
 
         else if (event.getActionCommand().equals("Fullscreen")) {
             FenetreGraphique.fullscreen = !FenetreGraphique.fullscreen;
+            FenetreGraphique.changeScreen = true;
             FenetreGraphique.changement = true;
         }
     }
