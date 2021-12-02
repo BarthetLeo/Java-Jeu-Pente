@@ -12,6 +12,8 @@ import java.awt.event.*;
 public class Options extends JPanel implements ActionListener{
     
     BufferedImage img;
+    static boolean vien_jeu;
+    private String action_rev = "Revenir";
 
     Options()
     {
@@ -23,6 +25,8 @@ public class Options extends JPanel implements ActionListener{
         {
             e.printStackTrace();
         }
+        if(vien_jeu)
+        {action_rev = "Revenir_Jeu";}
 
         creationBouton();
     }
@@ -51,7 +55,7 @@ public class Options extends JPanel implements ActionListener{
 
         //Bouton Revenir au menu principal
         Bouton Revenir = new Bouton(900,650,100,80,"Revenir");
-        Revenir.setActionCommand("Revenir");
+        Revenir.setActionCommand(action_rev);
         Revenir.addActionListener(this);
         this.add(Revenir);
     }
@@ -72,6 +76,11 @@ public class Options extends JPanel implements ActionListener{
         {
             FenetreGraphique.affiche_fps = !FenetreGraphique.affiche_fps;
         }
+        else if(event.getActionCommand().equals("Revenir_Jeu")) {
+            FenetreGraphique.window = 2;
+            FenetreGraphique.changement = true;
+        }
+
     }
 
     public void paintComponent(Graphics g)

@@ -7,9 +7,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.*;
 import java.io.File;
+import java.awt.event.*;
 
 
-public class Pente extends JPanel{
+public class Pente extends JPanel implements KeyListener{
     Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
     int Height = (int)dimension.getHeight();
     int Width  = (int)dimension.getWidth();
@@ -159,4 +160,20 @@ public class Pente extends JPanel{
         dessine_grille(g);
         affiche_joueur(g);
     }
+
+public void keyPressed(KeyEvent e)
+{
+
+}
+public void keyReleased(KeyEvent e)
+{
+
+}
+public void keyTyped(KeyEvent e)
+{
+    if(e.getKeyChar() == 'q')
+    {
+        Options n = new Options();
+    }
+}
 }

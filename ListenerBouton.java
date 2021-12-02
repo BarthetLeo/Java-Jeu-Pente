@@ -31,6 +31,7 @@ public class ListenerBouton implements ActionListener {
                 enverser_tour(pente.J1,pente.J2);
                 jeton.set_sur_terrain(true);
                 pente.supprimer(bouton);
+                pente.J2.test_jeton();
             }
         }
     }
@@ -46,6 +47,7 @@ public class ListenerBouton implements ActionListener {
         j.tour();
         j.get_tab()[j.get_nb_elem()] = jeton;
         j.add_jeton();
+        j.alligner();
         //j.affiche();
     }
 
