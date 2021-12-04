@@ -4,6 +4,7 @@ import java.awt.*;
 public class Joueur {
     Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
     int ecart  = (((int)dimension.getWidth()/4)*3-16)/20;
+    int ecart_y = (int)dimension.getHeight()/20-1;
     private String pseudo;
     private Color couleur_id;
     //Nombre de jeton restant.
@@ -71,12 +72,14 @@ public class Joueur {
     {
         int jeton_alligner_x;
         int jeton_alligner_y;
+        int jeton_diagonal;
         if(nb_elem >= 5)
         {
             for(int i = 0;i<nb_elem;i++)
             {
                 jeton_alligner_x = 0;
                 jeton_alligner_y = 0;
+                jeton_diagonal = 0;
                 for(int j = 0;j<nb_elem;j++)
                 {
                     if(tab_jeton[i].get_x() == tab_jeton[j].get_x() & i != j)
@@ -86,17 +89,24 @@ public class Joueur {
                     if(tab_jeton[i].get_y() == tab_jeton[j].get_y() & i != j)
                         if(tab_jeton[j].get_x() <= tab_jeton[i].get_x()+ecart*2 & tab_jeton[j].get_x() >= tab_jeton[i].get_x()-ecart*2)
                             jeton_alligner_y++;
-                        
-                        if(jeton_alligner_x == 4 | jeton_alligner_y == 4)
+                    
+                    if(tab_jeton[i].get_x()+ecart == tab_jeton[j].get_x() & tab_jeton[i].get_y()-ecart_y == tab_jeton[j].get_y())
+                        {jeton_diagonal++;}
+                    if(tab_jeton[i].get_x()+ecart*2 == tab_jeton[j].get_x() & tab_jeton[i].get_y()-ecart_y*2 == tab_jeton[j].get_y())
+                        {jeton_diagonal++;}
+
+                    if(tab_jeton[i].get_x()-ecart == tab_jeton[j].get_x() & tab_jeton[i].get_y()+ecart_y == tab_jeton[j].get_y())
+                        {jeton_diagonal++;}
+                    if(tab_jeton[i].get_x()-ecart*2 == tab_jeton[j].get_x() & tab_jeton[i].get_y()+ecart_y*2 == tab_jeton[j].get_y())
+                        {jeton_diagonal++;}
+
+                        if(jeton_alligner_x == 4 | jeton_alligner_y == 4 | jeton_diagonal == 4)
                         {
                             FenetreGraphique.window = 1;
                             FenetreGraphique.changement = true;
                             i = nb_elem;
                             j = nb_elem;
                         }
-                    //System.out.println("jX1 = " + tab_jeton[i].get_x() +" " +i + " " + "jX2 = " + tab_jeton[j].get_x() + " "+j + " " + jeton_alligner_y);
-                    //System.out.println("jY1 = " + tab_jeton[i].get_y() +" " +i + " " + "jY2 = " + tab_jeton[j].get_y() + " "+j + " " + jeton_alligner_x);
-                    //System.out.println("i = " + i + " j =" + j + " NB= " + nb_elem + " jetonY = " + jeton_alligner_x + " jetonX = " + jeton_alligner_y);
                 }
             }
         }
@@ -104,3 +114,4 @@ public class Joueur {
         
     }
 }
+

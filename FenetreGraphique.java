@@ -77,9 +77,7 @@ public class FenetreGraphique extends JFrame implements ActionListener{
                         //Dimension screenSize = getSize();
                         //int width = getWidth();
                         //double height = screenSize.getHeight();
-                        vien_de = window;
-                        if(vien_de == 1)
-                            pente = new Pente();
+                        pente = new Pente();
                         System.out.println("Jeux");
                         pente.setLayout(null);
                         setContentPane(pente);
