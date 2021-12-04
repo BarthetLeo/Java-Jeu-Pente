@@ -1,5 +1,5 @@
-import java.awt.Color;
 import java.awt.event.*;
+
 
 
 public class ListenerBouton implements ActionListener {
@@ -22,11 +22,13 @@ public class ListenerBouton implements ActionListener {
                 {
                     jeton.set_couleur(pente.J1.get_couleur());
                     gestion_jeton(pente.J1);
+                    capture(pente.J1,pente.J2, jeton);
                 }
                 else if(pente.J2.get_tour())
                 {
                     jeton.set_couleur(pente.J2.get_couleur());
                     gestion_jeton(pente.J2);
+                    capture(pente.J2,pente.J1, jeton);
                 }
                 enverser_tour(pente.J1,pente.J2);
                 jeton.set_sur_terrain(true);
@@ -51,4 +53,266 @@ public class ListenerBouton implements ActionListener {
         //j.affiche();
     }
 
+    public void capture(Joueur j1,Joueur j2,Jeton jeton)
+    {
+        int nb;
+        if(j1.get_nb_elem() >= 3)
+        {
+            for(int i = 0;i<j1.get_nb_elem();i++)
+            {
+                //Par rapport au jeton placer on compare si il existe un jeton a 2 d'espace a droite.
+                if(jeton.get_x()+j1.ecart*3 == j1.get_tab()[i].get_x()&  j1.get_tab()[i].get_y() == jeton.get_y())
+                { 
+                    nb = 2;
+                    compare_capture(j1, j2, nb);
+                }
+                //Par rapport au jeton placer on compare si il existe un jeton a 2 d'espace a gauche.
+                else if(jeton.get_x()-j1.ecart*3 == j1.get_tab()[i].get_x()&  j1.get_tab()[i].get_y() == jeton.get_y())
+                {   
+                    nb = 1;
+                    compare_capture(j1, j2, nb);
+                }
+                //Par rapport au jeton placer on compare si il existe un jeton a 2 d'espace en haut.
+                else if(jeton.get_y()-j1.ecart_y*3 == j1.get_tab()[i].get_y() & j1.get_tab()[i].get_x() == jeton.get_x())
+                {
+                    nb = 3;
+                    compare_capture(j1, j2, nb);
+                }
+                //Par rapport au jeton placer on compare si il existe un jeton a 2 d'espace en bas.
+                else if(jeton.get_y()+j1.ecart_y*3 == j1.get_tab()[i].get_y() & j1.get_tab()[i].get_x() == jeton.get_x())
+                {
+                    nb = 4;
+                    compare_capture(j1, j2, nb);
+                }
+                //Par rapport au jeton placer on compare si il existe un jeton a 2 d'espace en bas a gauche.
+                else if(jeton.get_x()+j1.ecart*3 == j1.get_tab()[i].get_x() & jeton.get_y()-j1.ecart_y*3 == j1.get_tab()[i].get_y())
+                {
+                    nb = 5;
+                    compare_capture(j1, j2, nb);
+                }
+                //Par rapport au jeton placer on compare si il existe un jeton a 2 d'espace en haut a gauche.
+                else if(jeton.get_x()+j1.ecart*3 == j1.get_tab()[i].get_x() & jeton.get_y()+j1.ecart_y*3 == j1.get_tab()[i].get_y())
+                {
+                    nb = 6;
+                    compare_capture(j1, j2, nb);
+                }
+                //Par rapport au jeton placer on compare si il existe un jeton a 2 d'espace en bas a droite.
+                else if(jeton.get_x()-j1.ecart*3 == j1.get_tab()[i].get_x() & jeton.get_y()+j1.ecart_y*3 == j1.get_tab()[i].get_y())
+                {
+                    nb = 7;
+                    compare_capture(j1, j2, nb);
+                }
+                //Par rapport au jeton placer on compare si il existe un jeton a 2 d'espace en haut a droite.
+                else if(jeton.get_x()-j1.ecart*3 == j1.get_tab()[i].get_x() & jeton.get_y()-j1.ecart_y*3 == j1.get_tab()[i].get_y())
+                {
+                    nb = 8;
+                    compare_capture(j1, j2, nb);
+                }
+            }
+        }
+    }
+    
+    public void compare_capture(Joueur j1,Joueur j2,int nb_case)
+    {
+        boolean g=false,h=false;
+        int nb1 = 0,nb2 = 0;
+        switch(nb_case){
+            case 1:{
+                for(int k = 0;k<j2.get_nb_elem();k++)
+                {
+                    if(j2.get_tab()[k].get_x() == jeton.get_x()-j1.ecart & j2.get_tab()[k].get_y() == jeton.get_y())
+                    {
+                        h = true;
+                        nb1 = k;
+                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k);
+                    }
+                    if(j2.get_tab()[k].get_x() == jeton.get_x()-j1.ecart*2 & j2.get_tab()[k].get_y() == jeton.get_y())
+                    {
+                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k); 
+                        g = true;
+                        nb2 = k;
+                    }
+                    if(g & h)
+                    {
+                        jeton_pris(j1, j2, nb1, nb2);
+                    }
+                }
+            break;
+            }
+
+            case 2:{
+                for(int k = 0;k<j2.get_nb_elem();k++)
+                {
+                    if(j2.get_tab()[k].get_x() == jeton.get_x()+j1.ecart & j2.get_tab()[k].get_y() == jeton.get_y() )
+                    {
+                        h = true;
+                        nb1 = k;
+                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k);
+                    }
+                    if(j2.get_tab()[k].get_x() == jeton.get_x()+j1.ecart*2& j2.get_tab()[k].get_y() == jeton.get_y() )
+                    {
+                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k); 
+                        g = true;
+                        nb2 = k;
+                    }
+                    if(g & h)
+                    {
+                        jeton_pris(j1, j2, nb1, nb2);
+                    }
+                }
+                break;
+            }
+
+            case 3:{
+
+                for(int k = 0;k<j2.get_nb_elem();k++)
+                {
+                    if(j2.get_tab()[k].get_y() == jeton.get_y()-j1.ecart_y & j2.get_tab()[k].get_x() == jeton.get_x() )
+                    {
+                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k);
+                        h = true;
+                        nb1 = k;
+                    }
+                    if(j2.get_tab()[k].get_y() == jeton.get_y()-j1.ecart_y*2 & j2.get_tab()[k].get_x() == jeton.get_x() )
+                    {
+                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k); 
+                        g = true;
+                        nb2 = k;
+                    }
+                    if(g & h)
+                    {
+                        jeton_pris(j1, j2, nb1, nb2);
+                    }
+                }
+                break;
+            }
+
+            case 4:{
+
+                for(int k = 0;k<j2.get_nb_elem();k++)
+                {
+                    if(j2.get_tab()[k].get_y() == jeton.get_y()+j1.ecart_y & j2.get_tab()[k].get_x() == jeton.get_x() )
+                    {
+                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k);
+                        h = true;
+                        nb1 = k;
+                    }
+                    if(j2.get_tab()[k].get_y() == jeton.get_y()+j1.ecart_y*2 & j2.get_tab()[k].get_x() == jeton.get_x() )
+                    {
+                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k); 
+                        g = true;
+                        nb2 = k;
+                    }
+                    if(g & h)
+                    {
+                        jeton_pris(j1, j2, nb1, nb2);
+                    }
+                }
+                break;
+            }
+
+            case 5:{
+
+                for(int k = 0;k<j2.get_nb_elem();k++)
+                {
+                    if(j2.get_tab()[k].get_x() == jeton.get_x()+j1.ecart & j2.get_tab()[k].get_y() == jeton.get_y()-j1.ecart_y)
+                    {
+                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k);
+                        h = true;
+                        nb1 = k;
+                    }
+                    if(j2.get_tab()[k].get_x() == jeton.get_x()+j1.ecart*2 & j2.get_tab()[k].get_y() == jeton.get_y()-j1.ecart_y*2)
+                    {
+                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k); 
+                        g = true;
+                        nb2 = k;
+                    }
+                    if(g & h)
+                    {
+                        jeton_pris(j1, j2, nb1, nb2);
+                    }
+                }
+                break;
+            }
+            case 6:{
+
+                for(int k = 0;k<j2.get_nb_elem();k++)
+                {
+                    if(j2.get_tab()[k].get_x() == jeton.get_x()+j1.ecart & j2.get_tab()[k].get_y() == jeton.get_y()+j1.ecart_y)
+                    {
+                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k);
+                        h = true;
+                        nb1 = k;
+                    }
+                    if(j2.get_tab()[k].get_x() == jeton.get_x()+j1.ecart*2 & j2.get_tab()[k].get_y() == jeton.get_y()+j1.ecart_y*2)
+                    {
+                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k); 
+                        g = true;
+                        nb2 = k;
+                    }
+                    if(g & h)
+                    {
+                        jeton_pris(j1, j2, nb1, nb2);
+                    }
+                }
+                break;
+            }
+            case 7:{
+
+                for(int k = 0;k<j2.get_nb_elem();k++)
+                {
+                    if(j2.get_tab()[k].get_x() == jeton.get_x()-j1.ecart & j2.get_tab()[k].get_y() == jeton.get_y()+j1.ecart_y)
+                    {
+                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k);
+                        h = true;
+                        nb1 = k;
+                    }
+                    if(j2.get_tab()[k].get_x() == jeton.get_x()-j1.ecart*2 & j2.get_tab()[k].get_y() == jeton.get_y()+j1.ecart_y*2)
+                    {
+                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k); 
+                        g = true;
+                        nb2 = k;
+                    }
+                    if(g & h)
+                    {
+                        jeton_pris(j1, j2, nb1, nb2);
+                    }
+                }
+                break;
+            }
+            case 8:{
+
+                for(int k = 0;k<j2.get_nb_elem();k++)
+                {
+                    if(j2.get_tab()[k].get_x() == jeton.get_x()-j1.ecart & j2.get_tab()[k].get_y() == jeton.get_y()-j1.ecart_y)
+                    {
+                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k);
+                        h = true;
+                        nb1 = k;
+                    }
+                    if(j2.get_tab()[k].get_x() == jeton.get_x()-j1.ecart*2 & j2.get_tab()[k].get_y() == jeton.get_y()-j1.ecart_y*2)
+                    {
+                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k); 
+                        g = true;
+                        nb2 = k;
+                    }
+                    if(g & h)
+                    {
+                        jeton_pris(j1, j2, nb1, nb2);
+                    }
+                }
+                break;
+            }
+            }
+    }
+
+    public void jeton_pris(Joueur j1,Joueur j2,int nb1,int nb2)
+    {
+        j1.ajouter(j2.get_tab()[nb1]);
+        j1.ajouter(j2.get_tab()[nb2]);
+        j2.enlever(nb1);
+        j2.enlever(nb2);
+        j1.alligner();
+    }
 }
+

@@ -3,8 +3,8 @@ import java.awt.*;
 
 public class Joueur {
     Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-    int ecart  = (((int)dimension.getWidth()/4)*3-16)/20;
-    int ecart_y = (int)dimension.getHeight()/20-1;
+    public int ecart  = (((int)dimension.getWidth()/4)*3-16)/20;
+    public int ecart_y = (int)dimension.getHeight()/20-1;
     private String pseudo;
     private Color couleur_id;
     //Nombre de jeton restant.
@@ -68,6 +68,24 @@ public class Joueur {
 
     }
 
+    public void enlever(int n)
+    {
+        if(n == nb_elem)
+            nb_elem --;
+        else
+        {
+            tab_jeton[n] = tab_jeton[nb_elem];
+            nb_elem--;
+        }
+    }
+
+    public void ajouter(Jeton j)
+    {
+        j.set_couleur(couleur_id);
+        tab_jeton[nb_elem] = j;
+        add_jeton();
+    }
+
     public void alligner()
     {
         int jeton_alligner_x;
@@ -82,19 +100,23 @@ public class Joueur {
                 jeton_diagonal = 0;
                 for(int j = 0;j<nb_elem;j++)
                 {
+                    //5 jeton alginés vertical
                     if(tab_jeton[i].get_x() == tab_jeton[j].get_x() & i != j)
                         if(tab_jeton[j].get_y() <= tab_jeton[i].get_y()+ecart*2 & tab_jeton[j].get_y() >= tab_jeton[i].get_y()-ecart*2)
                             jeton_alligner_x++;
-                    
+
+                    //5 jeton alginés horizontale
                     if(tab_jeton[i].get_y() == tab_jeton[j].get_y() & i != j)
                         if(tab_jeton[j].get_x() <= tab_jeton[i].get_x()+ecart*2 & tab_jeton[j].get_x() >= tab_jeton[i].get_x()-ecart*2)
                             jeton_alligner_y++;
-                    
+                
+                    //5 Jeton aligner sur la diagonale de droite
                     if(tab_jeton[i].get_x()+ecart == tab_jeton[j].get_x() & tab_jeton[i].get_y()-ecart_y == tab_jeton[j].get_y())
                         {jeton_diagonal++;}
                     if(tab_jeton[i].get_x()+ecart*2 == tab_jeton[j].get_x() & tab_jeton[i].get_y()-ecart_y*2 == tab_jeton[j].get_y())
                         {jeton_diagonal++;}
 
+                    //5 Jeton aligner sur la diagonale gauche
                     if(tab_jeton[i].get_x()-ecart == tab_jeton[j].get_x() & tab_jeton[i].get_y()+ecart_y == tab_jeton[j].get_y())
                         {jeton_diagonal++;}
                     if(tab_jeton[i].get_x()-ecart*2 == tab_jeton[j].get_x() & tab_jeton[i].get_y()+ecart_y*2 == tab_jeton[j].get_y())
@@ -110,8 +132,6 @@ public class Joueur {
                 }
             }
         }
-
-        
     }
 }
 
