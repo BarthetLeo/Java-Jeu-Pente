@@ -78,7 +78,7 @@ public class FenetreGraphique extends JFrame implements ActionListener {
                         pente = new Pente();
 
                         if (vien_de == 1) {
-                            pente = null;
+                            menu = null;
                         }
 
                         vien_de = window;
