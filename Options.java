@@ -12,7 +12,7 @@ import java.awt.event.*;
 public class Options extends JPanel implements ActionListener {
 
     BufferedImage img;
-    static boolean vien_jeu;
+    private static boolean vien_jeu;
     private String action_rev = "Revenir";
 
     Options() {

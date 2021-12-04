@@ -86,7 +86,7 @@ public class Pente extends JPanel implements KeyListener{
         //Espace minimum entre chaque ligne
         int m_H_plat = Height/20-1;
 
-        int taille = 25;
+        int taille = 30;
         int k=0,l=0;
         for(int i =m_H_plat;i<m_H_plat*20;i +=m_H_plat)
         {
@@ -171,9 +171,6 @@ public void keyReleased(KeyEvent e)
 }
 public void keyTyped(KeyEvent e)
 {
-    if(e.getKeyChar() == 'q')
-    {
-        Options n = new Options();
-    }
+
 }
 }
