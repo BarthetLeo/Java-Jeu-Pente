@@ -5,30 +5,27 @@ import java.awt.Toolkit;
 import java.awt.Dimension;
 import java.awt.event.*;
 
-public class FenetreGraphique extends JFrame implements ActionListener{
+public class FenetreGraphique extends JFrame implements ActionListener {
     ZoneDessin zoneDessin;
+    Options options;
     Menu menu;
     Pente pente;
-    Options options;
-    static int window; /* 1 = menu // 2 = game // 3 = settings*///, background /* 1 = settings // 2 = game */;
+    static int window; /* 1 = menu // 2 = game // 3 = settings */// , background /* 1 = settings // 2 = game */;
     static boolean changement, fullscreen = false, changeScreen = false;
     static double fps;
     static boolean affiche_fps = false;
     static String nom1;
     static String nom2;
-    static int vien_de;
+    static int vien_de = 1;
 
-    FenetreGraphique(String nom)
-    {
+    FenetreGraphique(String nom) {
         super(nom);
         changement = true;
-        menu = new Menu();
-        options = new Options();
         window = 1;
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double _width = screenSize.getWidth();
         double _height = screenSize.getHeight();
-        setSize((int)_width, (int)_height);
+        setSize((int) _width, (int) _height);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -42,62 +39,69 @@ public class FenetreGraphique extends JFrame implements ActionListener{
 
             double despacito = (temps_avant - temps_apres) / 1000000000.0;
 
-            fps = 1/ despacito;
+            fps = 1 / despacito;
             temps_apres = temps_avant;
 
-            /*try {
-                Thread.sleep(1000);
-            } catch (Exception e) {
-                //TODO: handle exception
-            }*/
-
-            if(changement) {
+            if (changement) {
                 changement = false;
 
                 switch (window) {
                     case 1: {
-                        //background = 1;
-                        //Dimension screenSize = getSize();
-                        //int width = getWidth();
-                        //double height = screenSize.getHeight();
-                
-                        //System.out.println("width : " + width);
+                        // background = 1;
+                        // Dimension screenSize = getSize();
+                        // int width = getWidth();
+                        // double height = screenSize.getHeight();
+
+                        // System.out.println("width : " + width);
+                        menu = new Menu();
+
+                        if (vien_de == 2) {
+                            pente = null;
+                        }
+
                         vien_de = window;
                         menu.setLayout(null);
-                        System.out.println("Menu");;
+                        System.out.println("Menu");
                         setContentPane(menu);
-                        
+
                         break;
                     }
 
                     case 2: {
-                                 
-                        //background = 2;
-        
-                        //Dimension screenSize = getSize();
-                        //int width = getWidth();
-                        //double height = screenSize.getHeight();
+
+                        // background = 2;
+
+                        // Dimension screenSize = getSize();
+                        // int width = getWidth();
+                        // double height = screenSize.getHeight();
+
+                        pente = new Pente();
+
+                        if (vien_de == 1) {
+                            pente = null;
+                        }
+
                         vien_de = window;
-                        if(vien_de == 1)
-                            pente = new Pente();
+
                         System.out.println("Jeux");
                         pente.setLayout(null);
                         setContentPane(pente);
-                        nom1 = JOptionPane.showInputDialog(null, "Entrer le nom du J1","Joueur 1");
+                        nom1 = JOptionPane.showInputDialog(null, "Entrer le nom du J1", "Joueur 1");
                         nom2 = JOptionPane.showInputDialog(null, "Entrer le nom du J2", "Joueur 2");
-                        
-                        
+
                         break;
                     }
 
                     case 3: {
+
+                        options = new Options();
                         System.out.println("Options");
                         options.setLayout(null);
-                        vien_de = window;
-                        setContentPane(options);                  
+                        setContentPane(options);
+
                         break;
                     }
-                
+
                     default:
                         break;
                 }
@@ -110,18 +114,18 @@ public class FenetreGraphique extends JFrame implements ActionListener{
                     if (fullscreen) {
                         setUndecorated(true);
                     }
-    
-                    else if (!fullscreen){
+
+                    else if (!fullscreen) {
                         setUndecorated(false);
                     }
                 }
 
             }
 
-            //int width = getWidth();
-            //double height = screenSize.getHeight();
-    
-            //System.out.println("width : " + width);
+            // int width = getWidth();
+            // double height = screenSize.getHeight();
+
+            // System.out.println("width : " + width);
 
             repaint();
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -129,9 +133,8 @@ public class FenetreGraphique extends JFrame implements ActionListener{
         }
 
     }
-    
-    public void actionPerformed(ActionEvent event)
-    {
+
+    public void actionPerformed(ActionEvent event) {
 
     }
 
