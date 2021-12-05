@@ -118,10 +118,6 @@ public class Hub extends JPanel implements ActionListener {
         }
     }
 
-    public void oui(Graphics g) {
-        update(g);
-    }
-
     public void actionPerformed(ActionEvent event) {
 
     }
