@@ -18,7 +18,7 @@ public class Options extends JPanel implements ActionListener {
     Options() {
 
         try {
-            img = ImageIO.read(new File("Ivanne.png"));
+            img = ImageIO.read(new File("graphics/images/Ivanne.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

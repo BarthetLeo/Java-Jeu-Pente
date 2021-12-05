@@ -37,6 +37,12 @@ public class ListenerBouton implements ActionListener {
         }
     }
 
+    public void gagner(Pente p,Joueur j)
+    {
+        if(Joueur.oui)
+            p.removeAll();
+    }
+
     public void enverser_tour(Joueur j1,Joueur j2)
     {
         j1.set_tour(!j1.get_tour());
@@ -50,6 +56,7 @@ public class ListenerBouton implements ActionListener {
         j.add_jeton();
         j.alligner();
         j.test_jeton();
+        gagner(pente, j);
         //j.affiche();
     }
 
@@ -60,16 +67,16 @@ public class ListenerBouton implements ActionListener {
         {
             for(int i = 0;i<j1.get_nb_elem();i++)
             {
-                //Par rapport au jeton placer on compare si il existe un jeton a 2 d'espace a droite.
-                if(jeton.get_x()+j1.ecart*3 == j1.get_tab()[i].get_x()&  j1.get_tab()[i].get_y() == jeton.get_y())
-                { 
-                    nb = 2;
-                    compare_capture(j1, j2, nb);
-                }
                 //Par rapport au jeton placer on compare si il existe un jeton a 2 d'espace a gauche.
-                else if(jeton.get_x()-j1.ecart*3 == j1.get_tab()[i].get_x()&  j1.get_tab()[i].get_y() == jeton.get_y())
+                if(jeton.get_x()-j1.ecart*3 == j1.get_tab()[i].get_x()&  j1.get_tab()[i].get_y() == jeton.get_y())
                 {   
                     nb = 1;
+                    compare_capture(j1, j2, nb);
+                }
+                //Par rapport au jeton placer on compare si il existe un jeton a 2 d'espace a droite.
+                else if(jeton.get_x()+j1.ecart*3 == j1.get_tab()[i].get_x()&  j1.get_tab()[i].get_y() == jeton.get_y())
+                { 
+                    nb = 2;
                     compare_capture(j1, j2, nb);
                 }
                 //Par rapport au jeton placer on compare si il existe un jeton a 2 d'espace en haut.
@@ -114,30 +121,31 @@ public class ListenerBouton implements ActionListener {
     
     public void compare_capture(Joueur j1,Joueur j2,int nb_case)
     {
-        boolean g=false,h=false;
+        boolean loin=false,pres=false;
         int nb1 = 0,nb2 = 0;
+        
         switch(nb_case){
             case 1:{
                 for(int k = 0;k<j2.get_nb_elem();k++)
                 {
                     if(j2.get_tab()[k].get_x() == jeton.get_x()-j1.ecart & j2.get_tab()[k].get_y() == jeton.get_y())
                     {
-                        h = true;
+                        pres = true;
                         nb1 = k;
-                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k);
+                        
                     }
                     if(j2.get_tab()[k].get_x() == jeton.get_x()-j1.ecart*2 & j2.get_tab()[k].get_y() == jeton.get_y())
                     {
-                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k); 
-                        g = true;
+                        loin = true;
                         nb2 = k;
                     }
-                    if(g & h)
+                    if(loin & pres)
                     {
                         jeton_pris(j1, j2, nb1, nb2);
+                        break;
                     }
                 }
-            break;
+                break;
             }
 
             case 2:{
@@ -145,19 +153,18 @@ public class ListenerBouton implements ActionListener {
                 {
                     if(j2.get_tab()[k].get_x() == jeton.get_x()+j1.ecart & j2.get_tab()[k].get_y() == jeton.get_y() )
                     {
-                        h = true;
+                        pres = true;
                         nb1 = k;
-                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k);
                     }
                     if(j2.get_tab()[k].get_x() == jeton.get_x()+j1.ecart*2& j2.get_tab()[k].get_y() == jeton.get_y() )
                     {
-                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k); 
-                        g = true;
+                        loin = true;
                         nb2 = k;
                     }
-                    if(g & h)
+                    if(loin & pres)
                     {
                         jeton_pris(j1, j2, nb1, nb2);
+                        break;
                     }
                 }
                 break;
@@ -169,19 +176,18 @@ public class ListenerBouton implements ActionListener {
                 {
                     if(j2.get_tab()[k].get_y() == jeton.get_y()-j1.ecart_y & j2.get_tab()[k].get_x() == jeton.get_x() )
                     {
-                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k);
-                        h = true;
+                        pres = true;
                         nb1 = k;
                     }
                     if(j2.get_tab()[k].get_y() == jeton.get_y()-j1.ecart_y*2 & j2.get_tab()[k].get_x() == jeton.get_x() )
                     {
-                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k); 
-                        g = true;
+                        loin = true;
                         nb2 = k;
                     }
-                    if(g & h)
+                    if(loin & pres)
                     {
                         jeton_pris(j1, j2, nb1, nb2);
+                        break;
                     }
                 }
                 break;
@@ -193,19 +199,18 @@ public class ListenerBouton implements ActionListener {
                 {
                     if(j2.get_tab()[k].get_y() == jeton.get_y()+j1.ecart_y & j2.get_tab()[k].get_x() == jeton.get_x() )
                     {
-                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k);
-                        h = true;
+                        pres = true;
                         nb1 = k;
                     }
                     if(j2.get_tab()[k].get_y() == jeton.get_y()+j1.ecart_y*2 & j2.get_tab()[k].get_x() == jeton.get_x() )
                     {
-                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k); 
-                        g = true;
+                        loin = true;
                         nb2 = k;
                     }
-                    if(g & h)
+                    if(loin & pres)
                     {
                         jeton_pris(j1, j2, nb1, nb2);
+                        break;
                     }
                 }
                 break;
@@ -217,19 +222,18 @@ public class ListenerBouton implements ActionListener {
                 {
                     if(j2.get_tab()[k].get_x() == jeton.get_x()+j1.ecart & j2.get_tab()[k].get_y() == jeton.get_y()-j1.ecart_y)
                     {
-                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k);
-                        h = true;
+                        pres = true;
                         nb1 = k;
                     }
                     if(j2.get_tab()[k].get_x() == jeton.get_x()+j1.ecart*2 & j2.get_tab()[k].get_y() == jeton.get_y()-j1.ecart_y*2)
                     {
-                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k); 
-                        g = true;
+                        loin = true;
                         nb2 = k;
                     }
-                    if(g & h)
+                    if(loin & pres)
                     {
                         jeton_pris(j1, j2, nb1, nb2);
+                        break;
                     }
                 }
                 break;
@@ -240,19 +244,19 @@ public class ListenerBouton implements ActionListener {
                 {
                     if(j2.get_tab()[k].get_x() == jeton.get_x()+j1.ecart & j2.get_tab()[k].get_y() == jeton.get_y()+j1.ecart_y)
                     {
-                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k);
-                        h = true;
+                        pres = true;
                         nb1 = k;
                     }
                     if(j2.get_tab()[k].get_x() == jeton.get_x()+j1.ecart*2 & j2.get_tab()[k].get_y() == jeton.get_y()+j1.ecart_y*2)
                     {
-                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k); 
-                        g = true;
+                         
+                        loin = true;
                         nb2 = k;
                     }
-                    if(g & h)
+                    if(loin & pres)
                     {
                         jeton_pris(j1, j2, nb1, nb2);
+                        break;
                     }
                 }
                 break;
@@ -263,19 +267,18 @@ public class ListenerBouton implements ActionListener {
                 {
                     if(j2.get_tab()[k].get_x() == jeton.get_x()-j1.ecart & j2.get_tab()[k].get_y() == jeton.get_y()+j1.ecart_y)
                     {
-                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k);
-                        h = true;
+                        pres = true;
                         nb1 = k;
                     }
                     if(j2.get_tab()[k].get_x() == jeton.get_x()-j1.ecart*2 & j2.get_tab()[k].get_y() == jeton.get_y()+j1.ecart_y*2)
                     {
-                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k); 
-                        g = true;
+                        loin = true;
                         nb2 = k;
                     }
-                    if(g & h)
+                    if(loin & pres)
                     {
                         jeton_pris(j1, j2, nb1, nb2);
+                        break;
                     }
                 }
                 break;
@@ -286,19 +289,18 @@ public class ListenerBouton implements ActionListener {
                 {
                     if(j2.get_tab()[k].get_x() == jeton.get_x()-j1.ecart & j2.get_tab()[k].get_y() == jeton.get_y()-j1.ecart_y)
                     {
-                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k);
-                        h = true;
+                        pres = true;
                         nb1 = k;
                     }
                     if(j2.get_tab()[k].get_x() == jeton.get_x()-j1.ecart*2 & j2.get_tab()[k].get_y() == jeton.get_y()-j1.ecart_y*2)
                     {
-                        //System.out.println("X : " + jeton.get_x() + " Y : " + jeton.get_y()+ " JX : " + j2.get_tab()[k].get_x() + " JY : " + j2.get_tab()[k].get_y() + " K :" + k); 
-                        g = true;
+                        loin = true;
                         nb2 = k;
                     }
-                    if(g & h)
+                    if(loin & pres)
                     {
                         jeton_pris(j1, j2, nb1, nb2);
+                        break;
                     }
                 }
                 break;

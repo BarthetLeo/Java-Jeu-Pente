@@ -5,7 +5,6 @@ public class Joueur {
     Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
     public int ecart  = (((int)dimension.getWidth()/4)*3-16)/20;
     public int ecart_y = (int)dimension.getHeight()/20-1;
-    private String pseudo;
     private Color couleur_id;
     //Nombre de jeton restant.
     private int pile_jeton;
@@ -14,11 +13,11 @@ public class Joueur {
     private Jeton[] tab_jeton;
     private int nb_elem;
     private int nb_prise;
+    static boolean oui = false;
 
     //Constructeur du Joueur.
-    public Joueur(String pseudo, Color couleur_id)
+    public Joueur(Color couleur_id)
     {
-        this.pseudo = pseudo;
         this.couleur_id = couleur_id;
         pile_jeton = 60;
         tour = false;
@@ -59,10 +58,10 @@ public class Joueur {
 
     public void affiche()
     {
+        System.out.println(couleur_id);
         for(int i=0;i<nb_elem;i++)
         {
-            System.out.println("X :" + i + " "+ tab_jeton[i].get_x());
-            System.out.println("Y :" + i + " "+ tab_jeton[i].get_y());
+            System.out.println("X :" + i + " "+ tab_jeton[i].get_x() + " Y :" + i + " "+ tab_jeton[i].get_y());
         }
     }
 
@@ -80,7 +79,7 @@ public class Joueur {
             nb_elem --;
         else
         {
-            tab_jeton[n] = tab_jeton[nb_elem];
+            tab_jeton[n] = tab_jeton[nb_elem-1];
             nb_elem--;
         }
     }
@@ -102,14 +101,16 @@ public class Joueur {
     {
         int jeton_alligner_x;
         int jeton_alligner_y;
-        int jeton_diagonal;
+        int jeton_diagonal_gd;
+        int jeton_diagonal_dg;
         if(nb_elem >= 5)
         {
             for(int i = 0;i<nb_elem;i++)
             {
                 jeton_alligner_x = 0;
                 jeton_alligner_y = 0;
-                jeton_diagonal = 0;
+                jeton_diagonal_gd = 0;
+                jeton_diagonal_dg = 0;
                 for(int j = 0;j<nb_elem;j++)
                 {
                     //5 jeton alginés vertical
@@ -122,24 +123,33 @@ public class Joueur {
                         if(tab_jeton[j].get_x() <= tab_jeton[i].get_x()+ecart*2 & tab_jeton[j].get_x() >= tab_jeton[i].get_x()-ecart*2)
                             jeton_alligner_y++;
                 
-                    //5 Jeton aligner sur la diagonale de droite
+                    //5 Jeton aligner sur la diagonale de gauche a droite
                     if(tab_jeton[i].get_x()+ecart == tab_jeton[j].get_x() & tab_jeton[i].get_y()-ecart_y == tab_jeton[j].get_y())
-                        {jeton_diagonal++;}
+                        {jeton_diagonal_gd++;}
                     if(tab_jeton[i].get_x()+ecart*2 == tab_jeton[j].get_x() & tab_jeton[i].get_y()-ecart_y*2 == tab_jeton[j].get_y())
-                        {jeton_diagonal++;}
-
-                    //5 Jeton aligner sur la diagonale gauche
+                        {jeton_diagonal_gd++;}
                     if(tab_jeton[i].get_x()-ecart == tab_jeton[j].get_x() & tab_jeton[i].get_y()+ecart_y == tab_jeton[j].get_y())
-                        {jeton_diagonal++;}
+                        {jeton_diagonal_gd++;}
                     if(tab_jeton[i].get_x()-ecart*2 == tab_jeton[j].get_x() & tab_jeton[i].get_y()+ecart_y*2 == tab_jeton[j].get_y())
-                        {jeton_diagonal++;}
+                        {jeton_diagonal_gd++;}
 
-                        if(jeton_alligner_x == 4 | jeton_alligner_y == 4 | jeton_diagonal == 4)
-                        {
-                            gagner();
-                            i = nb_elem;
-                            j = nb_elem;
-                        }
+                    //5 Jeton aligner sur la diagonale de droite a gauche
+                    if(tab_jeton[i].get_x()+ecart == tab_jeton[j].get_x() & tab_jeton[i].get_y()+ecart_y == tab_jeton[j].get_y())
+                        {jeton_diagonal_dg++;}
+                    if(tab_jeton[i].get_x()+ecart*2 == tab_jeton[j].get_x() & tab_jeton[i].get_y()+ecart_y*2 == tab_jeton[j].get_y())
+                        {jeton_diagonal_dg++;}
+                    if(tab_jeton[i].get_x()-ecart == tab_jeton[j].get_x() & tab_jeton[i].get_y()-ecart_y == tab_jeton[j].get_y())
+                        {jeton_diagonal_dg++;}
+                    if(tab_jeton[i].get_x()-ecart*2 == tab_jeton[j].get_x() & tab_jeton[i].get_y()-ecart_y*2 == tab_jeton[j].get_y())
+                        {jeton_diagonal_dg++;}
+
+                    if(jeton_alligner_x == 4 | jeton_alligner_y == 4 | jeton_diagonal_gd == 4 | jeton_diagonal_dg == 4)
+                    {
+                        //gagner();
+                        oui = true;
+                        i = nb_elem;
+                        j = nb_elem;
+                    }
                 }
             }
         }

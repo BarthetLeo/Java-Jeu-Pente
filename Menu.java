@@ -16,7 +16,7 @@ public class Menu extends JPanel implements ActionListener {
 
     Menu() {
         try {
-            img = ImageIO.read(new File("Fond_Menu.jpg"));
+            img = ImageIO.read(new File("graphics/images/Fond_Menu.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -67,8 +67,8 @@ public class Menu extends JPanel implements ActionListener {
         int fps = (int) FenetreGraphique.fps;
         Font font = new Font("Verdana", Font.BOLD, 20);
         g.setFont(font);
-        g.drawString("FPS :", 25, 50);
-        g.drawString("" + fps, 100, 50);
+        g.drawString("FPS :", 25, 40);
+        g.drawString("" + fps, 100, 40);
     }
 
     public void paintComponent(Graphics g) {

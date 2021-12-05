@@ -33,6 +33,7 @@ public class FenetreGraphique extends JFrame implements ActionListener {
 
         long temps_avant = System.nanoTime();
         long temps_apres = System.nanoTime();
+        JLayeredPane pane = new JLayeredPane();
         while (true) {
 
             temps_avant = System.nanoTime();

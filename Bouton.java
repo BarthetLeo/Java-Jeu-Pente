@@ -19,7 +19,7 @@ public class Bouton extends JButton {
         setContentAreaFilled(false);
         setBorderPainted(false);
         try {
-            file = new File("WIldrock.ttf");
+            file = new File("graphics/font/WIldrock.ttf");
             font = Font.createFont(Font.TRUETYPE_FONT, file);
             font = font.deriveFont(110.f);
             setFont(font);

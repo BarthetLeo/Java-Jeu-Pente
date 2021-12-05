@@ -1,14 +1,9 @@
 import javax.swing.*;
-import javax.swing.text.AttributeSet.ColorAttribute;
-
-/*import java.util.*;
-import java.awt.Toolkit;
-import java.awt.Dimension;*/
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.*;
-import javax.lang.model.util.ElementScanner14;
+
 
 import java.io.File;
 import java.awt.event.*;
@@ -31,7 +26,7 @@ public class Pente extends JPanel implements KeyListener{
         j_tab = new Jeton[19][19];
         try
         {
-            img = ImageIO.read(new File("fond_jeu.jpg"));
+            img = ImageIO.read(new File("graphics/images/fond_jeu.jpg"));
         }
         catch (IOException e)
         {
@@ -39,7 +34,7 @@ public class Pente extends JPanel implements KeyListener{
         }
 
         try {
-            file = new File("WIldrock.ttf");
+            file = new File("graphics/font/WIldrock.ttf");
             font = Font.createFont(Font.TRUETYPE_FONT, file);
             font = font.deriveFont(60.f);
         } catch (Exception ex) {
@@ -47,8 +42,8 @@ public class Pente extends JPanel implements KeyListener{
         }
         //Tableau permettant de stocker les Jeton mit sur le plateau
         tableau_bouton();
-        J1 = new Joueur(FenetreGraphique.nom1, Color.red);
-        J2 = new Joueur(FenetreGraphique.nom2,Color.yellow);
+        J1 = new Joueur(Color.red);
+        J2 = new Joueur(Color.yellow);
         
         J1.set_tour(true);
     }
