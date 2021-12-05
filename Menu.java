@@ -32,9 +32,9 @@ public class Menu extends JPanel implements ActionListener {
     }
 
     public void creationBouton() {
-        Bouton Jouer = new Bouton(800, 250, 300, 110, "Jouer");
-        Bouton Option = new Bouton(800, 450, 300, 110, "Option");
-        Bouton Quitter = new Bouton(800, 650, 300, 110, "Quitter");
+        Bouton Jouer = new Bouton(400, 250, 300, 110, "Jouer");
+        Bouton Option = new Bouton(400, 450, 300, 110, "Option");
+        Bouton Quitter = new Bouton(400, 650, 300, 110, "Quitter");
         Jouer.setActionCommand("Jouer");
         Option.setActionCommand("Option");
         Quitter.setActionCommand("Quitter");
@@ -48,14 +48,14 @@ public class Menu extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent event) {
         if (event.getActionCommand().equals("Jouer")) {
-            FenetreGraphique.window = 2;
-            FenetreGraphique.changement = true;
+            Hub.window = 2;
+            Hub.changement = true;
 
         }
 
         else if (event.getActionCommand().equals("Option")) {
-            FenetreGraphique.window = 3;
-            FenetreGraphique.changement = true;
+            Hub.window = 3;
+            Hub.changement = true;
         }
 
         else if (event.getActionCommand().equals("Quitter")) {
@@ -64,7 +64,7 @@ public class Menu extends JPanel implements ActionListener {
     }
 
     public static void creation_fps(Graphics g) {
-        int fps = (int) FenetreGraphique.fps;
+        int fps = (int) Hub.fps;
         Font font = new Font("Verdana", Font.BOLD, 20);
         g.setFont(font);
         g.drawString("FPS :", 25, 40);

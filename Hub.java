@@ -1,13 +1,10 @@
-import javax.swing.*;
-//import java.util.*;
-//import java.awt.*;
-import java.awt.Toolkit;
-import java.awt.Dimension;
+import javax.swing.JPanel;
 import java.awt.event.*;
+import javax.swing.*;
+import java.awt.*;
 
-public class FenetreGraphique extends JFrame implements ActionListener {
+public class Hub extends JPanel implements ActionListener {
 
-    static boolean affiche_fps = false;
     Options options;
     Menu menu;
     Pente pente;
@@ -16,17 +13,17 @@ public class FenetreGraphique extends JFrame implements ActionListener {
     static boolean changement = true, changeScreen = false, fullscreen = false;
     static int window = 1, vient_de = 1;
 
-    FenetreGraphique(String nom) {
-        super(nom);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setResizable(false);
-        setLocationRelativeTo(null);
-        setAlwaysOnTop(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    
+    Hub() {
+
+        FenetreGraphique f = new FenetreGraphique("Jeux");
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // double _width = screenSize.getWidth();
+        // double _height = screenSize.getHeight();
 
         long temps_avant = System.nanoTime();
         long temps_apres = System.nanoTime();
+
         while (true) {
 
             temps_avant = System.nanoTime();
@@ -41,45 +38,44 @@ public class FenetreGraphique extends JFrame implements ActionListener {
 
                 switch (window) {
                     case 1: {
-                        // background = 1;
-                        // Dimension screenSize = getSize();
-                        // int width = getWidth();
-                        // double height = screenSize.getHeight();
-
-                        // System.out.println("width : " + width);
-                        menu = new Menu();
 
                         if (vient_de == 2) {
                             pente = null;
                         }
 
+                        else if (vient_de == 3) {
+                            options = null;
+                        }
+
+                        menu = new Menu();
+                        setPreferredSize(screenSize);
+
                         vient_de = window;
                         menu.setLayout(null);
+                        f.add(menu);
                         System.out.println("Menu");
-                        setContentPane(menu);
 
                         break;
                     }
 
                     case 2: {
 
-                        // background = 2;
-
-                        // Dimension screenSize = getSize();
-                        // int width = getWidth();
-                        // double height = screenSize.getHeight();
-
-                        pente = new Pente();
-
                         if (vient_de == 1) {
                             menu = null;
                         }
+
+                        else if (vient_de == 3) {
+                            options = null;
+                        }
+
+                        pente = new Pente();
+                        setPreferredSize(screenSize);
 
                         vient_de = window;
 
                         System.out.println("Jeux");
                         pente.setLayout(null);
-                        setContentPane(pente);
+                        f.add(pente);
                         nom1 = JOptionPane.showInputDialog(null, "Entrer le nom du J1", "Joueur 1");
                         nom2 = JOptionPane.showInputDialog(null, "Entrer le nom du J2", "Joueur 2");
 
@@ -88,10 +84,20 @@ public class FenetreGraphique extends JFrame implements ActionListener {
 
                     case 3: {
 
+                        vient_de = window;
                         options = new Options();
                         System.out.println("Options");
+
+                        f.remove(menu);
+                        menu.setEnabled(false);
+                        f.add(menu);
+                        // menu.invalidate();
+                        // menu.requestFocus(false);
+
+                        options.setBackground(new Color(90, 90, 90, 123));
                         options.setLayout(null);
-                        setContentPane(options);
+                        options.setOpaque(true);
+                        f.add(options);
 
                         break;
                     }
@@ -102,27 +108,17 @@ public class FenetreGraphique extends JFrame implements ActionListener {
 
                 if (changeScreen) {
 
-                    changeScreen = false;
-                    dispose();
-
-                    if (fullscreen) {
-                        setUndecorated(true);
-                    }
-
-                    else if (!fullscreen) {
-                        setUndecorated(false);
-                    }
+                    f.changeDeScreen();
                 }
 
             }
-        }
 
-            // int width = getWidth();
-            // double height = screenSize.getHeight();
+            repaint();
+            f.setVisible(true);
         }
+    }
 
     public void actionPerformed(ActionEvent event) {
 
     }
-
 }

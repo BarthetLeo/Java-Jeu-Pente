@@ -30,10 +30,7 @@ public class Options extends JPanel implements ActionListener {
     }
 
     public void affiche_fond(Graphics g) {
-        int hauteur = getHeight();
-        int longueur = getWidth();
         g.setColor(Color.BLACK);
-        g.drawImage(img, 0, 0, longueur, hauteur, null);
     }
 
     public void creationBouton() {
@@ -74,7 +71,7 @@ public class Options extends JPanel implements ActionListener {
 
         else if (event.getActionCommand().equals("Revenir_Jeu")) {
             FenetreGraphique.changement = true;
-            FenetreGraphique.window = FenetreGraphique.vien_de;
+            FenetreGraphique.window = FenetreGraphique.vient_de;
         }
 
     }
