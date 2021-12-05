@@ -17,11 +17,6 @@ public class Options extends JPanel implements ActionListener {
 
     Options() {
 
-        try {
-            img = ImageIO.read(new File("Ivanne.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         if (vien_jeu) {
             action_rev = "Revenir_Jeu";
         }
@@ -30,10 +25,7 @@ public class Options extends JPanel implements ActionListener {
     }
 
     public void affiche_fond(Graphics g) {
-        int hauteur = getHeight();
-        int longueur = getWidth();
         g.setColor(Color.BLACK);
-        g.drawImage(img, 0, 0, longueur, hauteur, null);
     }
 
     public void creationBouton() {
@@ -58,14 +50,14 @@ public class Options extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent event) {
         if (event.getActionCommand().equals("Revenir")) {
-            FenetreGraphique.window = 1;
-            FenetreGraphique.changement = true;
+            Hub.window = 1;
+            Hub.changement = true;
         }
 
         else if (event.getActionCommand().equals("Fullscreen")) {
-            FenetreGraphique.fullscreen = !FenetreGraphique.fullscreen;
-            FenetreGraphique.changeScreen = true;
-            FenetreGraphique.changement = true;
+            Hub.fullscreen = !Hub.fullscreen;
+            Hub.changeScreen = true;
+            Hub.changement = true;
         }
 
         else if (event.getActionCommand().equals("AfficherFPS")) {
@@ -73,8 +65,8 @@ public class Options extends JPanel implements ActionListener {
         }
 
         else if (event.getActionCommand().equals("Revenir_Jeu")) {
-            FenetreGraphique.changement = true;
-            FenetreGraphique.window = FenetreGraphique.vien_de;
+            Hub.changement = true;
+            Hub.window = Hub.vient_de;
         }
 
     }
