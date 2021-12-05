@@ -48,14 +48,14 @@ public class Menu extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent event) {
         if (event.getActionCommand().equals("Jouer")) {
-            Hub.window = 2;
-            Hub.changement = true;
+            FenetreGraphique.window = 2;
+            FenetreGraphique.changement = true;
 
         }
 
         else if (event.getActionCommand().equals("Option")) {
-            Hub.window = 3;
-            Hub.changement = true;
+            FenetreGraphique.window = 3;
+            FenetreGraphique.changement = true;
         }
 
         else if (event.getActionCommand().equals("Quitter")) {
@@ -64,7 +64,7 @@ public class Menu extends JPanel implements ActionListener {
     }
 
     public static void creation_fps(Graphics g) {
-        int fps = (int) Hub.fps;
+        int fps = (int) FenetreGraphique.fps;
         Font font = new Font("Verdana", Font.BOLD, 20);
         g.setFont(font);
         g.drawString("FPS :", 25, 40);
