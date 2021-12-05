@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.text.AttributeSet.ColorAttribute;
+
 /*import java.util.*;
 import java.awt.Toolkit;
 import java.awt.Dimension;*/
@@ -6,6 +8,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.*;
+import javax.lang.model.util.ElementScanner14;
+
 import java.io.File;
 import java.awt.event.*;
 
@@ -19,6 +23,8 @@ public class Pente extends JPanel implements KeyListener{
     Jeton[][] j_tab;
     Joueur J1;
     Joueur J2;
+    private Font font;
+    private File file;
     
     public Pente()
     {
@@ -30,6 +36,14 @@ public class Pente extends JPanel implements KeyListener{
         catch (IOException e)
         {
             e.printStackTrace();
+        }
+
+        try {
+            file = new File("WIldrock.ttf");
+            font = Font.createFont(Font.TRUETYPE_FONT, file);
+            font = font.deriveFont(60.f);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
         }
         //Tableau permettant de stocker les Jeton mit sur le plateau
         tableau_bouton();
@@ -54,6 +68,8 @@ public class Pente extends JPanel implements KeyListener{
         g2.drawRect(0, 0, M_W_plat, Height);
         g2.setStroke(new BasicStroke(3.0f));
         g2.setColor(Color.black);
+        g2.setFont(new Font("Verdana",Font.BOLD,15));
+        
 
         //Boucle pour dessiner les colonne et des noms des colonnes
         String [] lettre = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S"};
@@ -61,7 +77,6 @@ public class Pente extends JPanel implements KeyListener{
         {
             g2.drawLine((M_W_plat/20)*i, (m_H_plat), (M_W_plat/20)*i, (m_H_plat)*19);
             g2.drawString(lettre[i-1], ((M_W_plat/20)*i)-3,((m_H_plat)*19)+30);
-            
         }
         
         //Boucle pour dessiner les lignes et les nombres des lignes
@@ -86,7 +101,7 @@ public class Pente extends JPanel implements KeyListener{
         //Espace minimum entre chaque ligne
         int m_H_plat = Height/20-1;
 
-        int taille = 30;
+        int taille = 34;
         int k=0,l=0;
         for(int i =m_H_plat;i<m_H_plat*20;i +=m_H_plat)
         {
@@ -148,11 +163,22 @@ public class Pente extends JPanel implements KeyListener{
 
     public void affiche_joueur(Graphics g)
     {
-        Font font = new Font("Verdana",Font.BOLD,20);
+        Color couleur = new Color(247,130,55);
         g.setFont(font);
-        g.setColor(Color.black);
-        g.drawString("Joueur 1 :" + FenetreGraphique.nom1, Width-((Width/4)/4)*4, Height/20);
-        g.drawString("Joueur 2 :" + FenetreGraphique.nom2, Width-((Width/4)/4)*4, (Height/20)*19);
+        if(J1.get_tour())
+        {
+            g.setColor(couleur);
+            g.drawString(FenetreGraphique.nom1, Width-((Width/4)/4)*4, Height/20);
+            g.setColor(Color.black);
+            g.drawString(FenetreGraphique.nom2, Width-((Width/4)/4)*4, (Height/20)*19);
+        }
+        else if(J2.get_tour())
+        {
+            g.setColor(couleur);
+            g.drawString(FenetreGraphique.nom2, Width-((Width/4)/4)*4, (Height/20)*19);
+            g.setColor(Color.black);
+            g.drawString(FenetreGraphique.nom1, Width-((Width/4)/4)*4, Height/20);
+        }
     }
 
     public void paintComponent(Graphics g)

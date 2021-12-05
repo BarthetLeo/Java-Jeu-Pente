@@ -13,6 +13,7 @@ public class Joueur {
     private boolean tour;
     private Jeton[] tab_jeton;
     private int nb_elem;
+    private int nb_prise;
 
     //Constructeur du Joueur.
     public Joueur(String pseudo, Color couleur_id)
@@ -23,6 +24,7 @@ public class Joueur {
         tour = false;
         tab_jeton = new Jeton[pile_jeton];
         nb_elem = 0;
+        nb_prise = 0;
     }
 
     public Color get_couleur()
@@ -49,6 +51,12 @@ public class Joueur {
     public int get_nb_elem()
     {return nb_elem;}
 
+    public void add_prise()
+    {nb_prise++;}
+
+    public int get_prise()
+    {return nb_prise;}
+
     public void affiche()
     {
         for(int i=0;i<nb_elem;i++)
@@ -60,12 +68,10 @@ public class Joueur {
 
     public void test_jeton()
     {
-        if(get_pile() == 0)
+        if(get_pile() == 0 | nb_prise == 5)
         {
-            FenetreGraphique.window = 1;
-            FenetreGraphique.changement = true;
+            gagner();
         }
-
     }
 
     public void enlever(int n)
@@ -78,12 +84,18 @@ public class Joueur {
             nb_elem--;
         }
     }
-
+    
     public void ajouter(Jeton j)
     {
         j.set_couleur(couleur_id);
         tab_jeton[nb_elem] = j;
         add_jeton();
+    }
+    
+    public void gagner()
+    {
+        FenetreGraphique.window = 1;
+        FenetreGraphique.changement = true;
     }
 
     public void alligner()
@@ -124,8 +136,7 @@ public class Joueur {
 
                         if(jeton_alligner_x == 4 | jeton_alligner_y == 4 | jeton_diagonal == 4)
                         {
-                            FenetreGraphique.window = 1;
-                            FenetreGraphique.changement = true;
+                            gagner();
                             i = nb_elem;
                             j = nb_elem;
                         }
