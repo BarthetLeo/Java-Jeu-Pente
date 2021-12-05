@@ -13,7 +13,6 @@ public class Joueur {
     private Jeton[] tab_jeton;
     private int nb_elem;
     private int nb_prise;
-    static boolean oui = false;
 
     //Constructeur du Joueur.
     public Joueur(Color couleur_id)
@@ -151,8 +150,7 @@ public class Joueur {
 
                     if(jeton_alligner_x == 4 | jeton_alligner_y == 4 | jeton_diagonal_gd == 4 | jeton_diagonal_dg == 4)
                     {
-                        //gagner();
-                        oui = true;
+                        gagner();
                         i = nb_elem;
                         j = nb_elem;
                     }

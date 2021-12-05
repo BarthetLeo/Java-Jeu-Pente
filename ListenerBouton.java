@@ -37,12 +37,6 @@ public class ListenerBouton implements ActionListener {
         }
     }
 
-    public void gagner(Pente p,Joueur j)
-    {
-        if(Joueur.oui)
-            p.removeAll();
-    }
-
     public void enverser_tour(Joueur j1,Joueur j2)
     {
         j1.set_tour(!j1.get_tour());
@@ -56,7 +50,6 @@ public class ListenerBouton implements ActionListener {
         j.add_jeton();
         j.alligner();
         j.test_jeton();
-        gagner(pente, j);
         //j.affiche();
     }
 

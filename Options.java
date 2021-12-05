@@ -1,7 +1,4 @@
 import javax.swing.*;
-/*import java.util.*;
-import java.awt.Toolkit;
-import java.awt.Dimension;*/
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -18,7 +15,7 @@ public class Options extends JPanel implements ActionListener {
     Options() {
 
         try {
-            img = ImageIO.read(new File("graphics/images/Ivanne.png"));
+            img = ImageIO.read(new File("graphics/images/Fond_Menu.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -30,7 +27,10 @@ public class Options extends JPanel implements ActionListener {
     }
 
     public void affiche_fond(Graphics g) {
+        int hauteur = getHeight();
+        int longueur = getWidth();
         g.setColor(Color.BLACK);
+        g.drawImage(img, 0, 0, longueur, hauteur, null);
     }
 
     public void creationBouton() {
@@ -71,7 +71,7 @@ public class Options extends JPanel implements ActionListener {
 
         else if (event.getActionCommand().equals("Revenir_Jeu")) {
             FenetreGraphique.changement = true;
-            FenetreGraphique.window = FenetreGraphique.vient_de;
+            FenetreGraphique.window = FenetreGraphique.vien_de;
         }
 
     }
