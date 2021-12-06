@@ -11,17 +11,22 @@ public class Options extends JPanel implements ActionListener {
     BufferedImage img;
     private static boolean vien_jeu;
     private String action_rev = "Revenir";
+    private FenetreOption f_o;
 
-    Options() {
+    Options(FenetreOption f_o) {
 
         try {
-            img = ImageIO.read(new File("graphics/images/Fond_Menu.jpg"));
+            img = ImageIO.read(new File("graphics/images/Sans titre.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (vien_jeu) {
-            action_rev = "Revenir_Jeu";
-        }
+        this.f_o = f_o;
+
+        /*
+         * if (vien_jeu) {
+         * action_rev = "Revenir_Jeu";
+         * }
+         */
 
         creationBouton();
     }
@@ -35,28 +40,28 @@ public class Options extends JPanel implements ActionListener {
 
     public void creationBouton() {
         // Bouton plein écran
-        Bouton Fullscreen = new Bouton(800, 250, 400, 110, "FullScreen");
+        Bouton Fullscreen = new Bouton(400, 150, 400, 110, "FullScreen");
         Fullscreen.setActionCommand("Fullscreen");
         Fullscreen.addActionListener(this);
         this.add(Fullscreen);
 
         // Bouton Afficher les FPS
-        Bouton AfficherFPS = new Bouton(780, 450, 500, 110, "Afficher Fps");
+        Bouton AfficherFPS = new Bouton(380, 350, 500, 110, "Afficher Fps");
         AfficherFPS.setActionCommand("AfficherFPS");
         AfficherFPS.addActionListener(this);
         this.add(AfficherFPS);
 
         // Bouton Revenir au menu principal
-        Bouton Revenir = new Bouton(800, 650, 300, 110, "Revenir");
-        Revenir.setActionCommand(action_rev);
+        Bouton Revenir = new Bouton(400, 550, 300, 110, "Revenir");
+        Revenir.setActionCommand("Revenir");
         Revenir.addActionListener(this);
         this.add(Revenir);
     }
 
     public void actionPerformed(ActionEvent event) {
         if (event.getActionCommand().equals("Revenir")) {
-            FenetreGraphique.window = 1;
-            FenetreGraphique.changement = true;
+            FenetreOption.show = false;
+            f_o.dispose();
         }
 
         else if (event.getActionCommand().equals("Fullscreen")) {
@@ -69,10 +74,10 @@ public class Options extends JPanel implements ActionListener {
             FenetreGraphique.affiche_fps = !FenetreGraphique.affiche_fps;
         }
 
-        else if (event.getActionCommand().equals("Revenir_Jeu")) {
-            FenetreGraphique.changement = true;
-            FenetreGraphique.window = FenetreGraphique.vien_de;
-        }
+        // else if (event.getActionCommand().equals("Revenir_Jeu")) {
+        // FenetreGraphique.changement = true;
+        // FenetreGraphique.window = FenetreGraphique.vien_de;
+        // }
 
     }
 

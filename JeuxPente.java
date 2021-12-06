@@ -2,6 +2,7 @@ public class JeuxPente {
 
     public static void main(String[] args) {
 
-       FenetreGraphique f = new FenetreGraphique("Jeux");
+        FenetreGraphique f = new FenetreGraphique("Jeux");
     }
+
 }

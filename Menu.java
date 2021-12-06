@@ -53,6 +53,7 @@ public class Menu extends JPanel implements ActionListener {
         else if (event.getActionCommand().equals("Option")) {
             FenetreGraphique.window = 3;
             FenetreGraphique.changement = true;
+            FenetreOption.show = true;
         }
 
         else if (event.getActionCommand().equals("Quitter")) {

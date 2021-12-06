@@ -4,10 +4,9 @@ import java.awt.Dimension;
 import java.awt.event.*;
 
 public class FenetreGraphique extends JFrame implements ActionListener {
-    ZoneDessin zoneDessin;
-    Options options;
     Menu menu;
     Pente pente;
+    FenetreOption fenetreOption;
     static int window;
     static boolean changement, fullscreen = false, changeScreen = false;
     static double fps;
@@ -78,12 +77,10 @@ public class FenetreGraphique extends JFrame implements ActionListener {
                     }
 
                     case 3: {
+                        // menu.setVisible(false);
+                        fenetreOption = new FenetreOption("Options");
 
-                        options = new Options();
-                        System.out.println("Options");
-                        options.setLayout(null);
-                        setContentPane(options);
-
+                        window = vien_de;
                         break;
                     }
 
