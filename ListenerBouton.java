@@ -320,6 +320,7 @@ public class ListenerBouton implements ActionListener {
         ajout_bouton(j2.get_tab()[nb2]);
         j2.enlever(nb1);
         j2.enlever(nb2);
+        j1.add_prise();
         j1.test_jeton();
         j1.alligner();
     }

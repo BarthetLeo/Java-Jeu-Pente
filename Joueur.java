@@ -100,6 +100,10 @@ public class Joueur {
     }
 
     public void gagner() {
+        if(nb_prise == 5)
+        {
+            System.out.println("GAGNER PAR PRISE");
+        }
         FenetreGraphique.window = 1;
         FenetreGraphique.changement = true;
     }
