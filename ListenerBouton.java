@@ -17,18 +17,36 @@ public class ListenerBouton implements ActionListener {
     public void actionPerformed(ActionEvent event)
     {
         if (event.getActionCommand().equals("Cliquez")) {
+            //System.out.println(jeton.get_x() + " " + jeton.get_y());
             {
-                if(pente.J1.get_tour())
+                if(Pente.nb_tour >= 3)
+                {
+                    if(pente.J1.get_tour())
+                    {
+                        jeton.set_couleur(pente.J1.get_couleur());
+                        gestion_jeton(pente.J1);
+                        capture(pente.J1,pente.J2, jeton);
+                    }
+                    else if(pente.J2.get_tour())
+                    {
+                        jeton.set_couleur(pente.J2.get_couleur());
+                        gestion_jeton(pente.J2);
+                        capture(pente.J2,pente.J1, jeton);
+                    }
+                }
+                else if(Pente.nb_tour == 1)
                 {
                     jeton.set_couleur(pente.J1.get_couleur());
                     gestion_jeton(pente.J1);
-                    capture(pente.J1,pente.J2, jeton);
+                    pente.regle_2();
                 }
-                else if(pente.J2.get_tour())
+
+                else if(Pente.nb_tour == 2)
                 {
                     jeton.set_couleur(pente.J2.get_couleur());
                     gestion_jeton(pente.J2);
-                    capture(pente.J2,pente.J1, jeton);
+                    pente.tableau_bouton();
+                    Pente.nb_tour = 3;
                 }
                 enverser_tour(pente.J1,pente.J2);
                 jeton.set_sur_terrain(true);

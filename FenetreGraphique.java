@@ -59,10 +59,12 @@ public class FenetreGraphique extends JFrame implements ActionListener {
                     }
 
                     case 2: {
-                        pente = new Pente();
-
+                        
                         if (vien_de == 1) {
+                            pente = new Pente();
                             menu = null;
+                            nom1 = JOptionPane.showInputDialog(null, "Entrer le nom du J1", "Joueur 1");
+                            nom2 = JOptionPane.showInputDialog(null, "Entrer le nom du J2", "Joueur 2");
                         }
 
                         vien_de = window;
@@ -70,8 +72,6 @@ public class FenetreGraphique extends JFrame implements ActionListener {
                         System.out.println("Jeux");
                         pente.setLayout(null);
                         setContentPane(pente);
-                        nom1 = JOptionPane.showInputDialog(null, "Entrer le nom du J1", "Joueur 1");
-                        nom2 = JOptionPane.showInputDialog(null, "Entrer le nom du J2", "Joueur 2");
 
                         break;
                     }
