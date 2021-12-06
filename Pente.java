@@ -8,7 +8,7 @@ import javax.imageio.*;
 import java.io.File;
 import java.awt.event.*;
 
-public class Pente extends JPanel implements KeyListener {
+public class Pente extends JPanel implements ActionListener {
     Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
     int Height = (int) dimension.getHeight();
     int Width = (int) dimension.getWidth();
@@ -44,6 +44,11 @@ public class Pente extends JPanel implements KeyListener {
         J2 = new Joueur(Color.yellow);
         
         J1.set_tour(true);
+
+        Bouton B_option = new Bouton(Width-300, Height-110, 300, 100, "Options");
+        B_option.setActionCommand("Option");
+        B_option.addActionListener(this);
+        this.add(B_option);
     }
 
     public void affiche_grille(Graphics g) {
@@ -158,15 +163,12 @@ public class Pente extends JPanel implements KeyListener {
         affiche_joueur(g);
     }
 
-    public void keyPressed(KeyEvent e) {
+    public void actionPerformed(ActionEvent event) {
 
-    }
-
-    public void keyReleased(KeyEvent e) {
-
-    }
-
-    public void keyTyped(KeyEvent e) {
-
+        if (event.getActionCommand().equals("Options")) {
+            FenetreGraphique.window = 3;
+            FenetreGraphique.changement = true;
+            FenetreOption.show = true;
+        }
     }
 }
