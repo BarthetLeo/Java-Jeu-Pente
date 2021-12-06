@@ -9,14 +9,14 @@ import java.awt.event.*;
 public class Options extends JPanel implements ActionListener {
 
     BufferedImage img;
-    private static boolean vien_jeu;
-    private String action_rev = "Revenir";
+    //private static boolean vien_jeu;
+    //private String action_rev = "Revenir";
     private FenetreOption f_o;
 
     Options(FenetreOption f_o) {
 
         try {
-            img = ImageIO.read(new File("graphics/images/Sans titre.png"));
+            img = ImageIO.read(new File("graphics/images/noir.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,19 +40,19 @@ public class Options extends JPanel implements ActionListener {
 
     public void creationBouton() {
         // Bouton plein écran
-        Bouton Fullscreen = new Bouton(400, 150, 400, 110, "FullScreen");
+        Bouton Fullscreen = new Bouton(740, 280, 500, 110, "FullScreen");
         Fullscreen.setActionCommand("Fullscreen");
         Fullscreen.addActionListener(this);
         this.add(Fullscreen);
 
         // Bouton Afficher les FPS
-        Bouton AfficherFPS = new Bouton(380, 350, 500, 110, "Afficher Fps");
+        Bouton AfficherFPS = new Bouton(780, 480, 500, 110, "Afficher Fps");
         AfficherFPS.setActionCommand("AfficherFPS");
         AfficherFPS.addActionListener(this);
         this.add(AfficherFPS);
 
         // Bouton Revenir au menu principal
-        Bouton Revenir = new Bouton(400, 550, 300, 110, "Revenir");
+        Bouton Revenir = new Bouton(800, 680, 300, 110, "Revenir");
         Revenir.setActionCommand("Revenir");
         Revenir.addActionListener(this);
         this.add(Revenir);

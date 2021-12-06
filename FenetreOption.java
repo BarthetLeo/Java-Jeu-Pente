@@ -1,9 +1,9 @@
 import javax.swing.JFrame;
-import java.util.*;
+//import java.util.*;
 import java.awt.Dimension;
-import javax.swing.*;
+//import javax.swing.*;
 import java.awt.Toolkit;
-import java.awt.*;
+//import java.awt.*;
 import java.awt.event.*;
 
 public class FenetreOption extends JFrame implements ActionListener{
@@ -15,11 +15,11 @@ public class FenetreOption extends JFrame implements ActionListener{
 
         super(nom);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        double _width = screenSize.getWidth() / 1.5;
-        double _height = screenSize.getHeight() / 1.5;
+        double _width = screenSize.getWidth();
+        double _height = screenSize.getHeight();
         setSize((int) _width, (int) _height);
         setUndecorated(true);
-        setOpacity(0.8f);
+        setOpacity(0.9f);
         setResizable(false);
         setLocationRelativeTo(null);
         setAlwaysOnTop(false);
