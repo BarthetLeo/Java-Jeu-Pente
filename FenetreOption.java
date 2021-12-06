@@ -29,7 +29,16 @@ public class FenetreOption extends JFrame implements ActionListener{
         options.setLayout(null);
         setContentPane(options);
 
+        long temps_avant = System.nanoTime();
+        long temps_apres = System.nanoTime();
         while (show) {
+            temps_avant = System.nanoTime();
+
+            double despacito = (temps_avant - temps_apres) / 1000000000.0;
+
+            FenetreGraphique.fps = 1 / despacito;
+            temps_apres = temps_avant;
+
             repaint();
             setDefaultCloseOperation(FenetreOption.EXIT_ON_CLOSE);
             setVisible(true);
