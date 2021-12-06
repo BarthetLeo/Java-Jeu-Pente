@@ -18,7 +18,7 @@ public class Bouton extends JButton {
         setOpaque(false);
         setContentAreaFilled(false);
         setBorderPainted(false);
-        this.setSelected(false);
+        setFocusPainted(false);
         try {
             file = new File("graphics/font/WIldrock.ttf");
             font = Font.createFont(Font.TRUETYPE_FONT, file);
