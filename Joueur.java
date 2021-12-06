@@ -82,6 +82,8 @@ public class Joueur {
 
     public void enlever(int n)
     {
+        Color c=new Color(0,0,0,1 );
+        tab_jeton[n].set_couleur(c);
         if(n == nb_elem)
             nb_elem --;
         else

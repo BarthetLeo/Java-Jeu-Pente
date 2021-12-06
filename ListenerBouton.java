@@ -53,10 +53,23 @@ public class ListenerBouton implements ActionListener {
         //j.affiche();
     }
 
+    public void ajout_bouton(Jeton jeton_j)
+    {
+        Bouton bt = new Bouton(jeton_j.get_x(), jeton_j.get_y(), 34, 34, "");
+        bt.setBorderPainted(false);
+        bt.setContentAreaFilled(false);
+        bt.setFocusPainted(false);
+        // On définie le nom de l'action
+        bt.setActionCommand("Cliquez");
+        // On créer un nouveau ListenerBouton pour le bouton
+        bt.addActionListener(new ListenerBouton(pente, bt, jeton_j));
+        pente.add(bt);
+    }
+
     public void capture(Joueur j1,Joueur j2,Jeton jeton)
     {
         int nb;
-        if(j1.get_nb_elem() >= 3)
+        if(j1.get_pile() < 58)
         {
             for(int i = 0;i<j1.get_nb_elem();i++)
             {
@@ -303,11 +316,10 @@ public class ListenerBouton implements ActionListener {
 
     public void jeton_pris(Joueur j1,Joueur j2,int nb1,int nb2)
     {
-        j1.ajouter(j2.get_tab()[nb1]);
-        j1.ajouter(j2.get_tab()[nb2]);
+        ajout_bouton(j2.get_tab()[nb1]);
+        ajout_bouton(j2.get_tab()[nb2]);
         j2.enlever(nb1);
         j2.enlever(nb2);
-        j1.add_prise();
         j1.test_jeton();
         j1.alligner();
     }
