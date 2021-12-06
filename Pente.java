@@ -46,7 +46,7 @@ public class Pente extends JPanel implements ActionListener {
         J1.set_tour(true);
 
         Bouton B_option = new Bouton(Width-300, Height-110, 300, 100, "Options");
-        B_option.setActionCommand("Option");
+        B_option.setActionCommand("Options");
         B_option.addActionListener(this);
         this.add(B_option);
     }

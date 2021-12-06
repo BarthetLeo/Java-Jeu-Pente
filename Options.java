@@ -58,14 +58,14 @@ public class Options extends JPanel implements ActionListener {
         this.add(Regles);
 
         // Bouton Revenir au menu principal
-        Bouton Revenir = new Bouton(1000, 780, 300, 110, "Revenir");
+        Bouton Revenir = new Bouton(1100, 780, 300, 110, "Revenir");
         Revenir.setActionCommand("Revenir");
         Revenir.addActionListener(this);
         this.add(Revenir);
 
         // Création de bouton si en jeux
         if (FenetreGraphique.vien_de == 2) {
-            Bouton Abandonner = new Bouton(600, 780, 300, 110, "Abandonner");
+            Bouton Abandonner = new Bouton(500, 780, 500, 110, "Abandonner");
             Abandonner.setActionCommand("Abandonner");
             Abandonner.addActionListener(this);
             this.add(Abandonner);
