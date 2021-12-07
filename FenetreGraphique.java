@@ -29,6 +29,8 @@ public class FenetreGraphique extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setAlwaysOnTop(false);
 
+        sounds = new Sounds("sounds/Menu.wav");
+
         long temps_avant = System.nanoTime();
         long temps_apres = System.nanoTime();
         while (true) {
@@ -39,6 +41,10 @@ public class FenetreGraphique extends JFrame implements ActionListener {
 
             fps = 1 / despacito;
             temps_apres = temps_avant;
+
+            if (!sounds.isRunning() || changement && window == 1 || changement && window == 2) {
+                playMusic();
+            }
 
             if (changement) {
                 changement = false;
@@ -104,7 +110,7 @@ public class FenetreGraphique extends JFrame implements ActionListener {
                 }
 
             }
-            playMusic();
+
             repaint();
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setVisible(true);
@@ -114,14 +120,16 @@ public class FenetreGraphique extends JFrame implements ActionListener {
 
     public void playMusic() {
         if (window == 1 || (window == 3 && vien_de == 1)) {
-            sounds = null;
-            sounds = new Sounds("sounds/Romantic-Ambient-Motivational-Piano.m4a");
+            sounds.stop();
+            sounds = new Sounds("sounds/Menu.wav");
+            sounds.setVolume(-30);
             sounds.play();
         }
 
         else if (window == 2 || (window == 3 && vien_de == 2)) {
-            sounds = null;
-            sounds = new Sounds("sounds/Romantic-Ambient-Motivational-Piano.m4a");
+            sounds.stop();
+            sounds = new Sounds("sounds/InGame.wav");
+            sounds.setVolume(-30);
             sounds.play();
         }
     }
