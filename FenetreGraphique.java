@@ -7,6 +7,7 @@ public class FenetreGraphique extends JFrame implements ActionListener {
     Menu menu;
     Pente pente;
     FenetreOption fenetreOption;
+    private Sounds sounds;
     static int window;
     static boolean changement, fullscreen = false, changeScreen = false;
     static double fps;
@@ -59,7 +60,7 @@ public class FenetreGraphique extends JFrame implements ActionListener {
                     }
 
                     case 2: {
-                        
+
                         if (vien_de == 1) {
                             pente = new Pente();
                             menu = null;
@@ -103,11 +104,26 @@ public class FenetreGraphique extends JFrame implements ActionListener {
                 }
 
             }
+            playMusic();
             repaint();
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setVisible(true);
         }
 
+    }
+
+    public void playMusic() {
+        if (window == 1 || (window == 3 && vien_de == 1)) {
+            sounds = null;
+            sounds = new Sounds("sounds/Romantic-Ambient-Motivational-Piano.m4a");
+            sounds.play();
+        }
+
+        else if (window == 2 || (window == 3 && vien_de == 2)) {
+            sounds = null;
+            sounds = new Sounds("sounds/Romantic-Ambient-Motivational-Piano.m4a");
+            sounds.play();
+        }
     }
 
     public void actionPerformed(ActionEvent event) {
