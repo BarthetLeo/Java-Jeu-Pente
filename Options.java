@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -6,7 +8,7 @@ import javax.imageio.*;
 import java.io.File;
 import java.awt.event.*;
 
-public class Options extends JPanel implements ActionListener {
+public class Options extends JPanel implements ActionListener, ChangeListener{
 
     BufferedImage img;
     //private static boolean vien_jeu;
@@ -39,6 +41,13 @@ public class Options extends JPanel implements ActionListener {
     }
 
     public void creationBouton() {
+
+        JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 100);
+        slider.setSize(200, 50);
+        setLocation(100, 100);
+        //slider.addChangeListener(new ChangeListener());
+        this.add(slider);
+
         // Bouton plein écran
         Bouton Fullscreen = new Bouton(740, 180, 500, 110, "FullScreen");
         Fullscreen.setActionCommand("Fullscreen");
@@ -100,6 +109,10 @@ public class Options extends JPanel implements ActionListener {
         // FenetreGraphique.changement = true;
         // FenetreGraphique.window = FenetreGraphique.vien_de;
         // }
+
+    }
+    
+    public void stateChanged(ChangeEvent e) {
 
     }
 
