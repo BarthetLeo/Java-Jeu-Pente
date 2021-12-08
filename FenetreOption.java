@@ -39,6 +39,10 @@ public class FenetreOption extends JFrame implements ActionListener{
             FenetreGraphique.fps = 1 / despacito;
             temps_apres = temps_avant;
 
+            if (!FenetreGraphique.sounds.isRunning()) {
+                FenetreGraphique.playMusic();
+            }
+
             repaint();
             setDefaultCloseOperation(FenetreOption.EXIT_ON_CLOSE);
             setVisible(true);

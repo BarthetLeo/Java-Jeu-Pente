@@ -42,10 +42,25 @@ public class Options extends JPanel implements ActionListener, ChangeListener{
 
     public void creationBouton() {
 
-        JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 100);
-        slider.setSize(200, 50);
-        setLocation(100, 100);
-        //slider.addChangeListener(new ChangeListener());
+        JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 70);
+        slider.setOpaque(false);
+        slider.setSize(300, 200);
+        slider.setPaintTrack(true); 
+        slider.setPaintTicks(true); 
+        slider.setPaintLabels(true); 
+        slider.setMajorTickSpacing(10); 
+        slider.setLocation(400, 300);
+
+        slider.addChangeListener(new ChangeListener() {
+            
+            public void stateChanged(ChangeEvent e) {
+                JSlider slider = (JSlider) e.getSource();
+                if(!slider.getValueIsAdjusting()) {
+                    FenetreGraphique.sounds.setVolume((float)(-100 + slider.getValue()));
+                }
+            }
+        });
+
         this.add(slider);
 
         // Bouton plein écran

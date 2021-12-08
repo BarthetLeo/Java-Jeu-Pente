@@ -7,7 +7,7 @@ public class FenetreGraphique extends JFrame implements ActionListener {
     Menu menu;
     Pente pente;
     FenetreOption fenetreOption;
-    private Sounds sounds;
+    static Sounds sounds;
     static int window;
     static boolean changement, fullscreen = false, changeScreen = false;
     static double fps;
@@ -30,6 +30,7 @@ public class FenetreGraphique extends JFrame implements ActionListener {
         setAlwaysOnTop(false);
 
         sounds = new Sounds("sounds/Menu.wav");
+        sounds.setVolume(-30);
 
         long temps_avant = System.nanoTime();
         long temps_apres = System.nanoTime();
@@ -118,18 +119,18 @@ public class FenetreGraphique extends JFrame implements ActionListener {
 
     }
 
-    public void playMusic() {
+    public static void playMusic() {
         if (window == 1 || (window == 3 && vien_de == 1)) {
             sounds.stop();
             sounds = new Sounds("sounds/Menu.wav");
-            sounds.setVolume(-30);
+            //sounds.setVolume(-10);
             sounds.play();
         }
 
         else if (window == 2 || (window == 3 && vien_de == 2)) {
             sounds.stop();
             sounds = new Sounds("sounds/InGame.wav");
-            sounds.setVolume(-30);
+            //sounds.setVolume(-10);
             sounds.play();
         }
     }
