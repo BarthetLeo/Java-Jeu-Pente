@@ -72,13 +72,13 @@ public class Options extends JPanel implements ActionListener, ChangeListener {
         this.add(Regles);
 
         // Bouton aller dans la catégorie graphisme
-        Bouton Graphisme = new Bouton(500, 100, 400, 110, "Graphisme");
+        Bouton Graphisme = new Bouton(550, 100, 400, 110, "Graphisme");
         Graphisme.setActionCommand("Activer le son");
         Graphisme.addActionListener(this);
         this.add(Graphisme);
 
         // Bouton Appliquer les changements
-        Bouton Son = new Bouton(1150, 100, 300, 110, "Son");
+        Bouton Son = new Bouton(1050, 100, 300, 110, "Son");
         Son.setActionCommand("Son");
         Son.addActionListener(this);
         this.add(Son);
