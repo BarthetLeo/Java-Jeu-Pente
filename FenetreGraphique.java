@@ -8,17 +8,14 @@ public class FenetreGraphique extends JFrame implements ActionListener {
     Pente pente;
     FenetreOption fenetreOption;
     static Sounds sounds;
-    static int window;
-    static boolean changement, fullscreen = false, changeScreen = false, affiche_fps = false, putSong = true;
+    static int window = 1, vien_de = 1;
+    static float lvlSound = -30;
+    static boolean changement = true, fullscreen = false, changeScreen = false, affiche_fps = false, putSong = true;
     static double fps;
-    static String nom1;
-    static String nom2;
-    static int vien_de = 1;
+    static String nom1, nom2;
 
     FenetreGraphique(String nom) {
         super(nom);
-        changement = true;
-        window = 1;
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double _width = screenSize.getWidth();
         double _height = screenSize.getHeight();
@@ -108,14 +105,14 @@ public class FenetreGraphique extends JFrame implements ActionListener {
         if (window == 1 || (window == 3 && vien_de == 1)) {
             sounds.stop();
             sounds = new Sounds("sounds/Menu.wav");
-            // sounds.setVolume(-10);
+            sounds.setVolume(lvlSound);
             sounds.play();
         }
 
         else if (window == 2 || (window == 3 && vien_de == 2)) {
             sounds.stop();
             sounds = new Sounds("sounds/InGame.wav");
-            // sounds.setVolume(-10);
+            sounds.setVolume(lvlSound);
             sounds.play();
         }
     }

@@ -9,7 +9,9 @@ import java.awt.event.*;
 public class FenetreOption extends JFrame implements ActionListener {
 
     Options options;
-    static boolean show = true;
+    OptionsSounds optionsSounds;
+    static boolean show = true, changement = true;
+    static int window = 1, vien_de = 1;
 
     FenetreOption(String nom) {
 
@@ -41,6 +43,47 @@ public class FenetreOption extends JFrame implements ActionListener {
 
             if (!FenetreGraphique.sounds.isRunning() && FenetreGraphique.putSong) {
                 FenetreGraphique.playMusic();
+            }
+
+            if (changement) {
+                changement = false;
+
+                switch (window) {
+                    case 1: {
+                        options = new Options(this);
+
+                        if (vien_de == 2) {
+                            optionsSounds = null;
+                        }
+
+                        vien_de = window;
+                        options.setLayout(null);
+                        System.out.println("options");
+                        setContentPane(options);
+
+                        break;
+                    }
+
+                    case 2: {
+
+                        if (vien_de == 1) {
+                            optionsSounds = new OptionsSounds(this);
+                            options = null;
+                        }
+
+                        vien_de = window;
+
+                        System.out.println("Jeux");
+                        optionsSounds.setLayout(null);
+                        setContentPane(optionsSounds);
+
+                        break;
+                    }
+
+                    default:
+                        break;
+                }
+
             }
 
             repaint();
