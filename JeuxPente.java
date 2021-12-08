@@ -1,8 +1,10 @@
 public class JeuxPente {
 
+    static FenetreGraphique f;
+
     public static void main(String[] args) {
 
-        FenetreGraphique f = new FenetreGraphique("Jeux");
+        f = new FenetreGraphique("Jeux");
     }
 
 }

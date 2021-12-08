@@ -6,7 +6,7 @@ import java.awt.Toolkit;
 //import java.awt.*;
 import java.awt.event.*;
 
-public class FenetreOption extends JFrame implements ActionListener{
+public class FenetreOption extends JFrame implements ActionListener {
 
     Options options;
     static boolean show = true;
@@ -39,7 +39,7 @@ public class FenetreOption extends JFrame implements ActionListener{
             FenetreGraphique.fps = 1 / despacito;
             temps_apres = temps_avant;
 
-            if (!FenetreGraphique.sounds.isRunning()) {
+            if (!FenetreGraphique.sounds.isRunning() && FenetreGraphique.putSong) {
                 FenetreGraphique.playMusic();
             }
 

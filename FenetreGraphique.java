@@ -9,9 +9,8 @@ public class FenetreGraphique extends JFrame implements ActionListener {
     FenetreOption fenetreOption;
     static Sounds sounds;
     static int window;
-    static boolean changement, fullscreen = false, changeScreen = false;
+    static boolean changement, fullscreen = false, changeScreen = false, affiche_fps = false, putSong = true;
     static double fps;
-    static boolean affiche_fps = false;
     static String nom1;
     static String nom2;
     static int vien_de = 1;
@@ -30,7 +29,7 @@ public class FenetreGraphique extends JFrame implements ActionListener {
         setAlwaysOnTop(false);
 
         sounds = new Sounds("sounds/Menu.wav");
-        sounds.setVolume(-30);
+        sounds.setVolume(-60);
 
         long temps_avant = System.nanoTime();
         long temps_apres = System.nanoTime();
@@ -43,7 +42,7 @@ public class FenetreGraphique extends JFrame implements ActionListener {
             fps = 1 / despacito;
             temps_apres = temps_avant;
 
-            if (!sounds.isRunning() || changement && window == 1 || changement && window == 2) {
+            if ((!sounds.isRunning() || changement && window == 1 || changement && window == 2) && putSong) {
                 playMusic();
             }
 
@@ -96,20 +95,6 @@ public class FenetreGraphique extends JFrame implements ActionListener {
                         break;
                 }
 
-                if (changeScreen) {
-
-                    changeScreen = false;
-                    dispose();
-
-                    if (fullscreen) {
-                        setUndecorated(true);
-                    }
-
-                    else if (!fullscreen) {
-                        setUndecorated(false);
-                    }
-                }
-
             }
 
             repaint();
@@ -123,15 +108,28 @@ public class FenetreGraphique extends JFrame implements ActionListener {
         if (window == 1 || (window == 3 && vien_de == 1)) {
             sounds.stop();
             sounds = new Sounds("sounds/Menu.wav");
-            //sounds.setVolume(-10);
+            // sounds.setVolume(-10);
             sounds.play();
         }
 
         else if (window == 2 || (window == 3 && vien_de == 2)) {
             sounds.stop();
             sounds = new Sounds("sounds/InGame.wav");
-            //sounds.setVolume(-10);
+            // sounds.setVolume(-10);
             sounds.play();
+        }
+    }
+
+    public void changementDeScreen() {
+        changeScreen = false;
+        dispose();
+
+        if (fullscreen) {
+            setUndecorated(true);
+        }
+
+        else if (!fullscreen) {
+            setUndecorated(false);
         }
     }
 

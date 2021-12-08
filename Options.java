@@ -8,12 +8,13 @@ import javax.imageio.*;
 import java.io.File;
 import java.awt.event.*;
 
-public class Options extends JPanel implements ActionListener, ChangeListener{
+public class Options extends JPanel implements ActionListener, ChangeListener {
 
     BufferedImage img;
-    //private static boolean vien_jeu;
-    //private String action_rev = "Revenir";
+    // private static boolean vien_jeu;
+    // private String action_rev = "Revenir";
     private FenetreOption f_o;
+    boolean changeSong = false;
 
     Options(FenetreOption f_o) {
 
@@ -42,21 +43,22 @@ public class Options extends JPanel implements ActionListener, ChangeListener{
 
     public void creationBouton() {
 
-        JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 70);
+        JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 60, 30);
+        slider.setLocation(400, 300);
         slider.setOpaque(false);
         slider.setSize(300, 200);
-        slider.setPaintTrack(true); 
-        slider.setPaintTicks(true); 
-        slider.setPaintLabels(true); 
-        slider.setMajorTickSpacing(10); 
-        slider.setLocation(400, 300);
+
+        slider.setPaintTrack(true);
+        slider.setPaintTicks(true);
+        slider.setPaintLabels(true);
+        slider.setMajorTickSpacing(10);
 
         slider.addChangeListener(new ChangeListener() {
-            
+
             public void stateChanged(ChangeEvent e) {
                 JSlider slider = (JSlider) e.getSource();
-                if(!slider.getValueIsAdjusting()) {
-                    FenetreGraphique.sounds.setVolume((float)(-100 + slider.getValue()));
+                if (!slider.getValueIsAdjusting()) {
+                    FenetreGraphique.sounds.setVolume((float) (-60 + slider.getValue()));
                 }
             }
         });
@@ -86,6 +88,18 @@ public class Options extends JPanel implements ActionListener, ChangeListener{
         Revenir.setActionCommand("Revenir");
         Revenir.addActionListener(this);
         this.add(Revenir);
+
+        // Bouton Appliquer les changements
+        Bouton Appliquer = new Bouton(200, 880, 400, 110, "Appliquer");
+        Appliquer.setActionCommand("Appliquer");
+        Appliquer.addActionListener(this);
+        this.add(Appliquer);
+
+        // Bouton Appliquer les changements
+        Bouton ActiverLeSon = new Bouton(200, 600, 500, 110, "Activer le son");
+        ActiverLeSon.setActionCommand("Activer le son");
+        ActiverLeSon.addActionListener(this);
+        this.add(ActiverLeSon);
 
         // Création de bouton si en jeux
         if (FenetreGraphique.vien_de == 2) {
@@ -120,13 +134,29 @@ public class Options extends JPanel implements ActionListener, ChangeListener{
             FenetreGraphique.window = 1;
         }
 
+        else if (event.getActionCommand().equals("Activer le son")) {
+            changeSong = true;
+        }
+
+        else if (event.getActionCommand().equals("Appliquer")) {
+            if (FenetreGraphique.changeScreen == true) {
+                JeuxPente.f.changementDeScreen();
+            }
+
+            else if (changeSong) {
+                changeSong = false;
+                FenetreGraphique.sounds.stop();
+                FenetreGraphique.putSong = !FenetreGraphique.putSong;
+            }
+        }
+
         // else if (event.getActionCommand().equals("Revenir_Jeu")) {
         // FenetreGraphique.changement = true;
         // FenetreGraphique.window = FenetreGraphique.vien_de;
         // }
 
     }
-    
+
     public void stateChanged(ChangeEvent e) {
 
     }
