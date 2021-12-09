@@ -8,7 +8,7 @@ import javax.imageio.*;
 import java.io.File;
 import java.awt.event.*;
 
-public class Options extends JPanel implements ActionListener, ChangeListener {
+public class OptionsGameplay extends JPanel implements ActionListener, ChangeListener {
 
     BufferedImage img;
     // private static boolean vien_jeu;
@@ -16,7 +16,7 @@ public class Options extends JPanel implements ActionListener, ChangeListener {
     private FenetreOption f_o;
     boolean changeSong = false;
 
-    Options(FenetreOption f_o) {
+    OptionsGameplay(FenetreOption f_o) {
 
         try {
             img = ImageIO.read(new File("graphics/images/FondMenuOptions.png"));
@@ -42,18 +42,6 @@ public class Options extends JPanel implements ActionListener, ChangeListener {
     }
 
     public void creationBouton() {
-
-        // Bouton plein écran
-        Bouton Fullscreen = new Bouton(720, 350, 500, 110, "FullScreen");
-        Fullscreen.setActionCommand("Fullscreen");
-        Fullscreen.addActionListener(this);
-        this.add(Fullscreen);
-
-        // Bouton Afficher les FPS
-        Bouton AfficherFPS = new Bouton(760, 600, 500, 110, "Afficher Fps");
-        AfficherFPS.setActionCommand("AfficherFPS");
-        AfficherFPS.addActionListener(this);
-        this.add(AfficherFPS);
 
         // Bouton Afficher règles du jeux
         Bouton Regles = new Bouton(1500, 950, 500, 110, "Regles");
@@ -92,7 +80,7 @@ public class Options extends JPanel implements ActionListener, ChangeListener {
         else if (FenetreGraphique.vien_de == 2) {
 
             // Bouton Abandonner la partie en cours
-            Bouton Abandonner = new Bouton(750, 880, 500, 110, "Abandonner");
+            Bouton Abandonner = new Bouton(750, 680, 500, 110, "Abandonner");
             Abandonner.setActionCommand("Abandonner");
             Abandonner.addActionListener(this);
             this.add(Abandonner);
@@ -120,6 +108,12 @@ public class Options extends JPanel implements ActionListener, ChangeListener {
 
         else if (event.getActionCommand().equals("Son")) {
             FenetreOption.window = 2;
+            FenetreOption.changement = true;
+            FenetreOption.show = true;
+        }
+
+        else if (event.getActionCommand().equals("Graphisme")) {
+            FenetreOption.window = 1;
             FenetreOption.changement = true;
             FenetreOption.show = true;
         }

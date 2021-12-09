@@ -9,6 +9,7 @@ import java.awt.event.*;
 public class FenetreOption extends JFrame implements ActionListener {
 
     Options options;
+    OptionsGameplay optionsGameplay;
     OptionsSounds optionsSounds;
     static boolean show = true, changement = true;
     static int window = 1, vien_de = 1;
@@ -50,11 +51,12 @@ public class FenetreOption extends JFrame implements ActionListener {
 
                 switch (window) {
                     case 1: {
-                        options = new Options(this);
 
                         if (vien_de == 2) {
                             optionsSounds = null;
                         }
+
+                        options = new Options(this);
                         System.out.println(vien_de);
 
                         vien_de = window;
@@ -67,16 +69,39 @@ public class FenetreOption extends JFrame implements ActionListener {
 
                     case 2: {
                         System.out.println(vien_de);
-                        optionsSounds = new OptionsSounds(this);
+
                         if (vien_de == 1) {
-                            //options = null;
+                            options = null;
                         }
+
+                        optionsSounds = new OptionsSounds(this);
 
                         vien_de = window;
 
                         System.out.println("OptionSon");
                         optionsSounds.setLayout(null);
                         setContentPane(optionsSounds);
+
+                        break;
+                    }
+
+                    case 3: {
+
+                        if (vien_de == 2) {
+                            optionsSounds = null;
+                        }
+
+                        if (vien_de == 1) {
+                            options = null;
+                        }
+
+                        optionsGameplay = new OptionsGameplay(this);
+                        System.out.println(vien_de);
+
+                        vien_de = window;
+                        optionsGameplay.setLayout(null);
+                        System.out.println("optionsGameplay");
+                        setContentPane(optionsGameplay);
 
                         break;
                     }
