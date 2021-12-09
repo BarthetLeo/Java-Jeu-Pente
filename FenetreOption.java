@@ -55,6 +55,7 @@ public class FenetreOption extends JFrame implements ActionListener {
                         if (vien_de == 2) {
                             optionsSounds = null;
                         }
+                        System.out.println(vien_de);
 
                         vien_de = window;
                         options.setLayout(null);
@@ -65,15 +66,15 @@ public class FenetreOption extends JFrame implements ActionListener {
                     }
 
                     case 2: {
-
+                        System.out.println(vien_de);
+                        optionsSounds = new OptionsSounds(this);
                         if (vien_de == 1) {
-                            optionsSounds = new OptionsSounds(this);
-                            options = null;
+                            //options = null;
                         }
 
                         vien_de = window;
 
-                        System.out.println("Jeux");
+                        System.out.println("OptionSon");
                         optionsSounds.setLayout(null);
                         setContentPane(optionsSounds);
 
