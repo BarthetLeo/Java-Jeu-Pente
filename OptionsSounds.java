@@ -37,7 +37,7 @@ public class OptionsSounds extends JPanel implements ActionListener, ChangeListe
     public void creationBouton() {
 
         JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 60, 30);
-        slider.setLocation(800, 520);
+        slider.setLocation(830, 520);
         slider.setOpaque(false);
         slider.setSize(300, 200);
 

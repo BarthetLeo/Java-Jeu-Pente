@@ -98,13 +98,13 @@ public class OptionsGameplay extends JPanel implements ActionListener, ChangeLis
             this.add(Recommencer);
 
             // Bouton Revenir au menu principal
-            Bouton Revenir = new Bouton(1225, 880, 300, 110, "Revenir");
+            Bouton Revenir = new Bouton(1100, 880, 300, 110, "Revenir");
             Revenir.setActionCommand("Revenir");
             Revenir.addActionListener(this);
             this.add(Revenir);
 
             // Bouton Appliquer les changements
-            Bouton Appliquer = new Bouton(400, 880, 400, 110, "Appliquer");
+            Bouton Appliquer = new Bouton(550, 880, 400, 110, "Appliquer");
             Appliquer.setActionCommand("Appliquer");
             Appliquer.addActionListener(this);
             this.add(Appliquer);

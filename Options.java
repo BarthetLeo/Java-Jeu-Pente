@@ -135,5 +135,6 @@ public class Options extends JPanel implements ActionListener{
         if (FenetreGraphique.affiche_fps) {
             Menu.creation_fps(g);
         }
+
     }
 }

@@ -56,7 +56,6 @@ public class FenetreGraphique extends JFrame implements ActionListener {
 
                         vien_de = window;
                         menu.setLayout(null);
-                        System.out.println("Menu");
                         setContentPane(menu);
 
                         break;
@@ -76,7 +75,6 @@ public class FenetreGraphique extends JFrame implements ActionListener {
 
                         vien_de = window;
 
-                        System.out.println("Jeux");
                         pente.setLayout(null);
                         setContentPane(pente);
 

@@ -29,7 +29,6 @@ public class FenetreOption extends JFrame implements ActionListener {
         setAlwaysOnTop(false);
 
         options = new Options(this);
-        System.out.println("Options");
         options.setLayout(null);
         setContentPane(options);
 
@@ -58,18 +57,15 @@ public class FenetreOption extends JFrame implements ActionListener {
                         }
 
                         options = new Options(this);
-                        System.out.println(vien_de);
 
                         vien_de = window;
                         options.setLayout(null);
-                        System.out.println("options");
                         setContentPane(options);
 
                         break;
                     }
 
                     case 2: {
-                        System.out.println(vien_de);
 
                         if (vien_de == 1) {
                             options = null;
@@ -79,7 +75,6 @@ public class FenetreOption extends JFrame implements ActionListener {
 
                         vien_de = window;
 
-                        System.out.println("OptionSon");
                         optionsSounds.setLayout(null);
                         setContentPane(optionsSounds);
 
@@ -97,11 +92,9 @@ public class FenetreOption extends JFrame implements ActionListener {
                         }
 
                         optionsGameplay = new OptionsGameplay(this);
-                        System.out.println(vien_de);
 
                         vien_de = window;
                         optionsGameplay.setLayout(null);
-                        System.out.println("optionsGameplay");
                         setContentPane(optionsGameplay);
 
                         break;
