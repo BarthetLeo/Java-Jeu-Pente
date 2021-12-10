@@ -59,6 +59,8 @@ public class OptionsGameplay extends JPanel implements ActionListener, ChangeLis
         Bouton Jeux = new Bouton(200, 100, 300, 110, "Jeux");
         Jeux.setActionCommand("Jeux");
         Jeux.addActionListener(this);
+        Color monOrange = new Color(197, 116, 29);
+        Jeux.setForeground(monOrange);
         this.add(Jeux);
 
         // Bouton Appliquer les changements

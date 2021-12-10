@@ -55,6 +55,8 @@ public class Options extends JPanel implements ActionListener{
         Bouton Affichage = new Bouton(550, 100, 400, 110, "Affichage");
         Affichage.setActionCommand("Activer le son");
         Affichage.addActionListener(this);
+        Color monOrange = new Color(197, 116, 29);
+        Affichage.setForeground(monOrange);
         this.add(Affichage);
 
         if (FenetreGraphique.vien_de == 2) {

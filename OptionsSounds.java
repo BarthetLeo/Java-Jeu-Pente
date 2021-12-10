@@ -89,6 +89,8 @@ public class OptionsSounds extends JPanel implements ActionListener, ChangeListe
         Bouton Son = new Bouton(1050, 100, 300, 110, "Son");
         Son.setActionCommand("Son");
         Son.addActionListener(this);
+        Color monOrange = new Color(197, 116, 29);
+        Son.setForeground(monOrange);
         this.add(Son);
 
         // Bouton Revenir au menu principal
