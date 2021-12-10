@@ -11,8 +11,6 @@ import java.awt.event.*;
 public class OptionsSounds extends JPanel implements ActionListener, ChangeListener {
 
     BufferedImage img;
-    // private static boolean vien_jeu;
-    // private String action_rev = "Revenir";
     private FenetreOption f_o;
     boolean changeSong = false;
 
@@ -25,12 +23,6 @@ public class OptionsSounds extends JPanel implements ActionListener, ChangeListe
         }
         this.f_o = f_o;
 
-        /*
-         * if (vien_jeu) {
-         * action_rev = "Revenir_Jeu";
-         * }
-         */
-
         creationBouton();
     }
 
@@ -41,10 +33,11 @@ public class OptionsSounds extends JPanel implements ActionListener, ChangeListe
         g.drawImage(img, 0, 0, longueur, hauteur, null);
     }
 
+
     public void creationBouton() {
 
         JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 60, 30);
-        slider.setLocation(400, 300);
+        slider.setLocation(800, 520);
         slider.setOpaque(false);
         slider.setSize(300, 200);
 
@@ -66,43 +59,49 @@ public class OptionsSounds extends JPanel implements ActionListener, ChangeListe
 
         this.add(slider);
 
+        // Bouton Appliquer les changements
+        Bouton ActiverLeSon = new Bouton(720, 350, 500, 110, "Activer le son");
+        ActiverLeSon.setActionCommand("Activer le son");
+        ActiverLeSon.addActionListener(this);
+        this.add(ActiverLeSon);
+
+        // Bouton Afficher règles du jeux
+        Bouton Regles = new Bouton(1500, 950, 500, 110, "Regles");
+        Regles.setActionCommand("Règles");
+        Regles.addActionListener(this);
+        this.add(Regles);
+
+        // Bouton Appliquer les changements
+        Bouton Affichage = new Bouton(550, 100, 400, 110, "Affichage");
+        Affichage.setActionCommand("Affichage");
+        Affichage.addActionListener(this);
+        this.add(Affichage);
+
+        if (FenetreGraphique.vien_de == 2) {
+            // Bouton aller dans Gameplay
+            Bouton Jeux = new Bouton(200, 100, 300, 110, "Jeux");
+            Jeux.setActionCommand("Jeux");
+            Jeux.addActionListener(this);
+            this.add(Jeux);
+        }
+
+        // Bouton Appliquer les changements
+        Bouton Son = new Bouton(1050, 100, 300, 110, "Son");
+        Son.setActionCommand("Son");
+        Son.addActionListener(this);
+        this.add(Son);
+
         // Bouton Revenir au menu principal
-        Bouton Revenir = new Bouton(1100, 780, 300, 110, "Revenir");
+        Bouton Revenir = new Bouton(1100, 880, 300, 110, "Revenir");
         Revenir.setActionCommand("Revenir");
         Revenir.addActionListener(this);
         this.add(Revenir);
 
         // Bouton Appliquer les changements
-        Bouton Appliquer = new Bouton(200, 880, 400, 110, "Appliquer");
+        Bouton Appliquer = new Bouton(550, 880, 400, 110, "Appliquer");
         Appliquer.setActionCommand("Appliquer");
         Appliquer.addActionListener(this);
         this.add(Appliquer);
-
-        // Bouton Appliquer les changements
-        Bouton ActiverLeSon = new Bouton(200, 600, 500, 110, "Activer le son");
-        ActiverLeSon.setActionCommand("Activer le son");
-        ActiverLeSon.addActionListener(this);
-        this.add(ActiverLeSon);
-
-        // Bouton Appliquer les changements
-        Bouton Graphisme = new Bouton(1600, 400, 400, 110, "Graphisme");
-        Graphisme.setActionCommand("Activer le son");
-        Graphisme.addActionListener(this);
-        this.add(Graphisme);
-
-        // Bouton Appliquer les changements
-        Bouton Son = new Bouton(1600, 700, 300, 110, "Son");
-        Son.setActionCommand("Son");
-        Son.addActionListener(this);
-        this.add(Son);
-
-        // Création de bouton si en jeux
-        if (FenetreGraphique.vien_de == 2) {
-            Bouton Abandonner = new Bouton(500, 780, 500, 110, "Abandonner");
-            Abandonner.setActionCommand("Abandonner");
-            Abandonner.addActionListener(this);
-            this.add(Abandonner);
-        }
     }
 
     public void actionPerformed(ActionEvent event) {
@@ -119,8 +118,14 @@ public class OptionsSounds extends JPanel implements ActionListener, ChangeListe
             FenetreGraphique.window = 1;
         }
 
-        else if (event.getActionCommand().equals("Graphisme")) {
+        else if (event.getActionCommand().equals("Affichage")) {
             FenetreOption.window = 1;
+            FenetreOption.changement = true;
+            FenetreOption.show = true;
+        }
+
+        else if (event.getActionCommand().equals("Jeux")) {
+            FenetreOption.window = 3;
             FenetreOption.changement = true;
             FenetreOption.show = true;
         }
@@ -131,7 +136,7 @@ public class OptionsSounds extends JPanel implements ActionListener, ChangeListe
 
         else if (event.getActionCommand().equals("Appliquer")) {
             if (FenetreGraphique.changeScreen == true) {
-                JeuxPente.f.changementDeScreen();
+                f_o.f_g.changementDeScreen();
             }
 
             else if (changeSong) {
@@ -141,11 +146,13 @@ public class OptionsSounds extends JPanel implements ActionListener, ChangeListe
             }
         }
 
-        // else if (event.getActionCommand().equals("Revenir_Jeu")) {
-        // FenetreGraphique.changement = true;
-        // FenetreGraphique.window = FenetreGraphique.vien_de;
-        // }
+    }
 
+    public void paintComponent(Graphics g) {
+        affiche_fond(g);
+        if (FenetreGraphique.affiche_fps) {
+            Menu.creation_fps(g);
+        }
     }
 
     public void stateChanged(ChangeEvent e) {

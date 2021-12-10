@@ -49,11 +49,17 @@ public class OptionsGameplay extends JPanel implements ActionListener, ChangeLis
         Regles.addActionListener(this);
         this.add(Regles);
 
-        // Bouton aller dans la catégorie graphisme
-        Bouton Graphisme = new Bouton(550, 100, 400, 110, "Graphisme");
-        Graphisme.setActionCommand("Activer le son");
-        Graphisme.addActionListener(this);
-        this.add(Graphisme);
+        // Bouton aller dans la catégorie Affichage
+        Bouton Affichage = new Bouton(550, 100, 400, 110, "Affichage");
+        Affichage.setActionCommand("Affichage");
+        Affichage.addActionListener(this);
+        this.add(Affichage);
+
+        // Bouton aller dans Gameplay
+        Bouton Jeux = new Bouton(200, 100, 300, 110, "Jeux");
+        Jeux.setActionCommand("Jeux");
+        Jeux.addActionListener(this);
+        this.add(Jeux);
 
         // Bouton Appliquer les changements
         Bouton Son = new Bouton(1050, 100, 300, 110, "Son");
@@ -80,10 +86,16 @@ public class OptionsGameplay extends JPanel implements ActionListener, ChangeLis
         else if (FenetreGraphique.vien_de == 2) {
 
             // Bouton Abandonner la partie en cours
-            Bouton Abandonner = new Bouton(750, 680, 500, 110, "Abandonner");
+            Bouton Abandonner = new Bouton(720, 350, 500, 110, "Abandonner");
             Abandonner.setActionCommand("Abandonner");
             Abandonner.addActionListener(this);
             this.add(Abandonner);
+
+            // Bouton Abandonner la partie en cours
+            Bouton Recommencer = new Bouton(760, 600, 500, 110, "Recommencer");
+            Recommencer.setActionCommand("Recommencer");
+            Recommencer.addActionListener(this);
+            this.add(Recommencer);
 
             // Bouton Revenir au menu principal
             Bouton Revenir = new Bouton(1225, 880, 300, 110, "Revenir");
@@ -112,7 +124,7 @@ public class OptionsGameplay extends JPanel implements ActionListener, ChangeLis
             FenetreOption.show = true;
         }
 
-        else if (event.getActionCommand().equals("Graphisme")) {
+        else if (event.getActionCommand().equals("Affichage")) {
             FenetreOption.window = 1;
             FenetreOption.changement = true;
             FenetreOption.show = true;
@@ -135,9 +147,18 @@ public class OptionsGameplay extends JPanel implements ActionListener, ChangeLis
             FenetreGraphique.window = 1;
         }
 
+        else if (event.getActionCommand().equals("Recommencer")) {
+            FenetreOption.show = false;
+            f_o.dispose();
+            FenetreGraphique.vien_de = 1;
+            FenetreGraphique.window = 2;
+            FenetreGraphique.changement = true;
+
+        }
+
         else if (event.getActionCommand().equals("Appliquer")) {
             if (FenetreGraphique.changeScreen == true) {
-                JeuxPente.f.changementDeScreen();
+                f_o.f_g.changementDeScreen();
             }
 
             else if (changeSong) {
@@ -146,11 +167,6 @@ public class OptionsGameplay extends JPanel implements ActionListener, ChangeLis
                 FenetreGraphique.putSong = !FenetreGraphique.putSong;
             }
         }
-
-        // else if (event.getActionCommand().equals("Revenir_Jeu")) {
-        // FenetreGraphique.changement = true;
-        // FenetreGraphique.window = FenetreGraphique.vien_de;
-        // }
 
     }
 

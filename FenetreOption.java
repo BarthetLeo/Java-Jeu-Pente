@@ -8,15 +8,16 @@ import java.awt.event.*;
 
 public class FenetreOption extends JFrame implements ActionListener {
 
+    FenetreGraphique f_g;
     Options options;
     OptionsGameplay optionsGameplay;
     OptionsSounds optionsSounds;
     static boolean show = true, changement = true;
     static int window = 1, vien_de = 1;
 
-    FenetreOption(String nom) {
+    FenetreOption(FenetreGraphique f_g) {
+        this.f_g = f_g;
 
-        super(nom);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double _width = screenSize.getWidth();
         double _height = screenSize.getHeight();

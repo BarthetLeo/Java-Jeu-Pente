@@ -65,10 +65,13 @@ public class FenetreGraphique extends JFrame implements ActionListener {
                     case 2: {
 
                         if (vien_de == 1) {
+                            if(pente == null)
+                            {
+                                nom1 = JOptionPane.showInputDialog(null, "Entrer le nom du J1", "Joueur 1");
+                                nom2 = JOptionPane.showInputDialog(null, "Entrer le nom du J2", "Joueur 2");
+                            }
                             pente = new Pente();
                             menu = null;
-                            nom1 = JOptionPane.showInputDialog(null, "Entrer le nom du J1", "Joueur 1");
-                            nom2 = JOptionPane.showInputDialog(null, "Entrer le nom du J2", "Joueur 2");
                         }
 
                         vien_de = window;
@@ -81,8 +84,8 @@ public class FenetreGraphique extends JFrame implements ActionListener {
                     }
 
                     case 3: {
-                        // menu.setVisible(false);
-                        fenetreOption = new FenetreOption("Options");
+
+                        fenetreOption = new FenetreOption(this);
 
                         window = vien_de;
                         break;
@@ -128,6 +131,8 @@ public class FenetreGraphique extends JFrame implements ActionListener {
         else if (!fullscreen) {
             setUndecorated(false);
         }
+
+        setVisible(true);
     }
 
     public void actionPerformed(ActionEvent event) {

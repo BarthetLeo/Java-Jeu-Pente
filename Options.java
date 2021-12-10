@@ -1,6 +1,4 @@
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -8,11 +6,9 @@ import javax.imageio.*;
 import java.io.File;
 import java.awt.event.*;
 
-public class Options extends JPanel implements ActionListener, ChangeListener {
+public class Options extends JPanel implements ActionListener{
 
     BufferedImage img;
-    // private static boolean vien_jeu;
-    // private String action_rev = "Revenir";
     private FenetreOption f_o;
     boolean changeSong = false;
 
@@ -24,12 +20,6 @@ public class Options extends JPanel implements ActionListener, ChangeListener {
             e.printStackTrace();
         }
         this.f_o = f_o;
-
-        /*
-         * if (vien_jeu) {
-         * action_rev = "Revenir_Jeu";
-         * }
-         */
 
         creationBouton();
     }
@@ -61,11 +51,19 @@ public class Options extends JPanel implements ActionListener, ChangeListener {
         Regles.addActionListener(this);
         this.add(Regles);
 
-        // Bouton aller dans la catégorie graphisme
-        Bouton Graphisme = new Bouton(550, 100, 400, 110, "Graphisme");
-        Graphisme.setActionCommand("Activer le son");
-        Graphisme.addActionListener(this);
-        this.add(Graphisme);
+        // Bouton aller dans la catégorie Affichage
+        Bouton Affichage = new Bouton(550, 100, 400, 110, "Affichage");
+        Affichage.setActionCommand("Activer le son");
+        Affichage.addActionListener(this);
+        this.add(Affichage);
+
+        if (FenetreGraphique.vien_de == 2) {
+            // Bouton aller dans Gameplay
+            Bouton Jeux = new Bouton(200, 100, 300, 110, "Jeux");
+            Jeux.setActionCommand("Jeux");
+            Jeux.addActionListener(this);
+            this.add(Jeux);
+        }
 
         // Bouton Appliquer les changements
         Bouton Son = new Bouton(1050, 100, 300, 110, "Son");
@@ -73,49 +71,34 @@ public class Options extends JPanel implements ActionListener, ChangeListener {
         Son.addActionListener(this);
         this.add(Son);
 
-        if (FenetreGraphique.vien_de == 1) {
+        // Bouton Revenir au menu principal
+        Bouton Revenir = new Bouton(1100, 880, 300, 110, "Revenir");
+        Revenir.setActionCommand("Revenir");
+        Revenir.addActionListener(this);
+        this.add(Revenir);
 
-            // Bouton Revenir au menu principal
-            Bouton Revenir = new Bouton(1100, 880, 300, 110, "Revenir");
-            Revenir.setActionCommand("Revenir");
-            Revenir.addActionListener(this);
-            this.add(Revenir);
-
-            // Bouton Appliquer les changements
-            Bouton Appliquer = new Bouton(550, 880, 400, 110, "Appliquer");
-            Appliquer.setActionCommand("Appliquer");
-            Appliquer.addActionListener(this);
-            this.add(Appliquer);
-        }
-
-        // Création de bouton si en jeux
-        else if (FenetreGraphique.vien_de == 2) {
-
-            // Bouton Abandonner la partie en cours
-            Bouton Abandonner = new Bouton(750, 880, 500, 110, "Abandonner");
-            Abandonner.setActionCommand("Abandonner");
-            Abandonner.addActionListener(this);
-            this.add(Abandonner);
-
-            // Bouton Revenir au menu principal
-            Bouton Revenir = new Bouton(1225, 880, 300, 110, "Revenir");
-            Revenir.setActionCommand("Revenir");
-            Revenir.addActionListener(this);
-            this.add(Revenir);
-
-            // Bouton Appliquer les changements
-            Bouton Appliquer = new Bouton(400, 880, 400, 110, "Appliquer");
-            Appliquer.setActionCommand("Appliquer");
-            Appliquer.addActionListener(this);
-            this.add(Appliquer);
-        }
+        // Bouton Appliquer les changements
+        Bouton Appliquer = new Bouton(550, 880, 400, 110, "Appliquer");
+        Appliquer.setActionCommand("Appliquer");
+        Appliquer.addActionListener(this);
+        this.add(Appliquer);
     }
 
     public void actionPerformed(ActionEvent event) {
 
         if (event.getActionCommand().equals("Revenir")) {
             FenetreOption.show = false;
+            if (FenetreGraphique.changeScreen == true) {
+                FenetreGraphique.fullscreen = !FenetreGraphique.fullscreen;
+                FenetreGraphique.changeScreen = false;
+            }
             f_o.dispose();
+        }
+
+        else if (event.getActionCommand().equals("Jeux")) {
+            FenetreOption.window = 3;
+            FenetreOption.changement = true;
+            FenetreOption.show = true;
         }
 
         else if (event.getActionCommand().equals("Son")) {
@@ -127,23 +110,15 @@ public class Options extends JPanel implements ActionListener, ChangeListener {
         else if (event.getActionCommand().equals("Fullscreen")) {
             FenetreGraphique.fullscreen = !FenetreGraphique.fullscreen;
             FenetreGraphique.changeScreen = true;
-            FenetreGraphique.changement = true;
         }
 
         else if (event.getActionCommand().equals("AfficherFPS")) {
             FenetreGraphique.affiche_fps = !FenetreGraphique.affiche_fps;
         }
 
-        else if (event.getActionCommand().equals("Abandonner")) {
-            FenetreOption.show = false;
-            f_o.dispose();
-            FenetreGraphique.changement = true;
-            FenetreGraphique.window = 1;
-        }
-
         else if (event.getActionCommand().equals("Appliquer")) {
             if (FenetreGraphique.changeScreen == true) {
-                JeuxPente.f.changementDeScreen();
+                f_o.f_g.changementDeScreen();
             }
 
             else if (changeSong) {
@@ -152,15 +127,6 @@ public class Options extends JPanel implements ActionListener, ChangeListener {
                 FenetreGraphique.putSong = !FenetreGraphique.putSong;
             }
         }
-
-        // else if (event.getActionCommand().equals("Revenir_Jeu")) {
-        // FenetreGraphique.changement = true;
-        // FenetreGraphique.window = FenetreGraphique.vien_de;
-        // }
-
-    }
-
-    public void stateChanged(ChangeEvent e) {
 
     }
 
