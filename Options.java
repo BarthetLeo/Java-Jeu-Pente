@@ -47,7 +47,7 @@ public class Options extends JPanel implements ActionListener{
 
         // Bouton Afficher règles du jeux
         Bouton Regles = new Bouton(1500, 950, 500, 110, "Regles");
-        Regles.setActionCommand("Règles");
+        Regles.setActionCommand("Regles");
         Regles.addActionListener(this);
         this.add(Regles);
 
@@ -65,6 +65,7 @@ public class Options extends JPanel implements ActionListener{
             Jeux.setActionCommand("Jeux");
             Jeux.addActionListener(this);
             this.add(Jeux);
+            this.remove(Regles);
         }
 
         // Bouton Appliquer les changements
@@ -128,6 +129,12 @@ public class Options extends JPanel implements ActionListener{
                 FenetreGraphique.sounds.stop();
                 FenetreGraphique.putSong = !FenetreGraphique.putSong;
             }
+        }
+        else if(event.getActionCommand().equals("Regles"))
+        {
+            FenetreOption.window = 4;
+            FenetreOption.changement = true;
+            FenetreOption.show = true;
         }
 
     }

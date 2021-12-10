@@ -65,12 +65,6 @@ public class OptionsSounds extends JPanel implements ActionListener, ChangeListe
         ActiverLeSon.addActionListener(this);
         this.add(ActiverLeSon);
 
-        // Bouton Afficher règles du jeux
-        Bouton Regles = new Bouton(1500, 950, 500, 110, "Regles");
-        Regles.setActionCommand("Règles");
-        Regles.addActionListener(this);
-        this.add(Regles);
-
         // Bouton Appliquer les changements
         Bouton Affichage = new Bouton(550, 100, 400, 110, "Affichage");
         Affichage.setActionCommand("Affichage");

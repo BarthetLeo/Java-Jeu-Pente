@@ -13,10 +13,12 @@ public class Joueur {
     private Jeton[] tab_jeton;
     private int nb_elem;
     private int nb_prise;
+    private String pseudo;
 
     //Constructeur du Joueur.
-    public Joueur(Color couleur_id)
+    public Joueur(Color couleur_id,String pseudo)
     {
+        this.pseudo = pseudo;
         this.couleur_id = couleur_id;
         pile_jeton = 60;
         tour = false;
@@ -24,6 +26,9 @@ public class Joueur {
         nb_elem = 0;
         nb_prise = 0;
     }
+
+    public String get_pseudo()
+    {return pseudo;}
 
     public Color get_couleur() {
         return couleur_id;
@@ -104,7 +109,8 @@ public class Joueur {
         {
             System.out.println("GAGNER PAR PRISE");
         }
-        FenetreGraphique.window = 1;
+        Pente.nom_gagnant = pseudo;
+        FenetreGraphique.window = 4;
         FenetreGraphique.changement = true;
     }
 

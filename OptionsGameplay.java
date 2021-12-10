@@ -45,7 +45,7 @@ public class OptionsGameplay extends JPanel implements ActionListener, ChangeLis
 
         // Bouton Afficher règles du jeux
         Bouton Regles = new Bouton(1500, 950, 500, 110, "Regles");
-        Regles.setActionCommand("Règles");
+        Regles.setActionCommand("Regles");
         Regles.addActionListener(this);
         this.add(Regles);
 
@@ -170,6 +170,12 @@ public class OptionsGameplay extends JPanel implements ActionListener, ChangeLis
             }
         }
 
+        else if(event.getActionCommand().equals("Regles"))
+        {
+            FenetreOption.window = 4;
+            FenetreOption.changement = true;
+            FenetreOption.show = true;
+        }
     }
 
     public void stateChanged(ChangeEvent e) {

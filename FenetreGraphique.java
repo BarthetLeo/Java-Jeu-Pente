@@ -89,6 +89,11 @@ public class FenetreGraphique extends JFrame implements ActionListener {
                         break;
                     }
 
+                    case 4:{
+                        FenetreGagne gagner = new FenetreGagne();
+                        gagner.setLayout(null);
+                        setContentPane(gagner);
+                    }
                     default:
                         break;
                 }

@@ -33,6 +33,32 @@ public class Bouton extends JButton {
         setLocation(x, y);
     }
 
+    Bouton(int x, int y, int width, int height, String name, float size)
+    {
+        super(name);
+        Color myColor = new Color(1, 131, 148);
+        Font font;
+        File file;
+        this.x = x;
+        this.y = y;
+        setOpaque(false);
+        setContentAreaFilled(false);
+        setBorderPainted(false);
+        setFocusPainted(false);
+        try {
+            file = new File("graphics/font/WIldrock.ttf");
+            font = Font.createFont(Font.TRUETYPE_FONT, file);
+            font = font.deriveFont(size);
+            setFont(font);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        setForeground(myColor);
+        setSize(width, height);
+        setLocation(x, y);
+    }
+
     public int get_x() {
         return x;
     }

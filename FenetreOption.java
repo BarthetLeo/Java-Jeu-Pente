@@ -99,6 +99,11 @@ public class FenetreOption extends JFrame implements ActionListener {
 
                         break;
                     }
+                    case 4:{
+                        Regle regle = new Regle();
+                        regle.setLayout(null);
+                        setContentPane(regle);
+                    }
 
                     default:
                         break;

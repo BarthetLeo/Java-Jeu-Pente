@@ -18,17 +18,19 @@ public class Pente extends JPanel implements ActionListener {
     Joueur J2;
     private Font font;
     private File file;
-    protected static int nb_tour = 1;
+    protected static int nb_regle = 1;
     // Largeur max du plateau
     private int M_W_plat = (Width / 4) * 3 - 16;
     // Espace minimum entre chaque ligne
     private int m_H_plat = Height / 20 - 1;
     private int taille = 34;
+    protected int nb_tour = 1;
+    public static String nom_gagnant;
 
     public Pente() {
         j_tab = new Jeton[19][19];
         try {
-            img = ImageIO.read(new File("graphics/images/fond_jeu.jpg"));
+            img = ImageIO.read(new File("graphics/images/fond_jeux.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,15 +42,16 @@ public class Pente extends JPanel implements ActionListener {
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
         }
-        nb_tour = 1;
+        nb_regle = 1;
         regle_1();
-        J1 = new Joueur(Color.red);
-        J2 = new Joueur(Color.yellow);
+        J1 = new Joueur(Color.red,FenetreGraphique.nom1);
+        J2 = new Joueur(Color.yellow,FenetreGraphique.nom2);
 
         J1.set_tour(true);
 
-        Bouton B_option = new Bouton(Width - 300, Height - 110, 300, 100, "Options");
+        Bouton B_option = new Bouton(Width - ((Width / 4) / 4)*2-50, (Height / 20)*9-5, 200, 100, "Options",60);
         B_option.setActionCommand("Options");
+        B_option.setBorderPainted(true);
         B_option.addActionListener(this);
         this.add(B_option);
     }
@@ -82,16 +85,13 @@ public class Pente extends JPanel implements ActionListener {
                 }
             }
         }
-        nb_tour++;
+        nb_regle++;
     }
 
     public void affiche_grille(Graphics g) {
         // Convertissseur de Graphics en Graphics2D pour plus d'option.
         Graphics2D g2 = (Graphics2D) g;
         // Permet de changer l'épaisseur des traits
-        g2.setStroke(new BasicStroke(5.0f));
-        g2.setColor(Color.red);
-        g2.drawRect(0, 0, M_W_plat, Height);
         g2.setColor(Color.black);
         g2.setFont(new Font("Verdana", Font.BOLD, 15));
 
@@ -123,7 +123,7 @@ public class Pente extends JPanel implements ActionListener {
                 g2.drawString(nb, ((M_W_plat / 20) - 30), ((m_H_plat) * i) + 6);
         }
 
-        if (nb_tour == 2) {
+        if (nb_regle == 2) {
             g2.setStroke(new BasicStroke(3.0f));
             g2.setColor(Color.red);
             g2.drawRect((M_W_plat / 20) * 8, m_H_plat * 8, (M_W_plat / 20) * 4, m_H_plat * 4);
@@ -163,6 +163,30 @@ public class Pente extends JPanel implements ActionListener {
         this.remove(bt);
     }
 
+    public void affiche_pile(Graphics g)
+    {
+        g.setColor(J1.get_couleur());
+        g.fillRect(Width - ((Width / 4) / 4), (Height / 20)*2, 20, -J1.get_pile());
+        g.setColor(J2.get_couleur());
+        g.fillRect(Width - ((Width / 4) / 4), (Height / 20)*18, 20, -J2.get_pile());
+        g.setColor(Color.black);
+        g.drawRect(Width - ((Width / 4) / 4)-2, (Height / 20)*2-62, 22, 62);
+        g.drawRect(Width - ((Width / 4) / 4)-2, (Height / 20)*18-62, 22, 62);
+        g.drawString("Il reste  : " + J1.get_pile() + " jetons.",Width - ((Width / 4) / 4) * 4, (Height / 20)*2);
+        g.drawString("Il reste  : " + J2.get_pile() + " jetons.",Width - ((Width / 4) / 4) * 4, (Height / 20)*18);
+    }
+
+    public void affiche_prise(Graphics g)
+    {
+        g.drawString("Nombre de prise : " + J1.get_prise() + " jetons.",Width - ((Width / 4) / 4) * 4, (Height / 20)*3);
+        g.drawString("Nombre de prise : " + J2.get_prise() + " jetons.",Width - ((Width / 4) / 4) * 4, (Height / 20)*19);
+    }
+
+    public void affiche_tour(Graphics g)
+    {
+        g.drawString("Tour : "+nb_tour,Width - ((Width / 4) / 4)*4, (Height / 20)*10);
+    }
+
     public void dessine_grille(Graphics g) {
         affiche_fond(g);
         affiche_grille(g);
@@ -170,7 +194,7 @@ public class Pente extends JPanel implements ActionListener {
             Menu.creation_fps(g);
         }
 
-        if (nb_tour >= 3) {
+        if (nb_regle >= 3) {
             for (int i = 0; i < 19; i++) {
                 for (int j = 0; j < 19; j++) {
                     if (j_tab[i][j].getbool())
@@ -178,11 +202,11 @@ public class Pente extends JPanel implements ActionListener {
                 }
             }
         }
-        if (nb_tour == 1) {
+        if (nb_regle == 1) {
             if (j_tab[9][9].getbool())
                 dessine_jeton(g, j_tab[9][9]);
         }
-        if (nb_tour == 2) {
+        if (nb_regle == 2) {
             for (int i = 7; i < 12; i++) {
                 for (int j = 7; j < 12; j++) {
                     if (j_tab[i][j].getbool())
@@ -198,23 +222,29 @@ public class Pente extends JPanel implements ActionListener {
 
     public void affiche_joueur(Graphics g) {
         Color couleur = new Color(247, 130, 55);
+        font = font.deriveFont(60.f);
         g.setFont(font);
         if (J1.get_tour()) {
             g.setColor(couleur);
-            g.drawString(FenetreGraphique.nom1, Width - ((Width / 4) / 4) * 4, Height / 20);
+            g.drawString(J1.get_pseudo(), Width - ((Width / 4) / 4) * 4, Height / 20);
             g.setColor(Color.black);
-            g.drawString(FenetreGraphique.nom2, Width - ((Width / 4) / 4) * 4, (Height / 20) * 19);
+            g.drawString(J2.get_pseudo(), Width - ((Width / 4) / 4) * 4, (Height / 20) * 17);
         } else if (J2.get_tour()) {
             g.setColor(couleur);
-            g.drawString(FenetreGraphique.nom2, Width - ((Width / 4) / 4) * 4, (Height / 20) * 19);
+            g.drawString(J2.get_pseudo(), Width - ((Width / 4) / 4) * 4, (Height / 20) * 17);
             g.setColor(Color.black);
-            g.drawString(FenetreGraphique.nom1, Width - ((Width / 4) / 4) * 4, Height / 20);
+            g.drawString(J1.get_pseudo(), Width - ((Width / 4) / 4) * 4, Height / 20);
         }
     }
 
     public void paintComponent(Graphics g) {
         dessine_grille(g);
         affiche_joueur(g);
+        affiche_tour(g);
+        font = font.deriveFont(40.f);
+        g.setFont(font);
+        affiche_pile(g);
+        affiche_prise(g);
     }
 
     public void actionPerformed(ActionEvent event) {
