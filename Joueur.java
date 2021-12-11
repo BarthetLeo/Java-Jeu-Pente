@@ -105,10 +105,6 @@ public class Joueur {
     }
 
     public void gagner() {
-        if(nb_prise == 5)
-        {
-            System.out.println("GAGNER PAR PRISE");
-        }
         Pente.nom_gagnant = pseudo;
         FenetreGraphique.window = 4;
         FenetreGraphique.changement = true;

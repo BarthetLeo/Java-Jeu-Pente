@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.Toolkit;
 import java.awt.Dimension;
 import java.awt.event.*;
+import java.awt.Image;
 
 public class FenetreGraphique extends JFrame implements ActionListener {
     Menu menu;
@@ -13,9 +14,10 @@ public class FenetreGraphique extends JFrame implements ActionListener {
     static boolean changement = true, fullscreen = false, changeScreen = false, affiche_fps = false, putSong = true;
     static double fps;
     static String nom1, nom2;
-
+    
     FenetreGraphique(String nom) {
         super(nom);
+        Image icon = Toolkit.getDefaultToolkit().getImage("graphics/images/Logo.png");
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double _width = screenSize.getWidth();
         double _height = screenSize.getHeight();
@@ -27,6 +29,8 @@ public class FenetreGraphique extends JFrame implements ActionListener {
 
         sounds = new Sounds("sounds/Menu.wav");
         sounds.setVolume(-60);
+
+        setIconImage(icon);
 
         long temps_avant = System.nanoTime();
         long temps_apres = System.nanoTime();
@@ -110,14 +114,14 @@ public class FenetreGraphique extends JFrame implements ActionListener {
     public static void playMusic() {
         if (window == 1 || (window == 3 && vien_de == 1)) {
             sounds.stop();
-            sounds = new Sounds("sounds/Menu.wav");
+            sounds = new Sounds("/sounds/Menu.wav");
             sounds.setVolume(lvlSound);
             sounds.play();
         }
 
         else if (window == 2 || (window == 3 && vien_de == 2)) {
             sounds.stop();
-            sounds = new Sounds("sounds/InGame.wav");
+            sounds = new Sounds("/sounds/InGame.wav");
             sounds.setVolume(lvlSound);
             sounds.play();
         }

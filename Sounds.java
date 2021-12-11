@@ -1,14 +1,9 @@
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.AudioFormat.Encoding;
-import javax.swing.*;
-
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.BufferedInputStream;
-import java.io.InputStream;
+
 
 import javax.sound.sampled.*;
 
@@ -18,25 +13,28 @@ public class Sounds {
     private FloatControl gainControl;
 
     Sounds(String path) {
-
         try {
             InputStream audioSrc = Sounds.class.getResourceAsStream(path);
             InputStream bufferedIn = new BufferedInputStream(audioSrc);
+            System.out.println(audioSrc);
             AudioInputStream ais = AudioSystem.getAudioInputStream(bufferedIn);
             AudioFormat baseFormat = ais.getFormat();
             AudioFormat decodeFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, baseFormat.getSampleRate(), 16,
-                    baseFormat.getChannels(), baseFormat.getChannels() * 2, baseFormat.getSampleRate(), false);
-            AudioInputStream dais = AudioSystem.getAudioInputStream(decodeFormat, ais);
-
+            baseFormat.getChannels(), baseFormat.getChannels() * 2, baseFormat.getSampleRate(), false);
             clip = AudioSystem.getClip();
+            AudioInputStream dais = AudioSystem.getAudioInputStream(decodeFormat, ais);
+        
             clip.open(dais);
 
-            gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
 
-        } catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
-
+        } catch (UnsupportedAudioFileException | LineUnavailableException e) {
+            System.out.println(e);
         }
-
+        catch(IOException e)
+        {
+            System.out.println("Sound: Input/Output Error: " + e);
+        }
     }
 
     public void play() {
