@@ -6,7 +6,7 @@ import javax.imageio.*;
 import java.io.File;
 import java.awt.event.*;
 
-public class Options extends JPanel implements ActionListener{
+public class Options extends JPanel implements ActionListener {
 
     BufferedImage img;
     private FenetreOption f_o;
@@ -14,11 +14,22 @@ public class Options extends JPanel implements ActionListener{
 
     Options(FenetreOption f_o) {
 
-        try {
-            img = ImageIO.read(new File("graphics/images/FondMenuOptions.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (FenetreGraphique.vien_de == 2) {
+            try {
+                img = ImageIO.read(new File("graphics/images/FondMenuOptions.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
+        else {
+            try {
+                img = ImageIO.read(new File("graphics/images/FondMenuOptions1.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         this.f_o = f_o;
 
         creationBouton();
@@ -52,7 +63,7 @@ public class Options extends JPanel implements ActionListener{
         this.add(Regles);
 
         // Bouton aller dans la catégorie Affichage
-        Bouton Affichage = new Bouton(550, 100, 400, 110, "Affichage");
+        Bouton Affichage = new Bouton(550, 90, 400, 110, "Affichage");
         Affichage.setActionCommand("Activer le son");
         Affichage.addActionListener(this);
         Color monOrange = new Color(197, 116, 29);
@@ -120,6 +131,7 @@ public class Options extends JPanel implements ActionListener{
         }
 
         else if (event.getActionCommand().equals("Appliquer")) {
+
             if (FenetreGraphique.changeScreen == true) {
                 f_o.f_g.changementDeScreen();
             }
@@ -130,8 +142,8 @@ public class Options extends JPanel implements ActionListener{
                 FenetreGraphique.putSong = !FenetreGraphique.putSong;
             }
         }
-        else if(event.getActionCommand().equals("Regles"))
-        {
+
+        else if (event.getActionCommand().equals("Regles")) {
             FenetreOption.window = 4;
             FenetreOption.changement = true;
             FenetreOption.show = true;

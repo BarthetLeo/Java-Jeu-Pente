@@ -18,11 +18,22 @@ public class OptionsGameplay extends JPanel implements ActionListener, ChangeLis
 
     OptionsGameplay(FenetreOption f_o) {
 
-        try {
-            img = ImageIO.read(new File("graphics/images/FondMenuOptions.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (FenetreGraphique.vien_de == 2) {
+            try {
+                img = ImageIO.read(new File("graphics/images/FondMenuOptions.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
+        else {
+            try {
+                img = ImageIO.read(new File("graphics/images/FondMenuOptions1.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         this.f_o = f_o;
 
         /*
@@ -50,7 +61,7 @@ public class OptionsGameplay extends JPanel implements ActionListener, ChangeLis
         this.add(Regles);
 
         // Bouton aller dans la catégorie Affichage
-        Bouton Affichage = new Bouton(550, 100, 400, 110, "Affichage");
+        Bouton Affichage = new Bouton(550, 90, 400, 110, "Affichage");
         Affichage.setActionCommand("Affichage");
         Affichage.addActionListener(this);
         this.add(Affichage);
@@ -170,8 +181,7 @@ public class OptionsGameplay extends JPanel implements ActionListener, ChangeLis
             }
         }
 
-        else if(event.getActionCommand().equals("Regles"))
-        {
+        else if (event.getActionCommand().equals("Regles")) {
             FenetreOption.window = 4;
             FenetreOption.changement = true;
             FenetreOption.show = true;

@@ -16,11 +16,22 @@ public class OptionsSounds extends JPanel implements ActionListener, ChangeListe
 
     OptionsSounds(FenetreOption f_o) {
 
-        try {
-            img = ImageIO.read(new File("graphics/images/FondMenuOptions.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (FenetreGraphique.vien_de == 2) {
+            try {
+                img = ImageIO.read(new File("graphics/images/FondMenuOptions.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
+        else {
+            try {
+                img = ImageIO.read(new File("graphics/images/FondMenuOptions1.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         this.f_o = f_o;
 
         creationBouton();
@@ -32,7 +43,6 @@ public class OptionsSounds extends JPanel implements ActionListener, ChangeListe
         g.setColor(Color.BLACK);
         g.drawImage(img, 0, 0, longueur, hauteur, null);
     }
-
 
     public void creationBouton() {
 
@@ -66,10 +76,16 @@ public class OptionsSounds extends JPanel implements ActionListener, ChangeListe
         this.add(ActiverLeSon);
 
         // Bouton Appliquer les changements
-        Bouton Affichage = new Bouton(550, 100, 400, 110, "Affichage");
+        Bouton Affichage = new Bouton(550, 90, 400, 110, "Affichage");
         Affichage.setActionCommand("Affichage");
         Affichage.addActionListener(this);
         this.add(Affichage);
+
+        // Bouton Afficher règles du jeux
+        Bouton Regles = new Bouton(1500, 950, 500, 110, "Regles");
+        Regles.setActionCommand("Regles");
+        Regles.addActionListener(this);
+        this.add(Regles);
 
         if (FenetreGraphique.vien_de == 2) {
             // Bouton aller dans Gameplay
@@ -140,6 +156,12 @@ public class OptionsSounds extends JPanel implements ActionListener, ChangeListe
                 FenetreGraphique.sounds.stop();
                 FenetreGraphique.putSong = !FenetreGraphique.putSong;
             }
+        }
+
+        else if (event.getActionCommand().equals("Regles")) {
+            FenetreOption.window = 4;
+            FenetreOption.changement = true;
+            FenetreOption.show = true;
         }
 
     }

@@ -14,7 +14,7 @@ public class FenetreGraphique extends JFrame implements ActionListener {
     static boolean changement = true, fullscreen = false, changeScreen = false, affiche_fps = false, putSong = true;
     static double fps;
     static String nom1, nom2;
-    
+
     FenetreGraphique(String nom) {
         super(nom);
         Image icon = Toolkit.getDefaultToolkit().getImage("graphics/images/Logo.png");
@@ -68,8 +68,7 @@ public class FenetreGraphique extends JFrame implements ActionListener {
                     case 2: {
 
                         if (vien_de == 1) {
-                            if(pente == null)
-                            {
+                            if (pente == null) {
                                 nom1 = JOptionPane.showInputDialog(null, "Entrer le nom du J1", "Joueur 1");
                                 nom2 = JOptionPane.showInputDialog(null, "Entrer le nom du J2", "Joueur 2");
                             }
@@ -93,7 +92,7 @@ public class FenetreGraphique extends JFrame implements ActionListener {
                         break;
                     }
 
-                    case 4:{
+                    case 4: {
                         FenetreGagne gagner = new FenetreGagne();
                         gagner.setLayout(null);
                         setContentPane(gagner);
