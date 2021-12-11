@@ -16,7 +16,6 @@ public class Sounds {
         try {
             InputStream audioSrc = Sounds.class.getResourceAsStream(path);
             InputStream bufferedIn = new BufferedInputStream(audioSrc);
-            System.out.println(audioSrc);
             AudioInputStream ais = AudioSystem.getAudioInputStream(bufferedIn);
             AudioFormat baseFormat = ais.getFormat();
             AudioFormat decodeFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, baseFormat.getSampleRate(), 16,
