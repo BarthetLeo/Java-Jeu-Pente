@@ -12,8 +12,12 @@ public class Options extends JPanel implements ActionListener {
     private FenetreOption f_o;
     boolean changeSong = false;
 
+    /**
+     * Créé le JPanel Menu avec une image et les boutons
+     */
     Options(FenetreOption f_o) {
 
+        // Si en jeux alors affichage différent
         if (FenetreGraphique.vien_de == 2) {
             try {
                 img = ImageIO.read(new File("graphics/images/FondMenuOptions.png"));
@@ -22,6 +26,7 @@ public class Options extends JPanel implements ActionListener {
             }
         }
 
+        // Si hors jeux alors affichage différent
         else {
             try {
                 img = ImageIO.read(new File("graphics/images/FondMenuOptions1.png"));
@@ -35,6 +40,11 @@ public class Options extends JPanel implements ActionListener {
         creationBouton();
     }
 
+    /**
+     * Affiche le fond et l'image
+     * 
+     * @param Graphics g
+     */
     public void affiche_fond(Graphics g) {
         int hauteur = getHeight();
         int longueur = getWidth();
@@ -42,6 +52,9 @@ public class Options extends JPanel implements ActionListener {
         g.drawImage(img, 0, 0, longueur, hauteur, null);
     }
 
+    /**
+     * Création de tout les boutons sur le Menu
+     */
     public void creationBouton() {
 
         // Bouton plein écran
@@ -62,30 +75,46 @@ public class Options extends JPanel implements ActionListener {
         Regles.addActionListener(this);
         this.add(Regles);
 
-        // Bouton aller dans la catégorie Affichage
-        Bouton Affichage = new Bouton(550, 90, 400, 110, "Affichage");
-        Affichage.setActionCommand("Activer le son");
-        Affichage.addActionListener(this);
-        Color monOrange = new Color(197, 116, 29);
-        Affichage.setForeground(monOrange);
-        this.add(Affichage);
-
         if (FenetreGraphique.vien_de == 2) {
-            // Bouton aller dans Gameplay
-            Bouton Jeux = new Bouton(200, 100, 300, 110, "Jeux");
+            // Bouton aller dans la catégorie Affichage
+            Bouton Affichage = new Bouton(820, 90, 400, 110, "Affichage");
+            Affichage.setActionCommand("Affichage");
+            Affichage.addActionListener(this);
+            Color monOrange = new Color(197, 116, 29);
+            Affichage.setForeground(monOrange);
+            this.add(Affichage);
+
+            // Bouton aller dans la catégorie jeux
+            Bouton Jeux = new Bouton(480, 100, 300, 110, "Jeux");
             Jeux.setActionCommand("Jeux");
             Jeux.addActionListener(this);
             this.add(Jeux);
-            this.remove(Regles);
+
+            // Bouton aller dans la catégorie Son
+            Bouton Son = new Bouton(1220, 100, 300, 110, "Son");
+            Son.setActionCommand("Son");
+            Son.addActionListener(this);
+            this.add(Son);
         }
 
-        // Bouton Appliquer les changements
-        Bouton Son = new Bouton(1050, 100, 300, 110, "Son");
-        Son.setActionCommand("Son");
-        Son.addActionListener(this);
-        this.add(Son);
+        else if (FenetreGraphique.vien_de == 1) {
 
-        // Bouton Revenir au menu principal
+            // Bouton aller dans la catégorie Affichage
+            Bouton Affichage = new Bouton(550, 90, 400, 110, "Affichage");
+            Affichage.setActionCommand("Affichage");
+            Affichage.addActionListener(this);
+            Color monOrange = new Color(197, 116, 29);
+            Affichage.setForeground(monOrange);
+            this.add(Affichage);
+
+            // Bouton aller dans la catégorie Son
+            Bouton Son = new Bouton(1050, 100, 300, 110, "Son");
+            Son.setActionCommand("Son");
+            Son.addActionListener(this);
+            this.add(Son);
+        }
+
+        // Bouton revenir ou l'on était avant
         Bouton Revenir = new Bouton(1100, 880, 300, 110, "Revenir");
         Revenir.setActionCommand("Revenir");
         Revenir.addActionListener(this);
@@ -98,38 +127,49 @@ public class Options extends JPanel implements ActionListener {
         this.add(Appliquer);
     }
 
+    /**
+     * Assigne a chaque bouton cliqué une action
+     * 
+     * @param ActionEvent event, le bouton cliqué
+     */
     public void actionPerformed(ActionEvent event) {
 
+        // Ferme la fenetre Option
         if (event.getActionCommand().equals("Revenir")) {
             FenetreOption.show = false;
-            if (FenetreGraphique.changeScreen == true) {
-                FenetreGraphique.fullscreen = !FenetreGraphique.fullscreen;
-                FenetreGraphique.changeScreen = false;
+            if (FenetreGraphique.changeScreen == true) { // Si bouton fullscreen est appuyé mais n'est pas appliqué
+                FenetreGraphique.fullscreen = !FenetreGraphique.fullscreen; // Alors on remet la valeur de fullScreen
+                FenetreGraphique.changeScreen = false; // comme elle l'était
             }
             f_o.dispose();
         }
 
+        // Aller dans la catégorie Jeux
         else if (event.getActionCommand().equals("Jeux")) {
             FenetreOption.window = 3;
             FenetreOption.changement = true;
             FenetreOption.show = true;
         }
 
+        // Aller dans la catégorie Son des options
         else if (event.getActionCommand().equals("Son")) {
             FenetreOption.window = 2;
             FenetreOption.changement = true;
             FenetreOption.show = true;
         }
 
+        // Permet de mettre le jeux en fullscreen
         else if (event.getActionCommand().equals("Fullscreen")) {
             FenetreGraphique.fullscreen = !FenetreGraphique.fullscreen;
             FenetreGraphique.changeScreen = true;
         }
 
+        // Change une valeur , qui permet d'afficher ou non les FPS
         else if (event.getActionCommand().equals("AfficherFPS")) {
             FenetreGraphique.affiche_fps = !FenetreGraphique.affiche_fps;
         }
 
+        // Applique les changmements, tels que Fullscreen et le son
         else if (event.getActionCommand().equals("Appliquer")) {
 
             if (FenetreGraphique.changeScreen == true) {
@@ -143,6 +183,7 @@ public class Options extends JPanel implements ActionListener {
             }
         }
 
+        // Ouvre une fenetre montrant les règles
         else if (event.getActionCommand().equals("Regles")) {
             FenetreOption.window = 4;
             FenetreOption.changement = true;
@@ -151,6 +192,11 @@ public class Options extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * Dessine le JPanel
+     * 
+     * @param Graphics g
+     */
     public void paintComponent(Graphics g) {
         affiche_fond(g);
         if (FenetreGraphique.affiche_fps) {

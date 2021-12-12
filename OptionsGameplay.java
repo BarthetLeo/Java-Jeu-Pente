@@ -11,13 +11,12 @@ import java.awt.event.*;
 public class OptionsGameplay extends JPanel implements ActionListener, ChangeListener {
 
     BufferedImage img;
-    // private static boolean vien_jeu;
-    // private String action_rev = "Revenir";
     private FenetreOption f_o;
     boolean changeSong = false;
 
     OptionsGameplay(FenetreOption f_o) {
 
+        // Si en jeux alors affichage différent
         if (FenetreGraphique.vien_de == 2) {
             try {
                 img = ImageIO.read(new File("graphics/images/FondMenuOptions.png"));
@@ -26,6 +25,7 @@ public class OptionsGameplay extends JPanel implements ActionListener, ChangeLis
             }
         }
 
+        // Si hors jeux alors affichage différent
         else {
             try {
                 img = ImageIO.read(new File("graphics/images/FondMenuOptions1.png"));
@@ -35,12 +35,6 @@ public class OptionsGameplay extends JPanel implements ActionListener, ChangeLis
         }
 
         this.f_o = f_o;
-
-        /*
-         * if (vien_jeu) {
-         * action_rev = "Revenir_Jeu";
-         * }
-         */
 
         creationBouton();
     }
@@ -61,98 +55,83 @@ public class OptionsGameplay extends JPanel implements ActionListener, ChangeLis
         this.add(Regles);
 
         // Bouton aller dans la catégorie Affichage
-        Bouton Affichage = new Bouton(550, 90, 400, 110, "Affichage");
+        Bouton Affichage = new Bouton(820, 90, 400, 110, "Affichage");
         Affichage.setActionCommand("Affichage");
         Affichage.addActionListener(this);
         this.add(Affichage);
 
-        // Bouton aller dans Gameplay
-        Bouton Jeux = new Bouton(200, 100, 300, 110, "Jeux");
+        // Bouton aller dans la catégorie Jeux
+        Bouton Jeux = new Bouton(480, 100, 300, 110, "Jeux");
         Jeux.setActionCommand("Jeux");
         Jeux.addActionListener(this);
         Color monOrange = new Color(197, 116, 29);
         Jeux.setForeground(monOrange);
         this.add(Jeux);
 
-        // Bouton Appliquer les changements
-        Bouton Son = new Bouton(1050, 100, 300, 110, "Son");
+        // Bouton aller dans la catégorie Son
+        Bouton Son = new Bouton(1220, 100, 300, 110, "Son");
         Son.setActionCommand("Son");
         Son.addActionListener(this);
         this.add(Son);
 
-        if (FenetreGraphique.vien_de == 1) {
+        // Bouton revenir ou l'on était
+        Bouton Revenir = new Bouton(1100, 880, 300, 110, "Revenir");
+        Revenir.setActionCommand("Revenir");
+        Revenir.addActionListener(this);
+        this.add(Revenir);
 
-            // Bouton Revenir au menu principal
-            Bouton Revenir = new Bouton(1100, 880, 300, 110, "Revenir");
-            Revenir.setActionCommand("Revenir");
-            Revenir.addActionListener(this);
-            this.add(Revenir);
+        // Bouton Appliquer les changements
+        Bouton Appliquer = new Bouton(550, 880, 400, 110, "Appliquer");
+        Appliquer.setActionCommand("Appliquer");
+        Appliquer.addActionListener(this);
+        this.add(Appliquer);
 
-            // Bouton Appliquer les changements
-            Bouton Appliquer = new Bouton(550, 880, 400, 110, "Appliquer");
-            Appliquer.setActionCommand("Appliquer");
-            Appliquer.addActionListener(this);
-            this.add(Appliquer);
-        }
+        // Bouton Abandonner la partie en cours
+        Bouton Abandonner = new Bouton(720, 350, 500, 110, "Abandonner");
+        Abandonner.setActionCommand("Abandonner");
+        Abandonner.addActionListener(this);
+        this.add(Abandonner);
 
-        // Création de bouton si en jeux
-        else if (FenetreGraphique.vien_de == 2) {
+        // Bouton recommencer la partie en cours
+        Bouton Recommencer = new Bouton(760, 600, 500, 110, "Recommencer");
+        Recommencer.setActionCommand("Recommencer");
+        Recommencer.addActionListener(this);
+        this.add(Recommencer);
 
-            // Bouton Abandonner la partie en cours
-            Bouton Abandonner = new Bouton(720, 350, 500, 110, "Abandonner");
-            Abandonner.setActionCommand("Abandonner");
-            Abandonner.addActionListener(this);
-            this.add(Abandonner);
-
-            // Bouton Abandonner la partie en cours
-            Bouton Recommencer = new Bouton(760, 600, 500, 110, "Recommencer");
-            Recommencer.setActionCommand("Recommencer");
-            Recommencer.addActionListener(this);
-            this.add(Recommencer);
-
-            // Bouton Revenir au menu principal
-            Bouton Revenir = new Bouton(1100, 880, 300, 110, "Revenir");
-            Revenir.setActionCommand("Revenir");
-            Revenir.addActionListener(this);
-            this.add(Revenir);
-
-            // Bouton Appliquer les changements
-            Bouton Appliquer = new Bouton(550, 880, 400, 110, "Appliquer");
-            Appliquer.setActionCommand("Appliquer");
-            Appliquer.addActionListener(this);
-            this.add(Appliquer);
-        }
     }
 
+    /**
+     * Assigne a chaque bouton cliqué une action
+     * 
+     * @param ActionEvent event, le bouton cliqué
+     */
     public void actionPerformed(ActionEvent event) {
 
+        // Ferme la fenetre option
         if (event.getActionCommand().equals("Revenir")) {
             FenetreOption.show = false;
+            if (FenetreGraphique.changeScreen == true) { // Si bouton fullscreen est appuyé mais n'est pas appliqué
+                FenetreGraphique.fullscreen = !FenetreGraphique.fullscreen; // Alors on remet la valeur de fullScreen
+                FenetreGraphique.changeScreen = false; // comme elle l'était
+            }
             f_o.dispose();
         }
 
+        // Aller dans la catégorie Son des options
         else if (event.getActionCommand().equals("Son")) {
             FenetreOption.window = 2;
             FenetreOption.changement = true;
             FenetreOption.show = true;
         }
 
+        // Aller dans la catégorie affichage des options
         else if (event.getActionCommand().equals("Affichage")) {
             FenetreOption.window = 1;
             FenetreOption.changement = true;
             FenetreOption.show = true;
         }
 
-        else if (event.getActionCommand().equals("Fullscreen")) {
-            FenetreGraphique.fullscreen = !FenetreGraphique.fullscreen;
-            FenetreGraphique.changeScreen = true;
-            FenetreGraphique.changement = true;
-        }
-
-        else if (event.getActionCommand().equals("AfficherFPS")) {
-            FenetreGraphique.affiche_fps = !FenetreGraphique.affiche_fps;
-        }
-
+        // Quitte la partie et revient au menu
         else if (event.getActionCommand().equals("Abandonner")) {
             FenetreOption.show = false;
             f_o.dispose();
@@ -160,6 +139,7 @@ public class OptionsGameplay extends JPanel implements ActionListener, ChangeLis
             FenetreGraphique.window = 1;
         }
 
+        // Recommencer la partie
         else if (event.getActionCommand().equals("Recommencer")) {
             FenetreOption.show = false;
             f_o.dispose();
@@ -169,6 +149,7 @@ public class OptionsGameplay extends JPanel implements ActionListener, ChangeLis
 
         }
 
+        // Applique les changmements, tels que Fullscreen et le son
         else if (event.getActionCommand().equals("Appliquer")) {
             if (FenetreGraphique.changeScreen == true) {
                 f_o.f_g.changementDeScreen();
@@ -181,6 +162,7 @@ public class OptionsGameplay extends JPanel implements ActionListener, ChangeLis
             }
         }
 
+        // Ouvre une fenetre montrant les règles
         else if (event.getActionCommand().equals("Regles")) {
             FenetreOption.window = 4;
             FenetreOption.changement = true;
@@ -192,6 +174,11 @@ public class OptionsGameplay extends JPanel implements ActionListener, ChangeLis
 
     }
 
+    /**
+     * Dessine le JPanel
+     * 
+     * @param Graphics g
+     */
     public void paintComponent(Graphics g) {
         affiche_fond(g);
         if (FenetreGraphique.affiche_fps) {

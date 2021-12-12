@@ -1,9 +1,6 @@
 import javax.swing.JFrame;
-//import java.util.*;
 import java.awt.Dimension;
-//import javax.swing.*;
 import java.awt.Toolkit;
-//import java.awt.*;
 import java.awt.event.*;
 
 public class FenetreOption extends JFrame implements ActionListener {
@@ -15,6 +12,12 @@ public class FenetreOption extends JFrame implements ActionListener {
     static boolean show = true, changement = true;
     static int window = 1, vien_de = 1;
 
+    /**
+     * Création d'une fenêtre d'option passant par dessus celle du jeux avec une
+     * opacité de 0.9
+     * 
+     * @param FenetreGraphique f_g
+     */
     FenetreOption(FenetreGraphique f_g) {
         this.f_g = f_g;
 
@@ -32,25 +35,28 @@ public class FenetreOption extends JFrame implements ActionListener {
         options.setLayout(null);
         setContentPane(options);
 
+        // création des valeurs pour la création des fps
         long temps_avant = System.nanoTime();
         long temps_apres = System.nanoTime();
-        while (show) {
+        while (show) { // Boucle de la fonction qui dit qui continue tant qu on fait pas revenir dans
+            // les options
             temps_avant = System.nanoTime();
 
-            double despacito = (temps_avant - temps_apres) / 1000000000.0;
+            double temps = (temps_avant - temps_apres) / 1000000000.0;
 
-            FenetreGraphique.fps = 1 / despacito;
+            FenetreGraphique.fps = 1 / temps;
             temps_apres = temps_avant;
 
             if (!FenetreGraphique.sounds.isRunning() && FenetreGraphique.putSong) {
                 FenetreGraphique.playMusic();
             }
 
-            if (changement) {
+            if (changement) { // Si on change d'interface
                 changement = false;
 
                 switch (window) {
-                    case 1: {
+
+                    case 1: { // Option Affichage
 
                         if (vien_de == 2) {
                             optionsSounds = null;
@@ -65,7 +71,7 @@ public class FenetreOption extends JFrame implements ActionListener {
                         break;
                     }
 
-                    case 2: {
+                    case 2: { // Option Son
 
                         if (vien_de == 1) {
                             options = null;
@@ -81,7 +87,7 @@ public class FenetreOption extends JFrame implements ActionListener {
                         break;
                     }
 
-                    case 3: {
+                    case 3: { // Les options de Gameplay
 
                         if (vien_de == 2) {
                             optionsSounds = null;
@@ -99,7 +105,8 @@ public class FenetreOption extends JFrame implements ActionListener {
 
                         break;
                     }
-                    case 4:{
+                    case 4: { // Regles du jeux
+
                         Regle regle = new Regle();
                         regle.setLayout(null);
                         setContentPane(regle);

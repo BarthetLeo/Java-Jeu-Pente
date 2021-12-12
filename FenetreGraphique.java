@@ -32,26 +32,28 @@ public class FenetreGraphique extends JFrame implements ActionListener {
 
         setIconImage(icon);
 
+        // création des valeurs pour la création des fps
         long temps_avant = System.nanoTime();
         long temps_apres = System.nanoTime();
-        while (true) {
+        while (true) { // Boucle de la fonction qui dit qui continue tant qu on fait pas revenir dans
+            // les options
 
             temps_avant = System.nanoTime();
 
-            double despacito = (temps_avant - temps_apres) / 1000000000.0;
+            double temps = (temps_avant - temps_apres) / 1000000000.0;
 
-            fps = 1 / despacito;
+            fps = 1 / temps;
             temps_apres = temps_avant;
 
             if ((!sounds.isRunning() || changement && window == 1 || changement && window == 2) && putSong) {
                 playMusic();
             }
 
-            if (changement) {
+            if (changement) { // Si on change d'interface
                 changement = false;
 
                 switch (window) {
-                    case 1: {
+                    case 1: { // Menu
                         menu = new Menu();
 
                         if (vien_de == 2) {
@@ -65,7 +67,7 @@ public class FenetreGraphique extends JFrame implements ActionListener {
                         break;
                     }
 
-                    case 2: {
+                    case 2: { // jeux de pente
 
                         if (vien_de == 1) {
                             if (pente == null) {
@@ -84,7 +86,7 @@ public class FenetreGraphique extends JFrame implements ActionListener {
                         break;
                     }
 
-                    case 3: {
+                    case 3: { // Les options
 
                         fenetreOption = new FenetreOption(this);
 
@@ -92,7 +94,7 @@ public class FenetreGraphique extends JFrame implements ActionListener {
                         break;
                     }
 
-                    case 4: {
+                    case 4: { // Écran de victoire
                         FenetreGagne gagner = new FenetreGagne();
                         gagner.setLayout(null);
                         setContentPane(gagner);
@@ -110,15 +112,18 @@ public class FenetreGraphique extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * Fonction static pour jouer la musique sous certaine condition
+     */
     public static void playMusic() {
-        if (window == 1 || (window == 3 && vien_de == 1)) {
+        if (window == 1 || (window == 3 && vien_de == 1)) { // Musique du Menu
             sounds.stop();
             sounds = new Sounds("/sounds/Menu.wav");
             sounds.setVolume(lvlSound);
             sounds.play();
         }
 
-        else if (window == 2 || (window == 3 && vien_de == 2)) {
+        else if (window == 2 || (window == 3 && vien_de == 2)) { // Musique du jeux
             sounds.stop();
             sounds = new Sounds("/sounds/InGame.wav");
             sounds.setVolume(lvlSound);
@@ -126,6 +131,9 @@ public class FenetreGraphique extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * Fonction pour mettre ou enlever le fullscreen
+     */
     public void changementDeScreen() {
         changeScreen = false;
         dispose();
