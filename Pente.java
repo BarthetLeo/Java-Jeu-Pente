@@ -26,7 +26,9 @@ public class Pente extends JPanel implements ActionListener {
     private int taille = 34;
     protected int nb_tour = 1;
     public static String nom_gagnant;
-
+    /**
+     * Constructeur du jeux de pente.
+     */
     public Pente() {
         j_tab = new Jeton[19][19];
         try {
@@ -55,7 +57,9 @@ public class Pente extends JPanel implements ActionListener {
         B_option.addActionListener(this);
         this.add(B_option);
     }
-
+    /**
+     * Permet de respecter la 1er regle le joueur 1 doit forcerment commencer au milieu
+     */
     public void regle_1() {
         Bouton bt = new Bouton(693, 513, taille, taille, "");
         Jeton jeton = new Jeton(693, 513, taille, taille);
@@ -65,7 +69,9 @@ public class Pente extends JPanel implements ActionListener {
         this.add(bt);
         j_tab[9][9] = jeton;
     }
-
+    /**
+     * Le joueur doit placer un jeton dans la zone prescrite ici 2 écart avec le milieu
+     */
     public void regle_2() {
 
         int k = 0, l;
@@ -87,7 +93,9 @@ public class Pente extends JPanel implements ActionListener {
         }
         nb_regle++;
     }
-
+    /**
+     * Affiche la grille de jeu avec le nom des colonnes et lignes
+     */
     public void affiche_grille(Graphics g) {
         // Convertissseur de Graphics en Graphics2D pour plus d'option.
         Graphics2D g2 = (Graphics2D) g;
@@ -129,7 +137,9 @@ public class Pente extends JPanel implements ActionListener {
             g2.drawRect((M_W_plat / 20) * 8, m_H_plat * 8, (M_W_plat / 20) * 4, m_H_plat * 4);
         }
     }
-
+    /**
+     * Créer les boutons qui son placer a chaque intersection de lignes et colonnes.
+     */
     public void tableau_bouton() {
         int k = 0, l = 0;
         for (int i = m_H_plat; i < m_H_plat * 20; i += m_H_plat) {
@@ -151,18 +161,25 @@ public class Pente extends JPanel implements ActionListener {
             }
         }
     }
-
+    /**
+     * affiche le fond du jeux ici une image
+     */
     public void affiche_fond(Graphics g) {
         int hauteur = Height;
         int longueur = Width;
         g.setColor(Color.BLACK);
         g.drawImage(img, 0, 0, longueur, hauteur, null);
     }
-
+    /**
+     * Supprime un bouton placer sur le jeux
+     * @param bt Bouton a supprimer
+     */
     public void supprimer(Bouton bt) {
         this.remove(bt);
     }
-
+    /**
+     * Affiche pour chaque Joueur son nombre de jeton avec un rectangle remplie qui se vide selon le nombre de jetons.
+     */
     public void affiche_pile(Graphics g)
     {
         g.setColor(J1.get_couleur());
@@ -175,18 +192,25 @@ public class Pente extends JPanel implements ActionListener {
         g.drawString("Il reste  : " + J1.get_pile() + " jetons.",Width - ((Width / 4) / 4) * 4, (Height / 20)*2);
         g.drawString("Il reste  : " + J2.get_pile() + " jetons.",Width - ((Width / 4) / 4) * 4, (Height / 20)*18);
     }
-
+    /**
+     * Affiche le nombre de capture effectuer par les Joueurs
+     */
     public void affiche_prise(Graphics g)
     {
         g.drawString("Nombre de prise : " + J1.get_prise() + " jetons.",Width - ((Width / 4) / 4) * 4, (Height / 20)*3);
         g.drawString("Nombre de prise : " + J2.get_prise() + " jetons.",Width - ((Width / 4) / 4) * 4, (Height / 20)*19);
     }
-
+    /**
+     * Affiche le tour
+     */
     public void affiche_tour(Graphics g)
     {
         g.drawString("Tour : "+nb_tour,Width - ((Width / 4) / 4)*4, (Height / 20)*10);
     }
-
+    /**
+     * Affiche la grille, le fond,les fps et les jetons placée sur le plateau.
+     * @param g
+     */
     public void dessine_grille(Graphics g) {
         affiche_fond(g);
         affiche_grille(g);
@@ -215,11 +239,18 @@ public class Pente extends JPanel implements ActionListener {
             }
         }
     }
-
+    /**
+     * Permet d'afficher le jeton placée
+     * @param g
+     * @param j Jeton a faire apparaitre
+     */
     public void dessine_jeton(Graphics g, Jeton j) {
         j.paintComponent(g);
     }
-
+    /**
+     * Affiche le nom des Joueurs et selon a qui est le tour la couleur du Joueur jouant est en orange
+     * @param g
+     */
     public void affiche_joueur(Graphics g) {
         Color couleur = new Color(247, 130, 55);
         font = font.deriveFont(60.f);

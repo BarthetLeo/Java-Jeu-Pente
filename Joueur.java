@@ -15,7 +15,11 @@ public class Joueur {
     private int nb_prise;
     private String pseudo;
 
-    //Constructeur du Joueur.
+    /**
+     * Constructeur du joueur qui prend une couleur et un nom.
+     * @param couleur_id  Couleur du joueur
+     * @param pseudo   Nom du joueur
+     */
     public Joueur(Color couleur_id,String pseudo)
     {
         this.pseudo = pseudo;
@@ -26,50 +30,84 @@ public class Joueur {
         nb_elem = 0;
         nb_prise = 0;
     }
-
+    /**
+     * Retourne le nom du joueur
+     * @return  nom du joueur
+     */
     public String get_pseudo()
     {return pseudo;}
 
+    /**
+     * Retourne la couleur du joueur
+     * @return  Couleur du joueur
+     */
     public Color get_couleur() {
         return couleur_id;
     }
 
+    /**
+     * Permet de modifier le tour du joueur a son tour ou non.
+     * @param b 
+     */
     public void set_tour(boolean b) {
         tour = b;
     }
-
+    /**
+     * Retourne si le joueur est train de jouer ou non
+     * @return  Le joueur joue ou non.
+     */
     public boolean get_tour() {
         return tour;
     }
-
+    /**
+     * Retourne le nombre de jeton du joueur.
+     * @return  le nombre de jeton restant.
+     */
     public int get_pile() {
         return pile_jeton;
     }
-
+    /**
+    * Enleve un jeton au joueur.
+    */
     public void tour() {
         pile_jeton--;
     }
-
+    /**
+     * Retourne le tableau de jeton acquis par le joueur
+     * @return  tableau de jeton du joueur
+     */
     public Jeton[] get_tab() {
         return tab_jeton;
     }
-
+    /**
+     * Agrandit la taille du tableau de 1.
+     */
     public void add_jeton() {
         nb_elem++;
     }
-
+    /**
+     * Retourne le nombre de jeton que possède le joueur
+     * @return  nombre de jeton possédés
+     */
     public int get_nb_elem() {
         return nb_elem;
     }
-
+    /**
+     * Ajoute +1 au nombre de prise qu'a effectuer le joueur
+     */
     public void add_prise() {
         nb_prise++;
     }
-
+    /**
+     * Retourne la valeur de prise faite par le joueur
+     * @return  valeur de prise faite
+     */
     public int get_prise() {
         return nb_prise;
     }
-
+    /**
+     * affiche la couleur et les jetons que possède le joueur
+     */
     public void affiche()
     {
         System.out.println(couleur_id);
@@ -78,13 +116,18 @@ public class Joueur {
             System.out.println("X :" + i + " "+ tab_jeton[i].get_x() + " Y :" + i + " "+ tab_jeton[i].get_y());
         }
     }
-
+    /**
+     * Test pour savoir si le joueur a gagner par prise ou par manque de jeton.
+     */
     public void test_jeton() {
         if (get_pile() == 0 | nb_prise == 5) {
             gagner();
         }
     }
-
+    /**
+     * Enleve un jeton précis au joueur.
+     * @param n Emplacement du jeton dans le tableau de jeton.
+     */
     public void enlever(int n)
     {
         Color c=new Color(0,0,0,1 );
@@ -97,19 +140,27 @@ public class Joueur {
             nb_elem--;
         }
     }
-
+    /**
+     * Ajoute un jeton dans le tableau de jeton
+     * @param j Jeton a ajouter au joueur
+     */
     public void ajouter(Jeton j) {
         j.set_couleur(couleur_id);
         tab_jeton[nb_elem] = j;
         add_jeton();
     }
-
+    /**
+     * Permet de savoir le nom du gagnant et d'aller a l'écran de victoire
+     */
     public void gagner() {
         Pente.nom_gagnant = pseudo;
         FenetreGraphique.window = 4;
         FenetreGraphique.changement = true;
     }
-
+    /**
+     * Test de victoire par allignement de 5 jetons
+     * Diagonales,verticale,horizontales.
+     */
     public void alligner() {
         int jeton_alligner_x;
         int jeton_alligner_y;

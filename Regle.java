@@ -10,7 +10,9 @@ public class Regle extends JPanel implements ActionListener{
 
     BufferedImage img;
     boolean changeSong = false;
-
+    /**
+     * Constructeur du Jpanel Regles
+     */
     Regle() {
 
         try {
@@ -21,14 +23,19 @@ public class Regle extends JPanel implements ActionListener{
 
         creationBouton();
     }
-
+    /**
+     * Affiche le fond des regles.
+     * @param g
+     */
     public void affiche_fond(Graphics g) {
         int hauteur = getHeight();
         int longueur = getWidth();
         g.setColor(Color.BLACK);
         g.drawImage(img, 0, 0, longueur, hauteur, null);
     }
-    
+    /**
+     * Crée le bouton Revenir.
+     */
     public void creationBouton()
     {
         Bouton Revenir = new Bouton(1600, 980, 300, 110, "Revenir");
@@ -45,7 +52,9 @@ public class Regle extends JPanel implements ActionListener{
             FenetreOption.show = true;
         }
     }
-
+    /**
+     * Affiche les regles a l'écran
+     */
     public void affiche_regle(Graphics g)
     {
         g.setFont(new Font("Verdana", Font.BOLD, 50));

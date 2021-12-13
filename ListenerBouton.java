@@ -1,12 +1,15 @@
 import java.awt.event.*;
 
-
-
 public class ListenerBouton implements ActionListener {
     private Pente pente;
     private Bouton bouton;
     private Jeton jeton;
-    
+    /**
+     * Constructeur du Listener de bouton pour chaque bouton sur la grille.
+     * @param pente Référence au jeux de pente actif
+     * @param bouton Référence au bouton associer a ce Listener
+     * @param jeton Référence au jeton associer au bouton
+     */
     public ListenerBouton(Pente pente,Bouton bouton,Jeton jeton)
     {
         this.bouton = bouton;
@@ -55,13 +58,20 @@ public class ListenerBouton implements ActionListener {
             }
         }
     }
-
+    /**
+     * Enverse le tour des 2 joueurs.
+     * @param j1    Joueur 1
+     * @param j2    Joueur 2
+     */
     public void enverser_tour(Joueur j1,Joueur j2)
     {
         j1.set_tour(!j1.get_tour());
         j2.set_tour(!j2.get_tour());
     }
-
+    /**
+     * Gére toutes les opérations a effectuer au sein du Joueur
+     * @param j Joueur
+     */
     public void gestion_jeton(Joueur j)
     {
         j.tour();
@@ -71,7 +81,9 @@ public class ListenerBouton implements ActionListener {
         j.test_jeton();
         //j.affiche();
     }
-
+    /**
+     * Permet de créer un bouton a l'emplacement d'un jeton.
+     */
     public void ajout_bouton(Jeton jeton_j)
     {
         Bouton bt = new Bouton(jeton_j.get_x(), jeton_j.get_y(), 34, 34, "");
@@ -84,7 +96,13 @@ public class ListenerBouton implements ActionListener {
         bt.addActionListener(new ListenerBouton(pente, bt, jeton_j));
         pente.add(bt);
     }
-
+    /**
+     * On vérifie sur le jeton placée si on peut on capturer des jetons.
+     * 
+     * @param j1 Joueur a qui appartient le jeton
+     * @param j2 Joueur a retirer les jetons
+     * @param jeton Jeton qui vient d'etre placer
+     */
     public void capture(Joueur j1,Joueur j2,Jeton jeton)
     {
         int nb;
@@ -143,13 +161,19 @@ public class ListenerBouton implements ActionListener {
             }
         }
     }
-    
+    /**
+     * Compare si il existe bien 2 jetons adverses entre les 2 jetons trouver 
+     * @param j1 Joueur a qui appartient le jeton
+     * @param j2 Joueur a retirer les jetons
+     * @param nb_case   Le nombre qui permet de déterminer sur quels cas il y a les 2 jetons
+     */
     public void compare_capture(Joueur j1,Joueur j2,int nb_case)
     {
         boolean loin=false,pres=false;
         int nb1 = 0,nb2 = 0;
         
         switch(nb_case){
+            //On vérifie si il existe bien les 2 jetons adverses entre le jeton comparer et le jeton a 2 d'espace a gauche.
             case 1:{
                 for(int k = 0;k<j2.get_nb_elem();k++)
                 {
@@ -172,7 +196,7 @@ public class ListenerBouton implements ActionListener {
                 }
                 break;
             }
-
+            //On vérifie si il existe bien les 2 jetons adverses entre le jeton comparer et le jeton a 2 d'espace a droite.
             case 2:{
                 for(int k = 0;k<j2.get_nb_elem();k++)
                 {
@@ -194,7 +218,7 @@ public class ListenerBouton implements ActionListener {
                 }
                 break;
             }
-
+            //On vérifie si il existe bien les 2 jetons adverses entre le jeton comparer et le jeton a 2 d'espace en haut.
             case 3:{
 
                 for(int k = 0;k<j2.get_nb_elem();k++)
@@ -217,7 +241,7 @@ public class ListenerBouton implements ActionListener {
                 }
                 break;
             }
-
+            //On vérifie si il existe bien les 2 jetons adverses entre le jeton comparer et le jeton a 2 d'espace en bas.
             case 4:{
 
                 for(int k = 0;k<j2.get_nb_elem();k++)
@@ -240,7 +264,7 @@ public class ListenerBouton implements ActionListener {
                 }
                 break;
             }
-
+            //On vérifie si il existe bien les 2 jetons adverses entre le jeton comparer et le jeton a 2 d'espace en bas a gauche.
             case 5:{
 
                 for(int k = 0;k<j2.get_nb_elem();k++)
@@ -263,8 +287,8 @@ public class ListenerBouton implements ActionListener {
                 }
                 break;
             }
+            //On vérifie si il existe bien les 2 jetons adverses entre le jeton comparer et le jeton a 2 d'espace en haut a gauche.
             case 6:{
-
                 for(int k = 0;k<j2.get_nb_elem();k++)
                 {
                     if(j2.get_tab()[k].get_x() == jeton.get_x()+j1.ecart & j2.get_tab()[k].get_y() == jeton.get_y()+j1.ecart_y)
@@ -286,6 +310,7 @@ public class ListenerBouton implements ActionListener {
                 }
                 break;
             }
+            //On vérifie si il existe bien les 2 jetons adverses entre le jeton comparer et le jeton a 2 d'espace en bas a droite.
             case 7:{
 
                 for(int k = 0;k<j2.get_nb_elem();k++)
@@ -308,6 +333,7 @@ public class ListenerBouton implements ActionListener {
                 }
                 break;
             }
+            //On vérifie si il existe bien les 2 jetons adverses entre le jeton comparer et le jeton a 2 d'espace en haut a droite.
             case 8:{
 
                 for(int k = 0;k<j2.get_nb_elem();k++)
@@ -332,7 +358,13 @@ public class ListenerBouton implements ActionListener {
             }
             }
     }
-
+    /**
+     * Gestion des jetons si il sont bien pris.
+     * @param j1 Joueur recevant les jetons
+     * @param j2 Joueur donnant les jetons
+     * @param nb1 Emplacement du jeton 1 dans le tableau de jeton de j2
+     * @param nb2 Emplacement du jeton 2 dans le tableau de jeton de j2
+     */
     public void jeton_pris(Joueur j1,Joueur j2,int nb1,int nb2)
     {
         ajout_bouton(j2.get_tab()[nb1]);

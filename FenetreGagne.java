@@ -33,12 +33,18 @@ public class FenetreGagne extends JPanel implements ActionListener{
         }
         creationBouton();
     }
-
+    /**
+     * Permet d'afficher le fond du Jpanel ici l'image
+     * @param g Graphics sur lequel ont peint le fond
+     */
     public void affiche_fond(Graphics g) {
         g.setColor(Color.BLACK);
         g.drawImage(img, 0, 0, Width, Height, null);
     }
-
+    /** 
+     * Permet de créer les boutons qui seront présent sur le menu.
+     * ici le 2 boutons Recommencer et Menu
+     */
     public void creationBouton()
     {
         Bouton Recommencer = new Bouton(Width/2+50, Height/2+110, 500, 110, "Recommencer");
@@ -52,7 +58,10 @@ public class FenetreGagne extends JPanel implements ActionListener{
         this.add(Menu);
 
     }
-
+    /**
+     * Affiche le gagnant du jeu qui est présent dans Pente en tant que String static et ici on l'affiche sur le Jpanel.
+     * @param g Graphics sur lequel ont peint le fond
+     */
     public void affiche_gagnant(Graphics g)
     {
         font = font.deriveFont(100.f);
