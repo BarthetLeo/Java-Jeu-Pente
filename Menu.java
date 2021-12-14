@@ -16,7 +16,7 @@ public class Menu extends JPanel implements ActionListener {
      */
     Menu() {
         try {
-            img = ImageIO.read(new File("graphics/images/Fond_Menu.jpg"));
+            img = ImageIO.read(new File("graphics/images/Fond_Menu.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

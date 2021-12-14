@@ -1,12 +1,14 @@
-import javax.swing.*;
+import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.*;
 import java.io.File;
-import java.awt.event.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class OptionsSounds extends JPanel implements ActionListener, ChangeListener {
 
@@ -48,24 +50,18 @@ public class OptionsSounds extends JPanel implements ActionListener, ChangeListe
 
     public void creationBouton() {
 
-        // JSlider permettant de modifier le volume des musiques
-        JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 60, 30);
+        // Slider permettant de modifier le volume des musiques
+        Slider slider = new Slider(0, 60, 30);
         slider.setLocation(830, 520);
-        slider.setOpaque(false);
         slider.setSize(300, 200);
-
-        slider.setPaintTrack(true);
-        slider.setPaintTicks(true);
-        slider.setPaintLabels(true);
-        slider.setMajorTickSpacing(10);
 
         slider.addChangeListener(new ChangeListener() {
 
             public void stateChanged(ChangeEvent e) {
-                JSlider slider = (JSlider) e.getSource();
+                Slider slider = (Slider) e.getSource();
                 if (!slider.getValueIsAdjusting()) {
-                    FenetreGraphique.sounds.setVolume((float) (-60 + slider.getValue()));
-                    FenetreGraphique.lvlSound = (float) (-60 + slider.getValue());
+                    FenetreGraphique.sounds.setVolume((float) (-60 + slider.getValue())); // -60 + 60 = 0 donc son non
+                    FenetreGraphique.lvlSound = (float) (-60 + slider.getValue()); // modifié
                 }
             }
         });
