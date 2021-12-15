@@ -17,6 +17,6 @@ public class SliderUI extends BasicSliderUI {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setColor(slider.getBackground());
-        g2.fillOval(2, slider.getHeight() / 2 - 2, slider.getWidth() - 5, 4);
+        g2.fillOval(2, slider.getHeight() / 2 - 2, slider.getWidth() - 2, 5);
     }
 }
